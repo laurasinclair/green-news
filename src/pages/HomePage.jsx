@@ -10,7 +10,7 @@ export default function HomePage() {
 	const [error, setError] = useState('')
 
 	useEffect(() => {
-		fetch('https://newsapi.org/v2/everything?q=trees&apiKey=7a472eb4344f4fd683c4c24f3bb3ffd5')
+		fetch(`https://newsapi.org/v2/everything?q=trees&apiKey=${import.meta.env.VITE_NEWS_API_TOKEN}`)
 			.then((resp) => resp.json())
 			.then((data) => setData(data.articles))
 			.catch((err) => setError('Oops'))
@@ -35,13 +35,19 @@ export default function HomePage() {
 		.finally(() => setError(''))
 	}
 
+	useEffect(() => {
+		if (!data) {
+			setError('No data to display.')
+		}
+	}, [data])
+
+	
+
 	return (
 		<>
 			<Hero title="Green News" size="m" />
 
-
 			<Button className="btn-primary" text="click" onClick={handleClick}/>
-
 
 			{error && (
 				<div>
@@ -52,7 +58,9 @@ export default function HomePage() {
 
 			<Container fluid>
 				<Row>
-					{data.map((e, i) => {
+					{
+					data &&
+					data.map((e, i) => {
 						return (
 							<>
 								<Col md="6" lg="4" key={`${e.title}+${i}`} className="article">
@@ -63,7 +71,8 @@ export default function HomePage() {
 								</Col>
 							</>
 						)
-					})}
+					})
+					}
 				</Row>
 			</Container>
 		</>
