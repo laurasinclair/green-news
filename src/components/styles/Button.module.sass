@@ -1,0 +1,65 @@
+.btn
+	padding: 8px 20px
+	display: inline-flex
+	align-items: center
+	justify-content: center
+	width: fit-content
+	margin: 4px
+	&-primary
+		@extend .btn
+		background-color: var(--white)
+		color: var(--darkish)
+		border: 2px solid var(--white)
+		&:hover,
+		&:focus,
+		&:active
+			background-color: var(--accent)
+			color: var(--darkish)
+			border: 2px solid var(--accent)
+		&-outline
+			@extend .btn
+			background-color: transparent
+			color: var(--white)
+			border: 2px solid var(--white)
+			&:hover,
+			&:focus,
+			&:active
+				background-color: var(--white)
+				color: var(--darkish)
+				border: 2px solid var(--white)
+	&-secondary
+		@extend .btn
+		background-color: var(--medium)
+		color: var(--darkish)
+		border: 2px solid var(--medium)
+		&:hover,
+		&:focus,
+		&:active
+			background-color: var(--accent)
+			color: var(--dark)
+			border: 2px solid var(--accent)
+		&-outline
+			@extend .btn
+			background-color: transparent
+			color: var(--medium)
+			border: 2px solid var(--medium)
+			&:hover,
+			&:focus,
+			&:active
+				background-color: var(--medium)
+				color: var(--dark)
+				border: 2px solid var(--medium)
+	&.full-width
+		width: 100%
+	&.icon
+		svg
+			width: 25px
+			height: 25px
+		&-left
+			@extend .icon
+			svg
+				margin-right: 8px
+		&-right
+			@extend .icon
+			svg
+				margin-left: 8px

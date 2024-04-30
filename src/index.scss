@@ -1,0 +1,60 @@
+@import 'bootstrap/scss/bootstrap-grid.scss';
+
+:root {
+	font-family: 'Roboto mono', system-ui, Avenir, Helvetica, Arial, sans-serif;
+	line-height: 1.5;
+	font-weight: 400;
+
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-text-size-adjust: 100%;
+
+	--white: #fff;
+	--light: #e0fbfcff;
+	--accent: #ff9b71ff;
+	--medium: #7d84b2ff;
+	--darkish: #2c2b3cff;
+	--dark: #011828ff;
+}
+
+#root {
+	margin: 0
+}
+
+img {
+	max-width: 100%;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+@media (prefers-color-scheme: light) {
+	:root {
+		color: #213547;
+		background-color: #ffffff;
+	}
+	a:hover {
+		color: #747bff;
+	}
+	button {
+		background-color: #f9f9f9;
+	}
+}
+
+::-moz-selection {
+	color: var(--white);
+	background: var(--accent);
+}
+
+::-webkit-selection {
+	color: var(--white);
+	background: var(--accent);
+}
+
+::selection {
+	color: var(--white);
+	background: var(--accent);
+}
