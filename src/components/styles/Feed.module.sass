@@ -1,0 +1,35 @@
+.feed
+	&_pagination
+		list-style: none
+		display: flex
+		justify-content: center
+		align-items: center
+		margin-top: 2px
+		cursor: pointer
+		font-weight: 800
+		.pageItem
+			height: 40px
+			width: 40px
+			margin-left: 4px
+			margin-right: 4px
+			padding: 2px 12px
+			display: flex
+			justify-content: center
+			align-items: center
+			border-radius: 50%
+			list-style: none
+			a
+				color: #71e7ca
+			&:hover,
+			&:focus
+				background-color: #ffffff1c
+				a
+					color: #fff !important
+			&.active
+				background-color: #fff
+				a
+					color: #181818 !important
+	&_article
+		padding: 20px 30px 50px
+		border: 2px solid white
+		height: 100%
