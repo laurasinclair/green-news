@@ -1,6 +1,6 @@
 import { Container, Row, Col } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
-import Logo from './Logo'
+import { Logo } from '@components';
 import styles from './styles/Navbar.module.sass'
 
 export default function Navbar() {

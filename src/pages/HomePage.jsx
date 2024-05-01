@@ -1,7 +1,7 @@
 import { Container, Row, Col } from 'react-bootstrap'
 import { useState, useEffect } from 'react'
 
-import { Button, Hero, Feed } from '@/components'
+import { Button, Hero, Feed } from '@components'
 
 export default function HomePage() {
 	return (

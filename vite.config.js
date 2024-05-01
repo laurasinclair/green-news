@@ -10,9 +10,10 @@ export default defineConfig({
 
 			'@': path.resolve(__dirname, 'src'),
 			'@components': `${path.resolve(__dirname, 'src/components/')}`,
+			'@assets': `${path.resolve(__dirname, 'src/assets/')}`,
 			'@img': `${path.resolve(__dirname, 'src/assets/images/')}`,
-			// public: `${path.resolve(__dirname, "./public/")}`,
 			'@pages': path.resolve(__dirname, 'src/pages'),
+			// public: `${path.resolve(__dirname, "./public/")}`,
 			// types: `${path.resolve(__dirname, "./src/@types")}`,
 		},
 	},
