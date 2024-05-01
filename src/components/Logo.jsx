@@ -1,4 +1,4 @@
-import logo from '/logo.png'
+import logo from '@img/logo.png'
 import styles from './styles/Logo.module.sass'
 
 export default function Logo({ size, hasText }) {

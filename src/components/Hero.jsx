@@ -1,5 +1,5 @@
 import { Container, Row, Col } from 'react-bootstrap';
-import Logo from './Logo';
+import { Logo } from '@components';
 import styles from './styles/Hero.module.sass';
 import classNames from 'classnames';
 
