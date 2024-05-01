@@ -1,6 +1,7 @@
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import ReactPaginate from 'react-paginate'
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { ArrowLeftCircleFill, ArrowRightCircleFill } from 'react-bootstrap-icons'
 
 import styles from './styles/Feed.module.sass'
@@ -36,6 +37,13 @@ export default function Feed(props) {
 		}
 	}, [page, data])
 
+	// console.log(data)
+
+	function getSlug(str) {
+		const tempString = str.replaceAll(/[^a-zA-Z0-9]/g, '-').toLowerCase().substring(0, 50);
+		return tempString.replace(/-+/g, '-').replace(/-$/, '')
+	}
+
 	return (
 		<div className={styles.feed}>
 			<h2>News feed</h2>
@@ -64,10 +72,12 @@ export default function Feed(props) {
 										filteredData.map((article, i) => {
 											return (
 												<Col md="6" lg="4" key={i} className="mb-4">
-													<div className={styles.feed_article}>
-														<h3>{article.title}</h3>
-														<div>{article.description}</div>
-													</div>
+													<Link to={`articles/${getSlug(article.title)}`}>
+														<div className={styles.feed_article}>
+															<h3>{article.title}</h3>
+															<div>{article.description}</div>
+														</div>
+													</Link>
 												</Col>
 											)
 										})}
