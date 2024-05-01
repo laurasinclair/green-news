@@ -2,7 +2,7 @@ import { Container, Row, Col } from 'react-bootstrap'
 import { useState, useEffect } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 
-import { Button, Hero, Feed } from '@/components'
+import { Button, Hero, Feed } from '@components'
 
 export default function Article() {
 	// const navigate = useNavigate()

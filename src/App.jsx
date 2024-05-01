@@ -1,7 +1,6 @@
 import "./App.sass";
-import HomePage from './pages/HomePage'
-import Article from './pages/Article'
-import Navbar from './components/Navbar'
+import { HomePage, Article, UserPage } from '@pages'
+import { Navbar } from '@components'
 import { Routes, Route } from 'react-router-dom'
 
 function App() {
@@ -17,6 +16,10 @@ function App() {
         <Route 
           path="/articles/:articleSlug" 
           element={<Article />}
+        />
+        <Route 
+          path="/user/johndoe" 
+          element={<UserPage />}
         />
       </Routes>
     </div>
