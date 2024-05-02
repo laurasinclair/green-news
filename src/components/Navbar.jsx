@@ -1,10 +1,12 @@
 import { Container, Row, Col } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import { PersonCircle } from 'react-bootstrap-icons'
-import { Logo } from '@components';
+import { Logo, Button } from '@components';
+import placeholder from '@img/placeholder_1-1.jpg'
 import styles from './styles/Navbar.module.sass'
 
-export default function Navbar() {
+export default function Navbar({currentUser}) {
 	return (
 		<nav className={styles.navbar}>
 			<Container fluid>
@@ -15,9 +17,18 @@ export default function Navbar() {
 						</NavLink>
 					</Col>
 					<Col className="d-flex align-items-center justify-content-end">
+						{currentUser ? (
+							<>
+							{currentUser.firstName} {currentUser.lastName}
+							<div className={styles.userPicture}>
+								<img src={placeholder} alt={`${currentUser.firstName} ${currentUser.lastName}`} />
+							</div>
+							</>
+						) : (
 						<NavLink to="/user/johndoe">
-							<PersonCircle size="30" />
+							<Button type="primary-outline" text="Log in" />
 						</NavLink>
+						)}
 					</Col>
 				</Row>
 			</Container>
