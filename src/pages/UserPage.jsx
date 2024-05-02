@@ -29,6 +29,13 @@ export default function UserPage() {
 		}
 	}, [users, currentUser])
 
+
+	useEffect(() => {
+		if (currentUser && currentUser.firstName) {
+			document.title = `${window.name} | ${currentUser.firstName} ${currentUser.lastName} ⛭ User settings`
+		}
+	}, [currentUser])
+
 	return (
 		<>
 			<Container fluid>
