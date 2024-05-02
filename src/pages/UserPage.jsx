@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 
 import { Button, Hero, Feed, SaveBtn } from '@components'
+import DisplayImage from '../components/DisplayImage'
 
 export default function UserPage() {
 	const navigate = useNavigate()
@@ -77,7 +78,16 @@ export default function UserPage() {
 									<Hero title={`Hello ${currentUser.firstName} ${currentUser.lastName}`} size="m" />
 								</Col>
 
+								<h3>User settings</h3>
+								<Row>
+									<Col>
+									Profile picture: 
+									<DisplayImage />
+									</Col>
+								</Row>
+
 								<h3>Saved articles</h3>
+
 
 								{currentUser.savedArticles && currentUser.savedArticles.length < 1 ? (
 									<Col md="6" lg="4" className="mb-4">
