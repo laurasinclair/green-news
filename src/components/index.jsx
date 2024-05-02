@@ -10,6 +10,7 @@ import Navbar from './Navbar'
 
 // Specific
 import Feed from './Feed'
+import SaveBtn from './SaveBtn'
 
 
 export {
@@ -17,5 +18,6 @@ export {
     Logo,
     Hero,
     Navbar,
-    Feed
+    Feed,
+    SaveBtn
 }

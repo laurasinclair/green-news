@@ -5,30 +5,70 @@ import { Link, useParams, useNavigate } from 'react-router-dom'
 import { Button, Hero, Feed } from '@components'
 
 export default function UserPage() {
-	// const navigate = useNavigate()
+	const navigate = useNavigate()
 
-	// fetching the data
-	const [data, setData] = useState([])
+	// fetching the users
+	const [users, setUsers] = useState([])
+	const [currentUser, setCurrentUser] = useState({})
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState('')
 
 	useEffect(() => {
-		fetch(`https://newsapi.org/v2/everything?q=trees&apiKey=${import.meta.env.VITE_NEWS_API_TOKEN}`)
+		fetch(`http://localhost:7200/users/`)
 			.then((resp) => resp.json())
-			.then((data) => setData(data))
-			.catch((err) => setError(`Data couldn't be fetched - ${err}`))
+			.then((data) => setUsers(data))
+			.catch((err) => setError(`User couldn't be fetched - ${err}`))
 	}, [])
 
-
-	
+	useEffect(() => {
+		if (users && users[0]) {
+			setCurrentUser(users[0])
+			setLoading(false)
+		} else {
+			setError('No users to display')
+		}
+	}, [users, currentUser])
 
 	return (
 		<>
 			<Container fluid>
-				<Hero title="Hello" size="m" />
-				
 				<Row>
-				
+					{loading ? (
+						<div>Loading...</div>
+					) : !currentUser ? (
+						error && (
+							<Col>
+								<div>
+									OH NO. <br />
+									{error}
+								</div>
+							</Col>
+						)
+					) : (
+						currentUser && (
+							<>
+								<Col>
+									<Hero title={`Hello ${currentUser.firstName} ${currentUser.lastName}`} size="m" />
+								</Col>
+
+								<h3>Saved articles</h3>
+
+								{currentUser.savedArticles && currentUser.savedArticles.length < 1 ? (
+									<Col md="6" lg="4" className="mb-4">
+										Nothing to show today :(
+									</Col>
+								) : (
+									currentUser.savedArticles.map((article) => {
+										return (
+											<Col md="6" lg="4" className="mb-4">
+												{article}
+											</Col>
+										)
+									})
+								)}
+							</>
+						)
+					)}
 				</Row>
 			</Container>
 		</>
