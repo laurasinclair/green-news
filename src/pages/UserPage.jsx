@@ -2,8 +2,7 @@ import { Container, Row, Col } from 'react-bootstrap'
 import { useState, useEffect } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 
-import { Button, Hero, Feed, SaveBtn } from '@components'
-import DisplayImage from '../components/DisplayImage'
+import { Button, Hero, Feed, SaveBtn, UploadImage } from '@components'
 
 export default function UserPage() {
 	const navigate = useNavigate()
@@ -82,7 +81,7 @@ export default function UserPage() {
 								<Row>
 									<Col>
 									Profile picture: 
-									<DisplayImage />
+									<UploadImage />
 									</Col>
 								</Row>
 

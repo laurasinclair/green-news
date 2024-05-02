@@ -11,6 +11,7 @@ import Navbar from './Navbar'
 // Specific
 import Feed from './Feed'
 import SaveBtn from './SaveBtn'
+import UploadImage from './UploadImage'
 
 
 export {
@@ -19,5 +20,6 @@ export {
     Hero,
     Navbar,
     Feed,
-    SaveBtn
+    SaveBtn,
+    UploadImage
 }

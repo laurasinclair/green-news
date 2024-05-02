@@ -3,7 +3,7 @@ import placeholder from '@img/placeholder_1-1.jpg'
 import styles from './styles/DisplayImage.module.sass'
 import { Row, Col } from 'react-bootstrap'
 
-const UploadAndDisplayImage = () => {
+const UploadImage = () => {
 	const [userImage, setUserImage] = useState({
 		imageUrl: placeholder,
 		label: 'Upload profile picture'
@@ -101,25 +101,46 @@ const UploadAndDisplayImage = () => {
 	return (
 		<Row>
 			<Col>
-				<div className={styles.profilePic}>{userImage && <img alt="Not found" width={'250px'} src={userImage.imageUrl} />}</div>
+				<div className={styles.profilePic}>
+					{
+						userImage && 
+							<img 
+								alt="Not found" 
+								width={'250px'} 
+								src={userImage.imageUrl} 
+							/>
+						}
+				</div>
 			</Col>
 			<Col className="d-flex flex-column">
-				<label htmlFor="files" className={styles.imageBtn} name="myImage" onChange={handleFileChange}>
+				<label 
+					htmlFor="files" 
+					className={styles.imageBtn} 
+					name="myImage" 
+					onChange={handleFileChange}
+					>
                     {userImage.label}
 				</label>
 
-				<input id="files" name="myImage" className="d-none" type="file" onChange={handleFileChange} />
-{/* 
-                {userImage.deleteBtn && (
-                    <input id="files" name="myImage" className="d-none" type="file" onChange={handleFileChange} />
-                )} */}
+				<input 
+					id="files" 
+					name="myImage" 
+					className="d-none" 
+					type="file" 
+					onChange={handleFileChange} 
+				/>
 
-				{userImage && (userImage.imageUrl !== placeholder) && (
-                    <button onClick={handleRemoveImage} className={styles.imageBtn}>Remove image</button>
+				{userImage && 
+				(userImage.imageUrl !== placeholder) && (
+                    <button 
+						onClick={handleRemoveImage} 
+						className={styles.imageBtn}>
+							Remove image
+					</button>
 				)}
 			</Col>
 		</Row>
 	)
 }
 
-export default UploadAndDisplayImage
+export default UploadImage
