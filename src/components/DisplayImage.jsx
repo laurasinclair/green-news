@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import placeholder from '@img/placeholder_image.jpg'
+import placeholder from '@img/placeholder_1-1.jpg'
 import styles from './styles/DisplayImage.module.sass'
 import { Row, Col } from 'react-bootstrap'
 
