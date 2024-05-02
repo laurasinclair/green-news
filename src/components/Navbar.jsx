@@ -7,6 +7,14 @@ import placeholder from '@img/placeholder_1-1.jpg'
 import styles from './styles/Navbar.module.sass'
 
 export default function Navbar({currentUser}) {
+	const [userImage, setUserImage] = useState(placeholder)
+
+	useEffect(() => {
+		currentUser.profilePicture && (
+			setUserImage(currentUser.profilePicture)
+		)
+	}, [currentUser, currentUser.profilePicture])
+
 	return (
 		<nav className={styles.navbar}>
 			<Container fluid>
@@ -22,7 +30,7 @@ export default function Navbar({currentUser}) {
 							<NavLink to="/user/johndoe" className="d-flex align-items-center">
 							{currentUser.firstName} {currentUser.lastName}
 								<div className={styles.userPicture}>
-									<img src={placeholder} alt={`${currentUser.firstName} ${currentUser.lastName}`} />
+									<img src={userImage} alt={`${currentUser.firstName} ${currentUser.lastName}`} />
 								</div>
 							</NavLink>
 							</>
