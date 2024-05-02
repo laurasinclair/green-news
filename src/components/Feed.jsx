@@ -64,6 +64,19 @@ export default function Feed(props) {
 					filteredData && (
 						<>
 							<Col>
+							<Row>
+								<Col md="6">
+								<Link to={`articles/${getSlug(filteredData[0].title)}`}>
+									<div className={styles.featuredImage}>
+										<h3>{filteredData[0].title}</h3>
+										<img src={filteredData[0].urlToImage} alt={filteredData[0].title} />
+									</div>
+								</Link>
+								</Col>
+							</Row>
+
+
+							
 								<div className="mb-4">
 									{data.articles.length} articles
 								</div>
