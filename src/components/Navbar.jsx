@@ -19,10 +19,12 @@ export default function Navbar({currentUser}) {
 					<Col className="d-flex align-items-center justify-content-end">
 						{currentUser ? (
 							<>
+							<NavLink to="/user/johndoe" className="d-flex align-items-center">
 							{currentUser.firstName} {currentUser.lastName}
-							<div className={styles.userPicture}>
-								<img src={placeholder} alt={`${currentUser.firstName} ${currentUser.lastName}`} />
-							</div>
+								<div className={styles.userPicture}>
+									<img src={placeholder} alt={`${currentUser.firstName} ${currentUser.lastName}`} />
+								</div>
+							</NavLink>
 							</>
 						) : (
 						<NavLink to="/user/johndoe">
