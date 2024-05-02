@@ -75,7 +75,7 @@ export default function Article() {
 							<>
 								<Col md="6" lg="4" className="mb-4">
 									<div>
-										<SaveBtn article={getSlug(article.title)} />
+										<SaveBtn articleSlug={getSlug(article.title)} />
 
 										<div>Author: {article.author}</div>
 										<div>

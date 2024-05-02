@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Heart, HeartFill } from 'react-bootstrap-icons'
 
 import { Button } from '@components'
 
-export default function SaveBtn({article}) {
+export default function SaveBtn({articleSlug}) {
+	const [userData, setUserData] = useState({})
 	const [error, setError] = useState('')
     
 	// saving article to user page
@@ -14,17 +15,43 @@ export default function SaveBtn({article}) {
 		icon: <Heart />,
 	})
 
+    useEffect(() => {
+        fetch('http://localhost:7200/users/1')
+        .then((resp) => resp.json())
+        .then((data) => setUserData(data))
+        .catch((err) => 'Error fetching userData')
+    }, [])
+
+    useEffect(() => {
+        if (userData && userData.savedArticles) {
+            const index = userData.savedArticles.indexOf(articleSlug)
+
+            if (index === -1) {
+                setSaveButtonState({
+                    saved: false,
+                    label: 'Save article',
+                    icon: <Heart />,
+                })
+            } else {
+                setSaveButtonState({
+                    saved: true,
+                    label: 'Article saved!',
+                    icon: <HeartFill />,
+                })
+            }
+        }
+    }, [userData, articleSlug])
+
 	async function handleClick(e) {
 		e.preventDefault()
 
 		try {
 			const userResponse = await fetch('http://localhost:7200/users/1')
 			const user = await userResponse.json()
-
-			const index = user.savedArticles.indexOf(article)
+			const index = user.savedArticles.indexOf(articleSlug)
 
 			if (index === -1) {
-				user.savedArticles.push(article)
+				user.savedArticles.push(articleSlug)
 				setSaveButtonState({
 					saved: true,
 					label: 'Article saved!',

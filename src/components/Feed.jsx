@@ -78,7 +78,7 @@ export default function Feed(props) {
 														<div className={styles.feed_article}>
 															<h3>{article.title}</h3>
 															<div>{article.description}</div>
-															<SaveBtn article={getSlug(article.title)} />
+															<SaveBtn articleSlug={getSlug(article.title)} />
 														</div>
 													</Link>
 												</Col>
