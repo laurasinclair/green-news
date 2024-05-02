@@ -6,12 +6,11 @@ import { Row, Col } from 'react-bootstrap'
 const UploadAndDisplayImage = () => {
 	const [userImage, setUserImage] = useState({
 		imageUrl: placeholder,
-		label: 'Upload profile picture',
-        deleteBtn: false
+		label: 'Upload profile picture'
 	})
-	// const [selectedImage, setSelectedImage] = useState('')
-	const [userInfo, setUserInfo] = useState({})
+    const [userInfo, setUserInfo] = useState({})
 	const [error, setError] = useState(null)
+
 
 	// convert image file to Base64 string
 	const convertToBase64 = (file) => {
@@ -29,8 +28,9 @@ const UploadAndDisplayImage = () => {
 		fetch('http://localhost:7200/users/1')
 			.then((resp) => resp.json())
 			.then((data) => setUserInfo(data))
-			.catch((err) => setError("Couldn't fetch user data"))
+			.catch((err) => setError("Couldn't fetch user data", err))
 	}, [])
+
 
 	// Handle file change event
 	const handleFileChange = async (event) => {
@@ -75,7 +75,7 @@ const UploadAndDisplayImage = () => {
 			if (!userInfo.profilePicture) {
 				setUserImage({
 					label: 'Upload profile picture',
-					imageUrl: placeholder,
+					imageUrl: placeholder
 				})
 			}
 		} catch (error) {
@@ -90,8 +90,7 @@ const UploadAndDisplayImage = () => {
 			if (userInfo.profilePicture) {
 				setUserImage({
 					label: 'Replace profile picture',
-					imageUrl: userInfo.profilePicture,
-                    deleteBtn: true
+					imageUrl: userInfo.profilePicture
 				})
 			}
 		} catch (error) {
@@ -110,16 +109,14 @@ const UploadAndDisplayImage = () => {
 				</label>
 
 				<input id="files" name="myImage" className="d-none" type="file" onChange={handleFileChange} />
-
+{/* 
                 {userImage.deleteBtn && (
                     <input id="files" name="myImage" className="d-none" type="file" onChange={handleFileChange} />
-                )}
+                )} */}
 
-				{userImage && (
+				{userImage && (userImage.imageUrl !== placeholder) && (
                     <button onClick={handleRemoveImage} className={styles.imageBtn}>Remove image</button>
 				)}
-
-
 			</Col>
 		</Row>
 	)
