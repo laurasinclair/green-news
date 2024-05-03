@@ -1,12 +1,15 @@
-import { Container, Row, Col, Button } from 'react-bootstrap'
+import { Row, Col } from 'react-bootstrap'
 import ReactPaginate from 'react-paginate'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowLeftCircleFill, ArrowRightCircleFill } from 'react-bootstrap-icons'
+import { UserContext, SaveBtn } from '@components'
 
 import styles from './styles/Feed.module.sass'
 
 export default function Feed(props) {
+	const { currentUser } = useContext(UserContext);
+
 	// fetching the data
 	const [data, setData] = useState([])
 	const [loading, setLoading] = useState(true)
@@ -37,16 +40,18 @@ export default function Feed(props) {
 		}
 	}, [page, data])
 
-	// console.log(data)
-
 	function getSlug(str) {
-		const tempString = str.replaceAll(/[^a-zA-Z0-9]/g, '-').toLowerCase().substring(0, 50);
+		const tempString = str
+			.replaceAll(/[^a-zA-Z0-9]/g, '-')
+			.toLowerCase()
+			.substring(0, 50)
 		return tempString.replace(/-+/g, '-').replace(/-$/, '')
 	}
 
 	return (
 		<div className={styles.feed}>
 			<h2>News feed</h2>
+			
 
 			<Row>
 				{loading ? (
@@ -77,9 +82,7 @@ export default function Feed(props) {
 
 
 							
-								<div className="mb-4">
-									{data.articles.length} articles
-								</div>
+								<div className="mb-4">{data.articles.length} articles</div>
 								<Row>
 									{filteredData &&
 										filteredData.map((article, i) => {
@@ -89,26 +92,17 @@ export default function Feed(props) {
 														<div className={styles.feed_article}>
 															<h3>{article.title}</h3>
 															<div>{article.description}</div>
+															
+															{currentUser.userId && (
+																<SaveBtn articleSlug={getSlug(article.title)} />
+															)}
 														</div>
 													</Link>
 												</Col>
 											)
 										})}
 
-									<ReactPaginate
-										containerClassName={styles.feed_pagination}
-										pageClassName={styles.pageItem}
-										activeClassName={styles.active}
-										onPageChange={(event) => setPage(event.selected)}
-										pageCount={Math.ceil(data.articles.length / perPage)}
-										breakLabel="..."
-										previousLabel={
-											<ArrowLeftCircleFill color='#5c736c' size="40" className='mt-2 me-3' />
-										}
-										nextLabel={
-											<ArrowRightCircleFill color='#5c736c' size="40" className='mt-2 ms-3' />
-										}
-									/>
+									<ReactPaginate containerClassName={styles.feed_pagination} pageClassName={styles.pageItem} activeClassName={styles.active} onPageChange={(event) => setPage(event.selected)} pageCount={Math.ceil(data.articles.length / perPage)} breakLabel="..." previousLabel={<ArrowLeftCircleFill color="#5c736c" size="40" className="mt-2 me-3" />} nextLabel={<ArrowRightCircleFill color="#5c736c" size="40" className="mt-2 ms-3" />} />
 								</Row>
 							</Col>
 						</>
