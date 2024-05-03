@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import placeholder from '@img/placeholder_1-1.jpg'
-import styles from './styles/DisplayImage.module.sass'
+import styles from './styles/UploadImage.module.sass'
 import { Row, Col } from 'react-bootstrap'
 import { UserContext } from '@components'
 
