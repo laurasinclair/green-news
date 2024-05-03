@@ -1,13 +1,16 @@
 import { Container, Row, Col } from 'react-bootstrap'
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 
-import { UserContext, Button, Hero, Feed, SaveBtn, UploadImage } from '@components'
+import { Button, Hero, Feed, SaveBtn, UploadImage } from '@components'
+import { useUserContext } from '../components/UserContext'
 
 export default function UserPage() {
 	const navigate = useNavigate()
-	
-	const { currentUser, setCurrentUser } = useContext(UserContext);
+
+	const { currentUser, setCurrentUser } = useUserContext()
+	// const { currentUser, setCurrentUser } = useUserContext();
+
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState('')
 
