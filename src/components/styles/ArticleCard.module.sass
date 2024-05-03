@@ -1,0 +1,23 @@
+@import 'bootstrap/scss/bootstrap-grid.scss'
+@import '/src/styles/_variables.sass'
+
+.articleCard
+	border: 2px solid $light-green
+	height: 100%
+	border-radius: 8px
+	overflow: hidden
+	display: flex
+	flex-direction: column
+	align-items: stretch
+	flex: 1
+	&_thumbnail
+		height: 200px
+		img
+			object-fit: cover
+			height: 100%
+			width: 100%
+	&_body
+		padding: 10px 26px 10px
+		flex: 1
+	&_footer
+		padding: 20px

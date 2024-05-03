@@ -6,8 +6,10 @@ export default function Button({ link, text, type = 'primary', fullWidth = false
     const typeStyles = {
         primary: styles['btn-primary'],
         secondary: styles['btn-secondary'],
+        tertiary: styles['btn-tertiary'],
         'primary-outline': styles['btn-primary-outline'],
         'secondary-outline': styles['btn-secondary-outline'],
+        'tertiary-outline': styles['btn-tertiary-outline'],
     };
 
     const buttonTypeClass = typeStyles[type] || typeStyles.primary;
