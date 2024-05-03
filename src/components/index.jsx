@@ -2,6 +2,7 @@
 import Button from './Button'
 import Logo from './Logo'
 import UserContext from './UserContext'
+import UserPicture from './UserPicture'
 
 
 // Layout
@@ -20,6 +21,7 @@ export {
     Button,
     Logo,
     Hero,
+    UserPicture,
     Navbar,
     Section,
     Feed,
