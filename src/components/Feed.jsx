@@ -7,10 +7,10 @@ import { ArrowLeftCircleFill, ArrowRightCircleFill, ArrowRight} from 'react-boot
 import { Button, SaveBtn } from '@components'
 
 import styles from './styles/Feed.module.sass'
-import { useUserContext } from './UserContext'
+import { useUserContext } from '../components/UserContext'
 
 export default function Feed(props) {
-	const { currentUser } = useContext(UserContext);
+	const { currentUser } = useUserContext();
 
 	// fetching the data
 	const [data, setData] = useState([])
