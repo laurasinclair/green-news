@@ -1,3 +1,5 @@
+@import '/src/styles/_variables.sass'
+
 .btn
 	padding: 8px 20px
 	display: inline-flex
@@ -7,48 +9,48 @@
 	margin: 4px
 	&-primary
 		@extend .btn
-		background-color: var(--dark)
-		color: var(--light)
-		border: 2px solid var(--dark)
+		background-color: $forest-green
+		color: $light
+		border: 2px solid $forest-green
 		&:hover,
 		&:focus,
 		&:active
-			background-color: var(--accent)
-			color: var(--light)
-			border: 2px solid var(--accent)
+			background-color: darken($forest-green, 10%)
+			color: $light
+			border: 2px solid darken($forest-green, 10%)
 		&-outline
 			@extend .btn
 			background-color: transparent
-			color: var(--dark)
-			border: 2px solid var(--dark)
+			color: $forest-green
+			border: 2px solid $forest-green
 			&:hover,
 			&:focus,
 			&:active
-				background-color: var(--dark)
-				color: var(--light)
-				border: 2px solid var(--dark)
+				background-color: $forest-green
+				color: $light
+				border: 2px solid $forest-green
 	&-secondary
 		@extend .btn
-		background-color: var(--medium)
-		color: var(--light)
-		border: 2px solid var(--medium)
+		background-color: $sunset-orange
+		color: $light
+		border: 2px solid $sunset-orange
 		&:hover,
 		&:focus,
 		&:active
-			background-color: var(--accent)
-			color: var(--light)
-			border: 2px solid var(--accent)
+			background-color: darken($sunset-orange, 10%)
+			color: $light
+			border: 2px solid darken($sunset-orange, 10%)
 		&-outline
 			@extend .btn
 			background-color: transparent
-			color: var(--medium)
-			border: 2px solid var(--medium)
+			color: $sunset-orange
+			border: 2px solid $sunset-orange
 			&:hover,
 			&:focus,
 			&:active
-				background-color: var(--medium)
-				color: var(--light)
-				border: 2px solid var(--medium)
+				background-color: $sunset-orange
+				color: $light
+				border: 2px solid $sunset-orange
 	&.full-width
 		width: 100%
 	&.icon

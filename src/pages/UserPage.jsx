@@ -111,6 +111,10 @@ export default function UserPage() {
 				<Row>
 					<Col>
 						<Button text="Log out" type="primary-outline" fullWidth onClick={handleLogOut} />
+						<Button text="Log out" type="primary" fullWidth onClick={handleLogOut} />
+						<Button text="Log out" type="secondary-outline" fullWidth onClick={handleLogOut} />
+						<Button text="Log out" type="secondary" fullWidth onClick={handleLogOut} />
+						<Button text="Log out" type="primary-outline" fullWidth onClick={handleLogOut} />
 					</Col>
 				</Row>
 			</Container>

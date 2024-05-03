@@ -1,5 +1,6 @@
 @import 'bootstrap/scss/bootstrap-grid.scss';
 @import '/src/assets/fonts/_font-rubik.sass';
+@import './styles/_variables.sass';
 
 :root {
 	// font-family: 'Quicksand', system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -13,12 +14,15 @@
 	-webkit-text-size-adjust: 100%;
 
 	--white: #fff;
-	--light: #e0fbfcff;
-	--accent: #ff9b71ff;
-	--medium: #7d84b2ff;
-	--darkish: #2c2b3cff;
-	--dark: #011828ff;
+	--light: #F5F4F0;
+	--sunset-orange: #D8952A;
+	--forest-green: #526245;
+	--copper: #B3653E;
+	--chestnut-red: #934521;
+	--pine-green: #2B3B20;
+	--dark: #14180C;
 }
+
 
 #root {
 	margin: 0
