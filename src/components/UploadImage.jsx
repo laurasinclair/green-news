@@ -1,12 +1,13 @@
-import React, { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react'
 import placeholder from '@img/placeholder_1-1.jpg'
 import styles from './styles/UploadImage.module.sass'
 import './styles/Button.module.sass'
 import { Row, Col } from 'react-bootstrap'
-import { UserContext, Button } from '@components'
+import { Button } from '@components'
+import { useUserContext } from '../components/UserContext'
 
 const UploadImage = () => {
-	const { currentUser } = useContext(UserContext)
+	const { currentUser } = useUserContext()
 
 	const [userImage, setUserImage] = useState({
 		imageUrl: placeholder,
