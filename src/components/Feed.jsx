@@ -1,13 +1,15 @@
 import { Row, Col } from 'react-bootstrap'
 import ReactPaginate from 'react-paginate'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowLeftCircleFill, ArrowRightCircleFill } from 'react-bootstrap-icons'
-import { SaveBtn } from '@components'
+import { UserContext, SaveBtn } from '@components'
 
 import styles from './styles/Feed.module.sass'
 
 export default function Feed(props) {
+	const { currentUser } = useContext(UserContext);
+
 	// fetching the data
 	const [data, setData] = useState([])
 	const [loading, setLoading] = useState(true)
@@ -38,8 +40,6 @@ export default function Feed(props) {
 		}
 	}, [page, data])
 
-	// console.log(data)
-
 	function getSlug(str) {
 		const tempString = str
 			.replaceAll(/[^a-zA-Z0-9]/g, '-')
@@ -51,6 +51,7 @@ export default function Feed(props) {
 	return (
 		<div className={styles.feed}>
 			<h2>News feed</h2>
+			
 
 			<Row>
 				{loading ? (
@@ -78,7 +79,10 @@ export default function Feed(props) {
 														<div className={styles.feed_article}>
 															<h3>{article.title}</h3>
 															<div>{article.description}</div>
-															<SaveBtn articleSlug={getSlug(article.title)} />
+															
+															{currentUser && (
+																<SaveBtn articleSlug={getSlug(article.title)} />
+															)}
 														</div>
 													</Link>
 												</Col>

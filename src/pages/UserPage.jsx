@@ -1,37 +1,20 @@
 import { Container, Row, Col } from 'react-bootstrap'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 
-import { Button, Hero, Feed, SaveBtn, UploadImage } from '@components'
+import { UserContext, Button, Hero, Feed, SaveBtn, UploadImage } from '@components'
 
 export default function UserPage() {
 	const navigate = useNavigate()
-
-	// fetching the users
-	const [users, setUsers] = useState([])
-	const [currentUser, setCurrentUser] = useState({})
+	
+	const { currentUser } = useContext(UserContext);
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState('')
 
-	useEffect(() => {
-		fetch(`http://localhost:7200/users/`)
-			.then((resp) => resp.json())
-			.then((data) => setUsers(data))
-			.catch((err) => setError(`User couldn't be fetched - ${err}`))
-	}, [])
 
 	useEffect(() => {
-		if (users && users[0]) {
-			setCurrentUser(users[0])
+		if (currentUser && currentUser.firstName && currentUser.lastName) {
 			setLoading(false)
-		} else {
-			setError('No users to display')
-		}
-	}, [users, currentUser])
-
-	// updating page title to user name
-	useEffect(() => {
-		if (currentUser && currentUser.firstName) {
 			document.title = `${window.name} | ${currentUser.firstName} ${currentUser.lastName} ⛭ User settings`
 		}
 	}, [currentUser])
@@ -80,8 +63,8 @@ export default function UserPage() {
 								<h3>User settings</h3>
 								<Row>
 									<Col>
-									Profile picture: 
-									<UploadImage />
+										Profile picture: 
+										<UploadImage />
 									</Col>
 								</Row>
 
