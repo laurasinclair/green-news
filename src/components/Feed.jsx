@@ -3,14 +3,14 @@ import ReactPaginate from 'react-paginate'
 import { useEffect, useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import placeholder from '@img/placeholder_1-1.jpg'
-import { ArrowLeftCircleFill, ArrowRightCircleFill, ArrowRight} from 'react-bootstrap-icons'
+import { ArrowLeftCircleFill, ArrowRightCircleFill, ArrowRight } from 'react-bootstrap-icons'
 import { Button, SaveBtn } from '@components'
 
 import styles from './styles/Feed.module.sass'
 import { useUserContext } from '../components/UserContext'
 
 export default function Feed(props) {
-	const { currentUser } = useUserContext();
+	const { currentUser } = useUserContext()
 
 	// fetching the data
 	const [data, setData] = useState([])
@@ -95,16 +95,16 @@ export default function Feed(props) {
 															<div className={styles.feed_articleCard_body}>
 																<h3>{article.title}</h3>
 																<p>{article.description}</p>
-																<Row className="flex-column flex-sm-row">
-																	{currentUser?.userId && (
-																		<Col>
-																			<SaveBtn articleSlug={getSlug(article.title)} />
-																		</Col>
-																	)}
-																	<Col>
-																		<Button link={`articles/${getSlug(article.title)}`} text="Read more" fullWidth iconRight={<ArrowRight size="18" />} />
-																	</Col>
-																</Row>
+															</div>
+															<div className={styles.feed_articleCard_footer}>
+																{currentUser?.userId && (
+																	<div>
+																		<SaveBtn articleSlug={getSlug(article.title)} />
+																	</div>
+																)}
+																<div>
+																	<Button link={`articles/${getSlug(article.title)}`} text="Read more" fullWidth iconRight={<ArrowRight size="18" />} />
+																</div>
 															</div>
 														</div>
 													</Link>
