@@ -86,7 +86,7 @@ export default function Feed(props) {
 									{filteredData &&
 										filteredData.map((article, i) => {
 											return (
-												<Col md="6" lg="4" key={i} className="mb-4">
+												<Col sm="6" lg="4" key={i} className="mb-4">
 													<Link to={`articles/${getSlug(article.title)}`}>
 														<div className={styles.feed_articleCard}>
 															<div className={styles.feed_articleCard_thumbnail}>
