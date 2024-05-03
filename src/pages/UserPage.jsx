@@ -2,7 +2,7 @@ import { Container, Row, Col } from 'react-bootstrap'
 import { useState, useEffect } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 
-import { Button, Hero, Feed, SaveBtn, UploadImage } from '@components'
+import { Button, Hero, Section, SaveBtn, UploadImage } from '@components'
 import { useUserContext } from '../components/UserContext'
 
 export default function UserPage() {
@@ -68,20 +68,39 @@ export default function UserPage() {
 							<Hero title={`Hello, ${currentUser.firstName} ${currentUser.lastName}!`} leadText="Happy to see you here! 🌿" size="m" />
 						</Container>
 
-						<section>
+						<Section>
 							<Container fluid>
 								<h2>User settings</h2>
 
 								<Row>
 									<Col>
-										Profile picture:
+									<h4>Profile picture</h4>
+										
 										<UploadImage />
+									</Col>
+									<Col className="d-flex">
+
+<div>
+	<h4>Username</h4>
+	<p>{currentUser.username}</p>
+</div>
+
+<div>
+	<h4>First name</h4>
+	<p>{currentUser.firstName}</p>
+</div>
+
+<div>
+	<h4>Last name</h4>
+	<p>{currentUser.lastName}</p>
+</div>
+										
 									</Col>
 								</Row>
 							</Container>
-						</section>
+						</Section>
 
-						<section>
+						<Section>
 							<Container fluid>
 								<h2>Saved articles</h2>
 								<p>
@@ -114,8 +133,8 @@ export default function UserPage() {
 									)}
 								</Row>
 							</Container>
-						</section>
-						<section>
+						</Section>
+						<Section>
 							<Container fluid>
 								<Row>
 									<Col>
@@ -123,7 +142,7 @@ export default function UserPage() {
 									</Col>
 								</Row>
 							</Container>
-						</section>
+						</Section>
 						</>
 					)
 				)}

@@ -7,6 +7,7 @@ import UserContext from './UserContext'
 // Layout
 import Hero from './Hero'
 import Navbar from './Navbar'
+import Section from './Section'
 
 
 // Specific
@@ -20,6 +21,7 @@ export {
     Logo,
     Hero,
     Navbar,
+    Section,
     Feed,
     SaveBtn,
     UploadImage,
