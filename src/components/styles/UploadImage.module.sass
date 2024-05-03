@@ -9,13 +9,20 @@
 	object-fit: cover
 
 .imageBtn
-	padding: 20px
+	padding: 10px 20px
+	border-radius: 6px
+	display: inline-flex
+	align-items: center
+	justify-content: center
+	width: fit-content
+	margin: 4px
+	cursor: pointer
 	background-color: $forest-green
-	border: none
-	text-align: center
-	font-family: 'Roboto mono'
-	font-size: 1rem
-	font-weight: 600
-	color: white
-	margin-bottom: 8px
-	display: inline-block
+	color: $light
+	border: 2px solid $forest-green
+	&:hover,
+	&:focus,
+	&:active
+		background-color: darken($forest-green, 10%)
+		color: $light
+		border: 2px solid darken($forest-green, 10%)
