@@ -7,11 +7,12 @@ import { UserContext, Button, Hero, Feed, SaveBtn, UploadImage } from '@componen
 export default function UserPage() {
 	const navigate = useNavigate()
 	
-	const { currentUser } = useContext(UserContext);
+	const { currentUser, setCurrentUser } = useContext(UserContext);
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState('')
 
 
+	// just updating the page title to the user name
 	useEffect(() => {
 		if (currentUser && currentUser.firstName && currentUser.lastName) {
 			setLoading(false)
@@ -19,15 +20,16 @@ export default function UserPage() {
 		}
 	}, [currentUser])
 
+
 	// displaying saved articles
 	const [allArticles, setAllArticles] = useState([])
-
 	useEffect(() => {
 		fetch(`https://newsapi.org/v2/everything?q=trees&apiKey=${import.meta.env.VITE_NEWS_API_TOKEN}`)
 			.then((resp) => resp.json())
 			.then((data) => setAllArticles(data.articles))
 			.catch((err) => setError(`Data couldn't be fetched - ${err}`))
 	}, [])
+
 
 	// matching the url with the right article
 	function getSlug(str) {
@@ -36,6 +38,14 @@ export default function UserPage() {
 			.toLowerCase()
 			.substring(0, 50)
 		return tempString.replace(/-+/g, '-').replace(/-$/, '')
+	}
+
+
+	// logging out user
+	const handleLogOut = (e) => {
+		e.preventDefault();
+		navigate('/')
+		setCurrentUser({})
 	}
 
 	return (
@@ -97,6 +107,11 @@ export default function UserPage() {
 							</>
 						)
 					)}
+				</Row>
+				<Row>
+					<Col>
+						<Button text="Log out" type="primary-outline" fullWidth onClick={handleLogOut} />
+					</Col>
 				</Row>
 			</Container>
 		</>

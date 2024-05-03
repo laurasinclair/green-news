@@ -80,7 +80,7 @@ export default function Feed(props) {
 															<h3>{article.title}</h3>
 															<div>{article.description}</div>
 															
-															{currentUser && (
+															{currentUser.userId && (
 																<SaveBtn articleSlug={getSlug(article.title)} />
 															)}
 														</div>
