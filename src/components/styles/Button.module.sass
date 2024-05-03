@@ -52,6 +52,28 @@
 				background-color: $sunset-orange
 				color: $light
 				border: 2px solid $sunset-orange
+	&-tertiary
+		@extend .btn
+		background-color: $light-green
+		color: $light
+		border: 2px solid $light-green
+		&:hover,
+		&:focus,
+		&:active
+			background-color: darken($light-green, 10%)
+			color: $light
+			border: 2px solid darken($light-green, 10%)
+		&-outline
+			@extend .btn
+			background-color: transparent
+			color: $light-green
+			border: 2px solid $light-green
+			&:hover,
+			&:focus,
+			&:active
+				background-color: $light-green
+				color: $light
+				border: 2px solid $light-green
 	&.full-width
 		width: 100%
 	&.icon

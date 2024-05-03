@@ -33,10 +33,20 @@
 				background-color: $forest-green
 				a
 					color: $white !important
-	&_article
-		padding: 20px 30px 50px
+	&_articleCard
 		border: 2px solid $light-green
 		height: 100%
+		border-radius: 8px
+		&_thumbnail
+			height: 200px
+			img
+				object-fit: cover
+				height: 100%
+				width: 100%
+		&_body
+			padding: 10px 26px 26px
+			p
+				margin-bottom: 20px
 	.featuredImage
 		border-radius: 20px
 		overflow: hidden

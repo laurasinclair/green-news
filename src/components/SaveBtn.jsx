@@ -84,5 +84,5 @@ export default function SaveBtn({articleSlug}) {
 		}
 	}
 
-	return <Button onClick={handleClick} text={saveButtonState.label} iconRight={saveButtonState.icon} />
+	return <Button onClick={handleClick} text={saveButtonState.label} iconRight={saveButtonState.icon} fullWidth type="tertiary" />
 }
