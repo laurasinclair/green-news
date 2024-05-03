@@ -1,5 +1,7 @@
+@import '/src/styles/_variables.sass'
+
 .profilePic
-	border: 1px solid #fff
+	border: 1px solid $forest-green
 	width: 200px
 	height: 200px
 	border-radius: 50%
@@ -7,13 +9,20 @@
 	object-fit: cover
 
 .imageBtn
-	padding: 20px
-	background-color: #173042
-	border: none
-	text-align: center
-	font-family: 'Roboto mono'
-	font-size: 1rem
-	font-weight: 600
-	color: white
-	margin-bottom: 8px
-	display: inline-block
+	padding: 10px 20px
+	border-radius: 6px
+	display: inline-flex
+	align-items: center
+	justify-content: center
+	width: fit-content
+	margin: 4px
+	cursor: pointer
+	background-color: $forest-green
+	color: $light
+	border: 2px solid $forest-green
+	&:hover,
+	&:focus,
+	&:active
+		background-color: darken($forest-green, 10%)
+		color: $light
+		border: 2px solid darken($forest-green, 10%)
