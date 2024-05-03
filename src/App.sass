@@ -1,10 +1,12 @@
+@import '/src/styles/_variables.sass'
+
 body
-	background-color: var(--light)
+	background-color: $light
 	font-family: Rubik, 'Open sans', 'Noto sans', Arial, Helvetica, sans-serif
-	color: var(--dark)
+	color: $dark
 	margin: 0 0 150px
 	padding: 0
-	font-size: 18px
+	font-size: 17px
 	min-height: 100vh
 
 h1
@@ -12,20 +14,27 @@ h1
 	line-height: 1.1
 	font-weight: 700 !important
 	margin-bottom: 0.6rem
-	color: var(--forest-green)
+	color: $forest-green
+
+h2
+	font-size: 3.6rem
+	line-height: 1.1
+	font-weight: 700 !important
+	margin-bottom: 0.6rem
+	color: $forest-green
 
 h3
-	font-size: 1.8rem
+	font-size: 1.5rem
 	line-height: 1.4
-	color: var(--forest-green)
+	color: $forest-green
 	margin-bottom: 0.6rem
 
 a
 	font-weight: 500
-	color: var(--dark)
+	color: $dark
 	text-decoration: inherit
 	&:hover,
 	&:focus,
 	&:active
-		color: var(--dark)
+		color: $dark
 		outline: none
