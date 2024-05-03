@@ -1,6 +1,7 @@
 // Basics
 import Button from './Button'
 import Logo from './Logo'
+import UserContext from './UserContext'
 
 
 // Layout
@@ -21,5 +22,6 @@ export {
     Navbar,
     Feed,
     SaveBtn,
-    UploadImage
+    UploadImage,
+    UserContext
 }

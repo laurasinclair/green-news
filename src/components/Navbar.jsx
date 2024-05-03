@@ -1,19 +1,26 @@
 import { Container, Row, Col } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect, createContext, useContext } from 'react'
 import { PersonCircle } from 'react-bootstrap-icons'
-import { Logo, Button } from '@components';
+import { UserContext, Logo, Button } from '@components'
 import placeholder from '@img/placeholder_1-1.jpg'
 import styles from './styles/Navbar.module.sass'
 
-export default function Navbar({currentUser}) {
-	const [userImage, setUserImage] = useState(placeholder)
+export default function Navbar() {
+	const { currentUser, setCurrentUser } = useContext(UserContext)
 
-	useEffect(() => {
-		currentUser.profilePicture && (
-			setUserImage(currentUser.profilePicture)
-		)
-	}, [currentUser, currentUser.profilePicture])
+	// fetching the users
+	const [loading, setLoading] = useState(true)
+	const [error, setError] = useState('')
+
+	const handleLogin = (e) => {
+		e.preventDefault()
+
+		fetch(`http://localhost:7200/users/1`)
+			.then((resp) => resp.json())
+			.then((data) => setCurrentUser(data))
+			.catch((err) => setError(`User couldn't be fetched - ${err}`))
+	}
 
 	return (
 		<nav className={styles.navbar}>
@@ -26,18 +33,25 @@ export default function Navbar({currentUser}) {
 					</Col>
 					<Col className="d-flex align-items-center justify-content-end">
 						{currentUser ? (
-							<>
-							<NavLink to="/user/johndoe" className="d-flex align-items-center">
-							{currentUser.firstName} {currentUser.lastName}
-								<div className={styles.userPicture}>
-									<img src={userImage} alt={`${currentUser.firstName} ${currentUser.lastName}`} />
-								</div>
-							</NavLink>
-							</>
+							Object.keys(currentUser).length !== 0 ? (
+								<NavLink to="/user/johndoe" className="d-flex align-items-center">
+									Welcome, {currentUser.firstName} {currentUser.lastName}
+									
+									<div className={styles.userPicture}>
+										<img src={currentUser.profilePicture || placeholder} alt={`${currentUser.firstName} ${currentUser.lastName}`} />
+									</div>
+								</NavLink>
+							) : (
+								<NavLink to="/user/johndoe">
+									<Button type="primary-outline" text="Log in" onClick={handleLogin} />
+								</NavLink>
+							)
 						) : (
-						<NavLink to="/user/johndoe">
-							<Button type="primary-outline" text="Log in" />
-						</NavLink>
+							<div>
+								<NavLink to="/user/johndoe">
+									<Button type="primary-outline" text="Log in" onClick={handleLogin} />
+								</NavLink>
+							</div>
 						)}
 					</Col>
 				</Row>

@@ -1,10 +1,11 @@
 import { Container, Row, Col } from 'react-bootstrap'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 
-import { Button, Hero, SaveBtn } from '@components'
+import { UserContext, Button, Hero, SaveBtn } from '@components'
 
 export default function Article() {
+	const { currentUser } = useContext(UserContext);
 	// const navigate = useNavigate()
 
 	// fetching the data
@@ -75,7 +76,9 @@ export default function Article() {
 							<>
 								<Col md="6" lg="4" className="mb-4">
 									<div>
-										<SaveBtn articleSlug={getSlug(article.title)} />
+										{currentUser.userId && (
+											<SaveBtn articleSlug={getSlug(article.title)} />
+										)}
 
 										<div>Author: {article.author}</div>
 										<div>
