@@ -1,17 +1,14 @@
 import { Row, Col } from 'react-bootstrap'
 import ReactPaginate from 'react-paginate'
-import { useEffect, useState, useContext } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import placeholder from '@img/placeholder_1-1.jpg'
-import { ArrowLeftCircleFill, ArrowRightCircleFill, ArrowRight } from 'react-bootstrap-icons'
-import { Button, SaveBtn } from '@components'
+import { ArrowLeftCircleFill, ArrowRightCircleFill } from 'react-bootstrap-icons'
+import { ArticleCard } from '@components'
 
 import styles from './styles/Feed.module.sass'
 import { useUserContext } from '../components/UserContext'
 
 export default function Feed(props) {
-	const { currentUser } = useUserContext()
-
 	// fetching the data
 	const [data, setData] = useState([])
 	const [loading, setLoading] = useState(true)
@@ -88,25 +85,7 @@ export default function Feed(props) {
 											return (
 												<Col sm="6" lg="4" key={i} className="mb-4">
 													<Link to={`articles/${getSlug(article.title)}`}>
-														<div className={styles.feed_articleCard}>
-															<div className={styles.feed_articleCard_thumbnail}>
-																<img src={article.urlToImage || placeholder} alt={article.title | window.name} />
-															</div>
-															<div className={styles.feed_articleCard_body}>
-																<h3>{article.title}</h3>
-																<p>{article.description}</p>
-															</div>
-															<div className={styles.feed_articleCard_footer}>
-																{currentUser?.userId && (
-																	<div>
-																		<SaveBtn articleSlug={getSlug(article.title)} />
-																	</div>
-																)}
-																<div>
-																	<Button link={`articles/${getSlug(article.title)}`} text="Read more" fullWidth iconRight={<ArrowRight size="18" />} />
-																</div>
-															</div>
-														</div>
+														<ArticleCard article={article} />
 													</Link>
 												</Col>
 											)

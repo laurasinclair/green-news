@@ -13,6 +13,7 @@ import Section from './Section'
 
 // Specific
 import Feed from './Feed'
+import ArticleCard from './ArticleCard'
 import SaveBtn from './SaveBtn'
 import UploadImage from './UploadImage'
 
@@ -25,6 +26,7 @@ export {
     Navbar,
     Section,
     Feed,
+    ArticleCard,
     SaveBtn,
     UploadImage,
     UserContext
