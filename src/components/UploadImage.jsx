@@ -3,7 +3,7 @@ import placeholder from '@img/placeholder_1-1.jpg'
 import styles from './styles/UploadImage.module.sass'
 import './styles/Button.module.sass'
 import { Row, Col } from 'react-bootstrap'
-import { Button } from '@components'
+import { Button, UserPicture } from '@components'
 import { useUserContext } from '../components/UserContext'
 
 const UploadImage = () => {
@@ -92,16 +92,17 @@ const UploadImage = () => {
 	}, [currentUser.profilePicture])
 
 	return (
-		<Row>
+		<Row class="d-flex flex-column">
 			<Col>
-				<div className={styles.profilePic}>{userImage && <img alt="Not found" width={'250px'} src={userImage.imageUrl} />}</div>
+				{userImage && 
+				<UserPicture src={userImage.imageUrl} alt={`${currentUser.firstName} ${currentUser.lastName}`} className="mb-3" size="250px" />}
 			</Col>
 			<Col className="d-flex flex-column">
-				<label htmlFor="files" name="myImage" className={styles.imageBtn} onChange={handleFileChange}>
+				<label htmlFor="files" name="userImage" className={styles.imageBtn} onChange={handleFileChange}>
 					{userImage.label}
 				</label>
 
-				<input id="files" name="myImage" className="d-none" type="file" onChange={handleFileChange} />
+				<input id="files" name="userImage" className="d-none" type="file" onChange={handleFileChange} />
 
 				{userImage && userImage.imageUrl !== placeholder && (
 					<Button onClick={handleRemoveImage} text="Remove image" />

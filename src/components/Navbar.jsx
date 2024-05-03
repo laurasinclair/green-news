@@ -1,8 +1,7 @@
 import { Container, Row, Col } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
 import React, { useState, useEffect,} from 'react'
-import { PersonCircle } from 'react-bootstrap-icons'
-import { UserContext, Logo, Button } from '@components'
+import { UserContext, Logo, Button, UserPicture } from '@components'
 import placeholder from '@img/placeholder_1-1.jpg'
 import styles from './styles/Navbar.module.sass'
 import { useUserContext } from './UserContext'
@@ -39,9 +38,9 @@ export default function Navbar() {
 								<NavLink to="/user/johndoe" className="d-flex align-items-center">
 									Welcome, {currentUser.firstName} {currentUser.lastName}
 									
-									<div className={styles.userPicture}>
-										<img src={currentUser.profilePicture || placeholder} alt={`${currentUser.firstName} ${currentUser.lastName}`} />
-									</div>
+									<UserPicture src={currentUser.profilePicture || placeholder} alt={`${currentUser.firstName} ${currentUser.lastName}`} className="ms-4" size="50px" />
+									
+									{/* <img src={currentUser.profilePicture || placeholder} alt={`${currentUser.firstName} ${currentUser.lastName}`} /> */}
 								</NavLink>
 							) : (
 								<NavLink to="/user/johndoe">

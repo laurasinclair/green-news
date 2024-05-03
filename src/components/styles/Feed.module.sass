@@ -37,6 +37,11 @@
 		border: 2px solid $light-green
 		height: 100%
 		border-radius: 8px
+		overflow: hidden
+		display: flex
+		flex-direction: column
+		align-items: stretch
+		flex: 1
 		&_thumbnail
 			height: 200px
 			img
@@ -44,9 +49,10 @@
 				height: 100%
 				width: 100%
 		&_body
-			padding: 10px 26px 26px
-			p
-				margin-bottom: 20px
+			padding: 10px 26px 10px
+			flex: 1
+		&_footer
+			padding: 20px
 	.featuredImage
 		border-radius: 20px
 		overflow: hidden
@@ -74,6 +80,7 @@
 			bottom: 0
 			margin-bottom: 0
 			padding: 20px
+			color: $white
 			font-size: 2rem
 			@include media-breakpoint-up(sm)
 				font-size: 2.4rem
