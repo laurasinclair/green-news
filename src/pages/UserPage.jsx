@@ -14,7 +14,6 @@ export default function UserPage() {
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState('')
 
-
 	// just updating the page title to the user name
 	useEffect(() => {
 		if (currentUser && currentUser.firstName && currentUser.lastName) {
@@ -22,7 +21,6 @@ export default function UserPage() {
 			document.title = `${window.name} | ${currentUser.firstName} ${currentUser.lastName} ⛭ User settings`
 		}
 	}, [currentUser])
-
 
 	// displaying saved articles
 	const [allArticles, setAllArticles] = useState([])
@@ -33,7 +31,6 @@ export default function UserPage() {
 			.catch((err) => setError(`Data couldn't be fetched - ${err}`))
 	}, [])
 
-
 	// matching the url with the right article
 	function getSlug(str) {
 		const tempString = str
@@ -43,80 +40,94 @@ export default function UserPage() {
 		return tempString.replace(/-+/g, '-').replace(/-$/, '')
 	}
 
-
 	// logging out user
 	const handleLogOut = (e) => {
-		e.preventDefault();
+		e.preventDefault()
 		navigate('/')
 		setCurrentUser({})
 	}
 
 	return (
 		<>
-			<Container fluid>
-				<Row>
-					{loading ? (
-						<div>Loading...</div>
-					) : !currentUser ? (
-						error && (
-							<Col>
-								<div>
-									OH NO. <br />
-									{error}
-								</div>
-							</Col>
-						)
-					) : (
-						currentUser && (
-							<>
-								<Col>
-									<Hero title={`Hello ${currentUser.firstName} ${currentUser.lastName}`} size="m" />
-								</Col>
+			<Row>
+				{loading ? (
+					<div>Loading...</div>
+				) : !currentUser ? (
+					error && (
+						<Col>
+							<div>
+								OH NO. <br />
+								{error}
+							</div>
+						</Col>
+					)
+				) : (
+					currentUser && (
+						<>
+						<Container fluid>
+							<Hero title={`Hello, ${currentUser.firstName} ${currentUser.lastName}!`} leadText="Happy to see you here! 🌿" size="m" />
+						</Container>
 
-								<h3>User settings</h3>
+						<section>
+							<Container fluid>
+								<h2>User settings</h2>
+
 								<Row>
 									<Col>
-										Profile picture: 
+										Profile picture:
 										<UploadImage />
 									</Col>
 								</Row>
+							</Container>
+						</section>
 
-								<h3>Saved articles</h3>
+						<section>
+							<Container fluid>
+								<h2>Saved articles</h2>
+								<p>
+									{currentUser.savedArticles && currentUser.savedArticles.length} article{(currentUser.savedArticles.length > 1) ? 's' : ''} saved
+								</p>
 
-
-								{currentUser.savedArticles && currentUser.savedArticles.length < 1 ? (
-									<Col md="6" lg="4" className="mb-4">
-										Nothing to show today :(
-									</Col>
-								) : (
-									allArticles.map((article, i) => {
-										for (let articleSlug of currentUser.savedArticles) {
-											if (articleSlug === getSlug(article.title)) {
-												return (
-													<Col md="6" lg="4" key={i} className="mb-4">
-													<Link to={`articles/${getSlug(article.title)}`}>
-														<div>
-															<h3>{article.title}</h3>
-															<div>{article.description}</div>
-															<SaveBtn articleSlug={getSlug(article.title)} />
-														</div>
-													</Link>
-												</Col>
-												)
+								<Row>
+									{currentUser.savedArticles && currentUser.savedArticles.length < 1 ? (
+										<Col md="6" lg="4" className="mb-4">
+											Nothing to show today :(
+										</Col>
+									) : (
+										allArticles.map((article, i) => {
+											for (let articleSlug of currentUser.savedArticles) {
+												if (articleSlug === getSlug(article.title)) {
+													return (
+														<Col md="6" lg="4" key={i} className="mb-4">
+															<Link to={`articles/${getSlug(article.title)}`}>
+																<div>
+																	<h3>{article.title}</h3>
+																	<div>{article.description}</div>
+																	<SaveBtn articleSlug={getSlug(article.title)} />
+																</div>
+															</Link>
+														</Col>
+													)
+												}
 											}
-										}
-									})
-								)}
-							</>
-						)
-					)}
-				</Row>
-				<Row>
-					<Col>
-						<Button text="Log out" type="primary-outline" fullWidth onClick={handleLogOut} />
-					</Col>
-				</Row>
-			</Container>
+										})
+									)}
+								</Row>
+							</Container>
+						</section>
+						<section>
+							<Container fluid>
+								<Row>
+									<Col>
+										<Button text="Log out" type="primary-outline" fullWidth onClick={handleLogOut} />
+									</Col>
+								</Row>
+							</Container>
+						</section>
+						</>
+					)
+				)}
+			</Row>
 		</>
 	)
 }
