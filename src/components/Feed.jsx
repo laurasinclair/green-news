@@ -15,12 +15,12 @@ export default function Feed() {
 	const [error, setError] = useState('')
 
 	useEffect(() => {
+		// fetch(`BROKENLINK}`)
 		fetch(`https://newsapi.org/v2/everything?q=trees&apiKey=${import.meta.env.VITE_NEWS_API_TOKEN}`)
 			.then((resp) => resp.json())
 			.then((data) => setData(data))
 			.catch((err) => setError(`Data couldn't be fetched - ${err}`))
 	}, [])
-
 
 	// pagination
 	const [page, setPage] = useState(0) // current page number
@@ -28,17 +28,21 @@ export default function Feed() {
 	const perPage = 9
 
 	useEffect(() => {
-		if (data && data.articles) {
+		data && data.articles && (
 			setFilteredData(
 				data.articles.filter((item, index) => {
 					return (index >= page * perPage) & (index < (page + 1) * perPage)
 				})
-			)
+			),
+			setError(''),
 			setLoading(false)
-		} else {
-			setError('No data to display.')
-		}
-	}, [page, data])
+		)
+		
+		!data || !data.articles && (
+			setError('No articles to display.'),
+			setLoading(false)
+		)
+	}, [page, data, error])
 
 	function getSlug(str) {
 		const tempString = str
@@ -53,17 +57,22 @@ export default function Feed() {
 			<h2>News feed</h2>
 
 			<Row>
-				{/* {error && (
+				{loading ? (	
 					<Col>
 						<div>
-							OH NO. <br />
-							{error}
+							<p>
+								Loading...
+							</p>
 						</div>
 					</Col>
-				)} */}
-
-				{loading ? (
-					<div>Loading...</div>
+				) : ( error ? (
+					<Col>
+						<div>
+							<p>
+								{error}
+							</p>
+						</div>
+					</Col>
 				) : (
 					filteredData && (
 						<>
@@ -97,6 +106,7 @@ export default function Feed() {
 							</Col>
 						</>
 					)
+				)
 				)}
 			</Row>
 		</div>

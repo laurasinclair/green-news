@@ -103,16 +103,13 @@ export default function UserPage() {
 									{currentUser.isLoggedIn && (
 										<>
 											{currentUser.userInfo.savedArticles.length} article{currentUser.userInfo.savedArticles.length > 1 ? 's' : ''} saved
+											{currentUser.userInfo.savedArticles.length < 1 && ' :('}
 										</>
 									)}
 								</p>
 
 								<Row>
-									{currentUser?.userInfo.savedArticles && currentUser?.userInfo.savedArticles.length < 1 ? (
-										<Col md="6" lg="4" className="mb-4">
-											Nothing to show today :(
-										</Col>
-									) : (
+									{currentUser?.userInfo.savedArticles && (
 										allArticles.map((article, i) => {
 											for (let articleSlug of currentUser.userInfo.savedArticles) {
 												if (articleSlug === getSlug(article.title)) {
