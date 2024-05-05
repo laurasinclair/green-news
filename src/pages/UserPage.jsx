@@ -118,7 +118,7 @@ export default function UserPage() {
 												if (articleSlug === getSlug(article.title)) {
 													return (
 														<Col md="6" lg="4" key={i} className="mb-4">
-															<Link to={`articles/${getSlug(article.title)}`}>
+															<Link to={`/articles/${getSlug(article.title)}`}>
 																<ArticleCard article={article} />
 															</Link>
 														</Col>
