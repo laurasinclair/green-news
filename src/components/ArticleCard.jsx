@@ -36,7 +36,7 @@ export default function ArticleCard({article}) {
 					</div>
 				)}
 				<div>
-					<Button link={`/articles/${getSlug(article.title)}`} text="Read more" fullWidth iconRight={<ArrowRight size="18" />} />
+					<Button link={`/articles/${getSlug(article.title)}`} label="Read more" fullWidth iconRight={<ArrowRight size="18" />} />
 				</div>
 			</div>
 		</div>

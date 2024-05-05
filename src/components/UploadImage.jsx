@@ -113,7 +113,7 @@ const UploadImage = () => {
 				<input id="files" name="userImage" className="d-none" type="file" onChange={handleFileChange} />
 
 				{userImage && userImage.imageUrl !== placeholder && (
-					<Button onClick={handleRemoveImage} text="Remove image" />
+					<Button onClick={handleRemoveImage} label="Remove image" />
 				)}
 			</Col>
 		</Row>

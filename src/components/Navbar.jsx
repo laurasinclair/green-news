@@ -59,13 +59,13 @@ export default function Navbar() {
 								</NavLink>
 							) : (
 								<NavLink to="/user/johndoe">
-									<Button type="primary-outline" text="Log in" onClick={handleLogin} />
+									<Button type="primary-outline" label="Log in" onClick={handleLogin} />
 								</NavLink>
 							)
 						) : (
 							<div>
 								<NavLink to="/user/johndoe">
-									<Button type="primary-outline" text="Log in" onClick={handleLogin} />
+									<Button type="primary-outline" label="Log in" onClick={handleLogin} />
 								</NavLink>
 							</div>
 						)}
