@@ -109,7 +109,7 @@ export default function UserPage() {
 								</p>
 
 								<Row>
-									{currentUser?.userInfo.savedArticles && (
+									{currentUser?.userInfo.savedArticles && allArticles ? (
 										allArticles.map((article, i) => {
 											for (let articleSlug of currentUser.userInfo.savedArticles) {
 												if (articleSlug === getSlug(article.title)) {
@@ -123,6 +123,10 @@ export default function UserPage() {
 												}
 											}
 										})
+									) : (
+										<Col md="6" lg="4" className="mb-4">
+											<p>We can't access your saved articles now :(</p>
+										</Col>
 									)}
 								</Row>
 							</Container>
