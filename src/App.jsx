@@ -1,6 +1,6 @@
 import './App.sass'
 import { HomePage, Article, UserPage } from '@pages'
-import { Navbar } from '@components'
+import { Navbar, Footer } from '@components'
 import { Routes, Route } from 'react-router-dom'
 import UserContextProvider from './components/UserContext'
 
@@ -16,6 +16,8 @@ function App() {
 					<Route path="/user/johndoe" element={<UserPage />} />
 				</Routes>
 			</UserContextProvider>
+
+			<Footer />
 		</div>
 	)
 }

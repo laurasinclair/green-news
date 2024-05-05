@@ -6,6 +6,7 @@ import UserPicture from './UserPicture'
 
 
 // Layout
+import Footer from './Footer'
 import Hero from './Hero'
 import Navbar from './Navbar'
 import Section from './Section'
@@ -21,6 +22,7 @@ import UploadImage from './UploadImage'
 export {
     Button,
     Logo,
+    Footer,
     Hero,
     UserPicture,
     Navbar,
