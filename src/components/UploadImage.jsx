@@ -35,7 +35,7 @@ const UploadImage = () => {
 			const base64 = await convertToBase64(file)
 
 			try {
-				currentUser.profilePicture = base64
+				currentUser.userInfo.profilePicture = base64
 				await fetch('http://localhost:7200/users/1', {
 					method: 'PUT',
 					headers: {
@@ -47,7 +47,12 @@ const UploadImage = () => {
 					label: 'Replace profile picture',
 					imageUrl: base64,
 				})
-				console.log('image successfully uploaded')
+
+				console.trace(
+					"%c 🖼️ Image successfully uploaded!",
+					"color: #2B3B20; padding: 6px 8px; background-color: #6FBF6B; display: inline-block; border-radius: 4px;"
+				);
+
 			} catch (error) {
 				setError("Image couldn't be saved :(", error)
 			}
@@ -57,7 +62,7 @@ const UploadImage = () => {
 	// Handle image removal
 	const handleRemoveImage = () => {
 		try {
-			currentUser.profilePicture = ''
+			currentUser.userInfo.profilePicture = ''
 			fetch('http://localhost:7200/users/1', {
 				method: 'PUT',
 				headers: {
@@ -66,12 +71,15 @@ const UploadImage = () => {
 				body: JSON.stringify(currentUser),
 			})
 
-			if (!currentUser.profilePicture) {
+			if (!currentUser.userInfo.profilePicture) {
 				setUserImage({
 					label: 'Upload profile picture',
 					imageUrl: placeholder,
 				})
 			}
+
+			console.trace("%c 🖼️ Image successfully removed!", "color: #2B3B20; padding: 6px 8px; background-color: #6FBF6B; display: inline-block; border-radius: 4px;");
+			
 		} catch (error) {
 			setError("Image couldn't be removed :(", error)
 		}
@@ -80,22 +88,22 @@ const UploadImage = () => {
 	// Load image from json server on component mount
 	useEffect(() => {
 		try {
-			if (currentUser.profilePicture) {
+			if (currentUser.userInfo.profilePicture) {
 				setUserImage({
 					label: 'Replace profile picture',
-					imageUrl: currentUser.profilePicture,
+					imageUrl: currentUser.userInfo.profilePicture,
 				})
 			}
 		} catch (error) {
 			setError("Image couldn't be loaded :(", error)
 		}
-	}, [currentUser.profilePicture])
+	}, [currentUser.userInfo.profilePicture])
 
 	return (
-		<Row class="d-flex flex-column">
+		<Row className="d-flex flex-column">
 			<Col>
 				{userImage && 
-				<UserPicture src={userImage.imageUrl} alt={`${currentUser.firstName} ${currentUser.lastName}`} className="mb-3" size="250px" />}
+				<UserPicture src={userImage.imageUrl} alt={`${currentUser.userInfo.firstName} ${currentUser.userInfo.lastName}`} className="mb-3" size="250px" />}
 			</Col>
 			<Col className="d-flex flex-column">
 				<label htmlFor="files" name="userImage" className={styles.imageBtn} onChange={handleFileChange}>

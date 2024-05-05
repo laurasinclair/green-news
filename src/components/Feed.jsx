@@ -6,9 +6,9 @@ import { ArrowLeftCircleFill, ArrowRightCircleFill } from 'react-bootstrap-icons
 import { ArticleCard } from '@components'
 
 import styles from './styles/Feed.module.sass'
-import { useUserContext } from '../components/UserContext'
+import { useUserContext } from './UserContext'
 
-export default function Feed(props) {
+export default function Feed() {
 	// fetching the data
 	const [data, setData] = useState([])
 	const [loading, setLoading] = useState(true)
@@ -20,6 +20,7 @@ export default function Feed(props) {
 			.then((data) => setData(data))
 			.catch((err) => setError(`Data couldn't be fetched - ${err}`))
 	}, [])
+
 
 	// pagination
 	const [page, setPage] = useState(0) // current page number
@@ -35,7 +36,7 @@ export default function Feed(props) {
 			)
 			setLoading(false)
 		} else {
-			setError('No data to display')
+			setError('No data to display.')
 		}
 	}, [page, data])
 
@@ -52,17 +53,17 @@ export default function Feed(props) {
 			<h2>News feed</h2>
 
 			<Row>
+				{/* {error && (
+					<Col>
+						<div>
+							OH NO. <br />
+							{error}
+						</div>
+					</Col>
+				)} */}
+
 				{loading ? (
 					<div>Loading...</div>
-				) : !filteredData || filteredData.length <= 0 ? (
-					error && (
-						<Col>
-							<div>
-								OH NO. <br />
-								{error}
-							</div>
-						</Col>
-					)
 				) : (
 					filteredData && (
 						<>
@@ -98,7 +99,6 @@ export default function Feed(props) {
 					)
 				)}
 			</Row>
-			{props.children}
 		</div>
 	)
 }

@@ -30,7 +30,7 @@ export default function ArticleCard({article}) {
 				<p>{article.description}</p>
 			</div>
 			<div className={styles.articleCard_footer}>
-				{currentUser?.userId && (
+				{currentUser.isLoggedIn && (
 					<div>
 						<SaveBtn articleSlug={getSlug(article.title)} />
 					</div>

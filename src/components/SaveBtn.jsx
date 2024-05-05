@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Heart, HeartFill } from 'react-bootstrap-icons'
+import { useUserContext } from '../components/UserContext'
 
 import { Button } from '@components'
 
 export default function SaveBtn({articleSlug}) {
-	const [userData, setUserData] = useState({})
+	const { currentUser } = useUserContext()
 	const [error, setError] = useState('')
     
+
 	// saving article to user page
 	const [saveButtonState, setSaveButtonState] = useState({
 		saved: false,
@@ -15,16 +17,16 @@ export default function SaveBtn({articleSlug}) {
 		icon: <Heart />,
 	})
 
-    useEffect(() => {
-        fetch('http://localhost:7200/users/1')
-        .then((resp) => resp.json())
-        .then((data) => setUserData(data))
-        .catch((err) => 'Error fetching userData')
-    }, [])
+    // useEffect(() => {
+    //     fetch('http://localhost:7200/users/1')
+    //     .then((resp) => resp.json())
+    //     .then((data) => setcurrentUser(data))
+    //     .catch((err) => 'Error fetching currentUser')
+    // }, [])
 
     useEffect(() => {
-        if (userData && userData.savedArticles) {
-            const index = userData.savedArticles.indexOf(articleSlug)
+        if (currentUser && currentUser.userInfo.savedArticles) {
+            const index = currentUser.userInfo.savedArticles.indexOf(articleSlug)
 
             if (index === -1) {
                 setSaveButtonState({
@@ -40,7 +42,7 @@ export default function SaveBtn({articleSlug}) {
                 })
             }
         }
-    }, [userData, articleSlug])
+    }, [currentUser, articleSlug])
 
 	async function handleClick(e) {
 		e.preventDefault()
@@ -48,17 +50,17 @@ export default function SaveBtn({articleSlug}) {
 		try {
 			const userResponse = await fetch('http://localhost:7200/users/1')
 			const user = await userResponse.json()
-			const index = user.savedArticles.indexOf(articleSlug)
+			const index = user.userInfo.savedArticles.indexOf(articleSlug)
 
 			if (index === -1) {
-				user.savedArticles.push(articleSlug)
+				user.userInfo.savedArticles.push(articleSlug)
 				setSaveButtonState({
 					saved: true,
 					label: 'Article saved!',
 					icon: <HeartFill />,
 				})
 			} else {
-				user.savedArticles.splice(index, 1)
+				user.userInfo.savedArticles.splice(index, 1)
 				setSaveButtonState({
 					saved: false,
 					label: 'Save article',
@@ -73,10 +75,10 @@ export default function SaveBtn({articleSlug}) {
 				},
 				body: JSON.stringify(user),
 			})
-			console.log({
-				'saved articles': user.savedArticles.length,
+			console.table({
+				'saved articles': user.userInfo.savedArticles.length,
 				index: index,
-				saved: saveButtonState.saved,
+				'saved?': saveButtonState.saved,
 				updatedResponse: updatedResponse.status,
 			})
 		} catch (error) {

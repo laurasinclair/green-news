@@ -11,7 +11,7 @@ export default function HomePage() {
 			</Container>
 
 			<Container fluid>
-				<Feed>I can even add content, here.</Feed>
+				<Feed />
 			</Container>
 		</>
 	)
