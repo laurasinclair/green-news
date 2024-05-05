@@ -77,7 +77,7 @@ export default function Article() {
 							<>
 								<Col md="6" lg="4" className="mb-4">
 									<div>
-										{currentUser?.userId && (
+										{currentUser.isLoggedIn && (
 											<SaveBtn articleSlug={getSlug(article.title)} />
 										)}
 
