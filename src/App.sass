@@ -29,6 +29,9 @@ h3
 	color: $forest-green
 	margin-bottom: 0.6rem
 
+h4
+	margin-bottom: 0.6rem
+
 a
 	font-weight: 500
 	color: $dark
@@ -43,3 +46,32 @@ a
 	display: flex
 	flex-direction: column
 	min-height: 100vh
+
+.bg-01
+	background-color: $white
+	border-radius: 6px
+	padding: 30px 40px
+	box-sizing: border-box
+
+.inputfield
+	border: 2px solid $light-green
+	padding: 8px 12px
+	border-radius: 4px
+	cursor: pointer
+	position: relative
+	&:after
+		content: ''
+		width: 16px
+		height: 16px
+		display: block
+		position: absolute
+		right: 10px
+		transition: all .2s ease-in-out
+		top: 12px
+		opacity: 0
+		background-image: url('/src/assets/images/icon_pencil-fill.svg')
+		background-repeat: no-repeat
+		background-position: center right
+	&:hover
+		&:after
+			opacity: 1
