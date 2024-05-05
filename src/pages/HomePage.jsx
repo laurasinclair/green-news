@@ -1,18 +1,12 @@
-import { Container, Row, Col } from 'react-bootstrap'
-import { useState, useEffect } from 'react'
-
-import { Button, Hero, Feed } from '@components'
+import { Container } from 'react-bootstrap'
+import { Hero, Feed } from '@components'
 
 export default function HomePage() {
 	return (
 		<>
-			<Container fluid>
-				<Hero title="Green News" size="m" />
-			</Container>
+			<Hero title="Green News" size="m" />
 
-			<Container fluid>
-				<Feed />
-			</Container>
+			<Feed />
 		</>
 	)
 }
