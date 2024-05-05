@@ -1,7 +1,9 @@
 @import 'bootstrap/scss/bootstrap-grid.scss';
+@import '/src/assets/fonts/_font-rubik.sass';
+@import './styles/_variables.sass';
 
 :root {
-	font-family: 'Roboto mono', system-ui, Avenir, Helvetica, Arial, sans-serif;
+	// font-family: 'Quicksand', system-ui, Avenir, Helvetica, Arial, sans-serif;
 	line-height: 1.5;
 	font-weight: 400;
 
@@ -11,13 +13,16 @@
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-text-size-adjust: 100%;
 
-	--white: #fff;
-	--light: #e0fbfcff;
-	--accent: #ff9b71ff;
-	--medium: #7d84b2ff;
-	--darkish: #2c2b3cff;
-	--dark: #011828ff;
+	--white: $white;
+	--light: $light;
+	--sunset-orange: $sunset-orange;
+	--forest-green: $forest-green;
+	--copper: $copper;
+	--chestnut-red: $chestnut-red;
+	--pine-green: $pine-green;
+	--dark: $dark;
 }
+
 
 #root {
 	margin: 0
@@ -45,16 +50,16 @@ img {
 }
 
 ::-moz-selection {
-	color: var(--white);
-	background: var(--accent);
+	color: $white;
+	background: $light-green;
 }
 
 ::-webkit-selection {
-	color: var(--white);
-	background: var(--accent);
+	color: $white;
+	background: $light-green;
 }
 
 ::selection {
-	color: var(--white);
-	background: var(--accent);
+	color: $white;
+	background: $light-green;
 }

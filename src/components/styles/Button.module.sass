@@ -1,54 +1,80 @@
+@import '/src/styles/_variables.sass'
+
 .btn
-	padding: 8px 20px
+	padding: 10px 20px
+	border-radius: 6px
 	display: inline-flex
 	align-items: center
 	justify-content: center
 	width: fit-content
+	white-space: nowrap
 	margin: 4px
 	&-primary
 		@extend .btn
-		background-color: var(--white)
-		color: var(--darkish)
-		border: 2px solid var(--white)
+		background-color: $forest-green
+		color: $light
+		border: 2px solid $forest-green
 		&:hover,
 		&:focus,
 		&:active
-			background-color: var(--accent)
-			color: var(--darkish)
-			border: 2px solid var(--accent)
+			background-color: darken($forest-green, 10%)
+			color: $light
+			border: 2px solid darken($forest-green, 10%)
 		&-outline
 			@extend .btn
 			background-color: transparent
-			color: var(--white)
-			border: 2px solid var(--white)
+			color: $forest-green
+			border: 2px solid $forest-green
 			&:hover,
 			&:focus,
 			&:active
-				background-color: var(--white)
-				color: var(--darkish)
-				border: 2px solid var(--white)
+				background-color: $forest-green
+				color: $light
+				border: 2px solid $forest-green
 	&-secondary
 		@extend .btn
-		background-color: var(--medium)
-		color: var(--darkish)
-		border: 2px solid var(--medium)
+		background-color: $sunset-orange
+		color: $light
+		border: 2px solid $sunset-orange
 		&:hover,
 		&:focus,
 		&:active
-			background-color: var(--accent)
-			color: var(--dark)
-			border: 2px solid var(--accent)
+			background-color: darken($sunset-orange, 10%)
+			color: $light
+			border: 2px solid darken($sunset-orange, 10%)
 		&-outline
 			@extend .btn
 			background-color: transparent
-			color: var(--medium)
-			border: 2px solid var(--medium)
+			color: $sunset-orange
+			border: 2px solid $sunset-orange
 			&:hover,
 			&:focus,
 			&:active
-				background-color: var(--medium)
-				color: var(--dark)
-				border: 2px solid var(--medium)
+				background-color: $sunset-orange
+				color: $light
+				border: 2px solid $sunset-orange
+	&-tertiary
+		@extend .btn
+		background-color: $light-green
+		color: $light
+		border: 2px solid $light-green
+		&:hover,
+		&:focus,
+		&:active
+			background-color: darken($light-green, 10%)
+			color: $light
+			border: 2px solid darken($light-green, 10%)
+		&-outline
+			@extend .btn
+			background-color: transparent
+			color: $light-green
+			border: 2px solid $light-green
+			&:hover,
+			&:focus,
+			&:active
+				background-color: $light-green
+				color: $light
+				border: 2px solid $light-green
 	&.full-width
 		width: 100%
 	&.icon

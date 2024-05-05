@@ -1,22 +1,40 @@
+@import '/src/styles/_variables.sass'
+
 body
-	background-color: var(--dark)
-	font-family: 'Roboto mono'
-	color: var(--light)
+	background-color: $light
+	font-family: Rubik, 'Open sans', 'Noto sans', Arial, Helvetica, sans-serif
+	color: $dark
 	margin: 0 0 150px
 	padding: 0
-	font-size: 16px
+	font-size: 17px
 	min-height: 100vh
 
 h1
-	font-size: 3.2em
+	font-size: 3.6rem
 	line-height: 1.1
+	font-weight: 700 !important
+	margin-bottom: 0.6rem
+	color: $forest-green
+
+h2
+	font-size: 2.6rem
+	line-height: 1.1
+	font-weight: 700 !important
+	margin-bottom: 0.6rem
+	color: $forest-green
+
+h3
+	font-size: 1.5rem
+	line-height: 1.4
+	color: $forest-green
+	margin-bottom: 0.6rem
 
 a
 	font-weight: 500
-	color: var(--medium)
+	color: $dark
 	text-decoration: inherit
 	&:hover,
 	&:focus,
 	&:active
-		color: var(--accent)
+		color: $dark
 		outline: none

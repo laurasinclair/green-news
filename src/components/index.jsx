@@ -1,21 +1,33 @@
 // Basics
 import Button from './Button'
 import Logo from './Logo'
+import UserContext from './UserContext'
+import UserPicture from './UserPicture'
 
 
 // Layout
 import Hero from './Hero'
 import Navbar from './Navbar'
+import Section from './Section'
 
 
 // Specific
 import Feed from './Feed'
+import ArticleCard from './ArticleCard'
+import SaveBtn from './SaveBtn'
+import UploadImage from './UploadImage'
 
 
 export {
     Button,
     Logo,
     Hero,
+    UserPicture,
     Navbar,
-    Feed
+    Section,
+    Feed,
+    ArticleCard,
+    SaveBtn,
+    UploadImage,
+    UserContext
 }
