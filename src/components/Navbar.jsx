@@ -15,17 +15,20 @@ export default function Navbar() {
 		console.info("%c👤 User not logged in", "color: #FFDAD6; padding: 6px 8px; background-color: #4F3534; display: inline-block; border-radius: 4px;")
 	}, [currentUser, currentUser.isLoggedIn])
 
-	// fetching the users
-	const [loading, setLoading] = useState(true)
-	const [error, setError] = useState('')
-
 	const handleLogin = (e) => {
 		e.preventDefault()
+		
+		console.clear()
 
-		setCurrentUser({
-			...currentUser,
-			"isLoggedIn": true
-		})
+		currentUser && Object.keys(currentUser.userInfo).length !== 0 ? (
+			setCurrentUser({
+				...currentUser,
+				"isLoggedIn": true
+			})
+		) : (
+			console.error("%c👤 Can't find user", "color: #FFDAD6; padding: 6px 8px; background-color: #4F3534; display: inline-block; border-radius: 4px;")
+		)
+
 		
 		// console.clear()
 		// console.table('currentUser', currentUser)
@@ -35,11 +38,6 @@ export default function Navbar() {
 			console.info("%c👤 User successfully logged in!", "color: #2B3B20; padding: 6px 8px; background-color: #6FBF6B; display: inline-block; border-radius: 4px;") : 
 			console.error("%c👤 User not logged in :(", "color: #FFDAD6; padding: 6px 8px; background-color: #4F3534; display: inline-block; border-radius: 4px;")
 		)
-
-		// fetch(`http://localhost:7200/users/1`)
-		// 	.then((resp) => resp.json())
-		// 	.then((data) => setCurrentUser(data))
-		// 	.catch((err) => setError(`User couldn't be fetched - ${err}`))
 	}
 
 	return (
