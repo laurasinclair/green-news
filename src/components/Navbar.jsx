@@ -1,26 +1,43 @@
 import { Container, Row, Col } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
-import React, { useState, useEffect,} from 'react'
-import { UserContext, Logo, Button, UserPicture } from '@components'
+import { useState, useEffect } from 'react'
+import { Logo, Button, UserPicture } from '@components'
 import placeholder from '@img/placeholder_1-1.jpg'
 import styles from './styles/Navbar.module.sass'
 import { useUserContext } from './UserContext'
 
 export default function Navbar() {
-	// const { currentUser, setCurrentUser } = useUserContext()
 	const { currentUser, setCurrentUser } = useUserContext()
 
-	// fetching the users
-	const [loading, setLoading] = useState(true)
-	const [error, setError] = useState('')
+	useEffect(() => {
+		currentUser.isLoggedIn ? 
+		console.info("%c👤 User successfully logged in!", "color: #2B3B20; padding: 6px 8px; background-color: #6FBF6B; display: inline-block; border-radius: 4px;") : 
+		console.info("%c👤 User not logged in", "color: #FFDAD6; padding: 6px 8px; background-color: #4F3534; display: inline-block; border-radius: 4px;")
+	}, [currentUser, currentUser.isLoggedIn])
 
 	const handleLogin = (e) => {
 		e.preventDefault()
+		
+		console.clear()
 
-		fetch(`http://localhost:7200/users/1`)
-			.then((resp) => resp.json())
-			.then((data) => setCurrentUser(data))
-			.catch((err) => setError(`User couldn't be fetched - ${err}`))
+		currentUser && Object.keys(currentUser.userInfo).length !== 0 ? (
+			setCurrentUser({
+				...currentUser,
+				"isLoggedIn": true
+			})
+		) : (
+			console.error("%c👤 Can't find user", "color: #FFDAD6; padding: 6px 8px; background-color: #4F3534; display: inline-block; border-radius: 4px;")
+		)
+
+		
+		// console.clear()
+		// console.table('currentUser', currentUser)
+
+		console.log(
+			currentUser.isLoggedIn ? 
+			console.info("%c👤 User successfully logged in!", "color: #2B3B20; padding: 6px 8px; background-color: #6FBF6B; display: inline-block; border-radius: 4px;") : 
+			console.error("%c👤 User not logged in :(", "color: #FFDAD6; padding: 6px 8px; background-color: #4F3534; display: inline-block; border-radius: 4px;")
+		)
 	}
 
 	return (
@@ -33,24 +50,22 @@ export default function Navbar() {
 						</NavLink>
 					</Col>
 					<Col className="d-flex align-items-center justify-content-end">
-						{currentUser ? (
-							Object.keys(currentUser).length !== 0 ? (
+						{currentUser && currentUser.isLoggedIn ? (
+							Object.keys(currentUser.userInfo).length !== 0 ? (
 								<NavLink to="/user/johndoe" className="d-flex align-items-center">
-									Welcome, {currentUser.firstName} {currentUser.lastName}
+									Welcome, {currentUser.userInfo.firstName} {currentUser.userInfo.lastName}
 									
-									<UserPicture src={currentUser.profilePicture || placeholder} alt={`${currentUser.firstName} ${currentUser.lastName}`} className="ms-4" size="50px" />
-									
-									{/* <img src={currentUser.profilePicture || placeholder} alt={`${currentUser.firstName} ${currentUser.lastName}`} /> */}
+									<UserPicture src={currentUser.userInfo.profilePicture || placeholder} alt={`${currentUser.userInfo.firstName} ${currentUser.userInfo.lastName}`} className="ms-4" size="50px" />
 								</NavLink>
 							) : (
 								<NavLink to="/user/johndoe">
-									<Button type="primary-outline" text="Log in" onClick={handleLogin} />
+									<Button type="primary-outline" label="Log in" onClick={handleLogin} />
 								</NavLink>
 							)
 						) : (
 							<div>
 								<NavLink to="/user/johndoe">
-									<Button type="primary-outline" text="Log in" onClick={handleLogin} />
+									<Button type="primary-outline" label="Log in" onClick={handleLogin} />
 								</NavLink>
 							</div>
 						)}
