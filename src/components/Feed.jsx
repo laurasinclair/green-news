@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowLeftCircleFill, ArrowRightCircleFill } from 'react-bootstrap-icons'
 import { ArticleCard } from '@components'
+import classNames from 'classnames';
 
 import styles from './styles/Feed.module.sass'
 import { useUserContext } from './UserContext'
@@ -53,7 +54,7 @@ export default function Feed() {
 	}
 
 	return (
-		<div className={styles.feed}>
+		<div className={classNames('feed', styles.feed)}>
 			<Container fluid>
 				<h2>News feed</h2>
 

@@ -6,7 +6,7 @@ import { Row, Col } from 'react-bootstrap'
 import { Button, UserPicture } from '@components'
 import { useUserContext } from '../components/UserContext'
 
-const UploadImage = () => {
+const UploadImage = ({imageSize}) => {
 	const { currentUser } = useUserContext()
 
 	const [userImage, setUserImage] = useState({
@@ -100,10 +100,10 @@ const UploadImage = () => {
 	}, [currentUser.userInfo.profilePicture])
 
 	return (
-		<Row className="d-flex flex-column">
+		<Row>
 			<Col>
 				{userImage && 
-				<UserPicture src={userImage.imageUrl} alt={`${currentUser.userInfo.firstName} ${currentUser.userInfo.lastName}`} className="mb-3" size="250px" />}
+				<UserPicture src={userImage.imageUrl} alt={`${currentUser.userInfo.firstName} ${currentUser.userInfo.lastName}`} className="mb-3" size={imageSize || '200px'} />}
 			</Col>
 			<Col className="d-flex flex-column">
 				<label htmlFor="files" name="userImage" className={styles.imageBtn} onChange={handleFileChange}>
