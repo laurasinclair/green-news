@@ -123,7 +123,7 @@ export default function UserPage() {
 											for (let articleSlug of currentUser.userInfo.savedArticles) {
 												if (articleSlug === getSlug(article.title)) {
 													return (
-														<Col md="6" lg="4" key={i} className="mb-4">
+														<Col sm="6" md="4" lg="3" key={i} className="mb-4">
 															<Link to={`/articles/${getSlug(article.title)}`}>
 																<ArticleCard article={article} />
 															</Link>
