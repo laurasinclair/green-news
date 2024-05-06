@@ -14,7 +14,6 @@ export default function Article() {
 	const [article, setArticle] = useState({})
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState('')
-	const [savedArticle, setSavedArticle] = useState([])
 
 	useEffect(() => {
 		fetch(`https://newsapi.org/v2/everything?q=trees&apiKey=${import.meta.env.VITE_NEWS_API_TOKEN}`)
@@ -42,6 +41,7 @@ export default function Article() {
 			if (findArticle) {
 				setArticle(findArticle)
 			}
+			setError('')
 			setLoading(false)
 		} else {
 			setError('No data to display')
@@ -61,17 +61,22 @@ export default function Article() {
 				<Hero title={article.title} size="m" />
 
 				<Row>
-					{loading ? (
-						<div>Loading...</div>
-					) : !article ? (
-						error && (
-							<Col>
-								<div>
-									OH NO. <br />
+				{loading ? (	
+						<Col>
+							<div>
+								<p>
+									Loading...
+								</p>
+							</div>
+						</Col>
+					) : ( error ? (
+						<Col>
+							<div>
+								<p>
 									{error}
-								</div>
-							</Col>
-						)
+								</p>
+							</div>
+						</Col>
 					) : (
 						article && (
 							<>
@@ -93,7 +98,7 @@ export default function Article() {
 								</Col>
 							</>
 						)
-					)}
+					))}
 				</Row>
 			</Container>
 		</>
