@@ -5,7 +5,7 @@ import { useUserContext } from '../components/UserContext'
 
 import { Button } from '@components'
 
-export default function SaveBtn({articleSlug}) {
+export default function SaveBtn({articleSlug, fullWidth}) {
 	const { currentUser } = useUserContext()
 	const [error, setError] = useState('')
     
@@ -86,5 +86,5 @@ export default function SaveBtn({articleSlug}) {
 		}
 	}
 
-	return <Button onClick={handleClick} label={saveButtonState.label} iconRight={saveButtonState.icon} fullWidth type="tertiary" />
+	return <Button onClick={handleClick} label={saveButtonState.label} iconRight={saveButtonState.icon} type="tertiary" {...(fullWidth && { fullWidth })} />
 }

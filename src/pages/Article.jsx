@@ -1,12 +1,14 @@
 import { Container, Row, Col } from 'react-bootstrap'
 import { useState, useEffect, useContext } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
+import placeholder from '@img/bart-zimny-W5XTTLpk1-I-unsplash.jpg'
 
 import { Button, Hero, SaveBtn } from '@components'
 import { useUserContext } from '../components/UserContext'
+import styles from './styles/Article.module.sass'
 
 export default function Article() {
-	const { currentUser } = useUserContext();
+	const { currentUser } = useUserContext()
 	// const navigate = useNavigate()
 
 	// fetching the data
@@ -24,11 +26,13 @@ export default function Article() {
 
 	// matching the url with the right article
 	function getSlug(str) {
-		const tempString = str
-			.replaceAll(/[^a-zA-Z0-9]/g, '-')
-			.toLowerCase()
-			.substring(0, 50)
-		return tempString.replace(/-+/g, '-').replace(/-$/, '')
+		if (typeof str === 'string') {
+			const tempString = str
+				.replaceAll(/[^a-zA-Z0-9]/g, '-')
+				.toLowerCase()
+				.substring(0, 50)
+			return tempString.replace(/-+/g, '-').replace(/-$/, '')
+		}
 	}
 
 	const articleUrl = useParams().articleSlug
@@ -54,51 +58,64 @@ export default function Article() {
 		}
 	}, [article])
 
+	const publishedDate = (d) => {
+		const date = new Date(d)
+
+		const options = {
+			year: 'numeric',
+			month: 'long',
+			day: 'numeric',
+			timeZone: 'UTC',
+			hour12: false,
+		}
+
+		return date.toLocaleString('en-GB', options)
+	}
 
 	return (
 		<>
-			<Container fluid>
-				<Hero title={article.title} size="m" />
+			<div className={styles.article_top} style={{ backgroundImage: 'url(' + (article.urlToImage || placeholder) + ')' }}>
+				{}
+				<Container fluid>
+					<div className={styles.article_top_content}>
+						<h3>{article.title}</h3>
+					</div>
+				</Container>
+			</div>
 
+			<Container fluid>
 				<Row>
-				{loading ? (	
+					{loading ? (
 						<Col>
 							<div>
-								<p>
-									Loading...
-								</p>
+								<p>Loading...</p>
 							</div>
 						</Col>
-					) : ( error ? (
+					) : error ? (
 						<Col>
 							<div>
-								<p>
-									{error}
-								</p>
+								<p>{error}</p>
 							</div>
 						</Col>
 					) : (
 						article && (
-							<>
-								<Col md="6" lg="4" className="mb-4">
-									<div>
-										{currentUser.isLoggedIn && (
-											<SaveBtn articleSlug={getSlug(article.title)} />
-										)}
+							<Col sm="10" md="8" lg="6" className="mx-auto pt-5 pb-3">
+								<div>
+									<p className={styles.article_details}>
+										<strong>{article.author ? article.author : 'Author unknown :('}</strong> {article.source && article.source.name && ('  -  ' + article.source.name)}<br />
+										Published on {article.publishedAt && (publishedDate(article.publishedAt))}
+									</p>
+								</div>
 
-										<div>Author: {article.author}</div>
-										<div>
-											<a href={article.url}>{article.source.name}</a>
-										</div>
-										<img src={article.urlToImage} alt="" />
-										<div>publishedAt: {article.publishedAt}</div>
-										<div>description: {article.description}</div>
-										<div>content: {article.content}</div>
-									</div>
-								</Col>
-							</>
+								<div className="pb-3 pb-md-5">
+									<div className={styles.article_description}>{article.description}</div>
+									<div className={styles.article_content}>{article.content}</div>
+								</div>
+
+								{currentUser.isLoggedIn && <SaveBtn articleSlug={getSlug(article.title)} />}
+							</Col>
 						)
-					))}
+					)}
 				</Row>
 			</Container>
 		</>

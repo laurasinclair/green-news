@@ -1,3 +1,4 @@
+@import 'bootstrap/scss/bootstrap-grid.scss'
 @import '/src/styles/_variables.sass'
 
 body
@@ -87,3 +88,42 @@ a
 		margin: 0
 	h1
 		font-size: 4rem !important
+
+.featuredImage
+	overflow: hidden
+	position: relative
+	background-size: cover
+	@include media-breakpoint-up(sm)
+		height: 500px
+	&:after
+		content: ''
+		position: absolute
+		display: block
+		width: 100%
+		height: 100%
+		top: 0
+		left: 0
+		z-index: 777
+		background: linear-gradient(20deg, rgba(0, 0, 0, 0.8) 0%,  rgba(0, 0, 0, 0.6) 30%, rgba(255, 255, 255, 0) 50%)
+		pointer-events: none // text can still be selected
+		z-index: 555
+	img
+		width: 100%
+		height: 100%
+		object-fit: cover
+	h3
+		position: absolute
+		bottom: 0
+		margin-bottom: 0
+		padding: 20px
+		color: $white
+		font-size: 2rem
+		@include media-breakpoint-up(sm)
+			font-size: 2.4rem
+			padding: 24px
+		@include media-breakpoint-up(md)
+			padding: 28px
+			font-size: 3rem
+			width: 80%
+		line-height: 1.2
+		z-index: 777

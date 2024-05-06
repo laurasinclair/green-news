@@ -32,7 +32,7 @@ export default function ArticleCard({article}) {
 			<div className={styles.articleCard_footer}>
 				{currentUser.isLoggedIn && (
 					<div>
-						<SaveBtn articleSlug={getSlug(article.title)} />
+						<SaveBtn articleSlug={getSlug(article.title)} fullWidth />
 					</div>
 				)}
 				<div>
