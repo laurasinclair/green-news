@@ -7,7 +7,7 @@ export default function Footer() {
 		<footer className={styles.footer}>
 			<Container fluid>
 				<Row className="justify-content-between">
-					<Col>
+					<Col className="d-flex align-items-center">
 						<p>
 							Made with 🖤 (and a lot of coffee) by Laura.
 							Have a look at my{' '}
@@ -17,7 +17,7 @@ export default function Footer() {
 							!
 						</p>
 					</Col>
-					<Col sm="2" className="d-flex justify-content-end">
+					<Col sm="2" className="d-flex align-items-center justify-content-end">
 						<p>
 							<a href="https://www.linkedin.com/in/laurasnclr/" target="_blank" rel="noreferrer" className="ms-sm-3">
 								<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none">
