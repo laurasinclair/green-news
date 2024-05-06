@@ -117,7 +117,7 @@ export default function UserPage() {
 									)}
 								</p>
 
-								<Row>
+								<Row className="gx-3 gx-md-5">
 									{currentUser?.userInfo.savedArticles && allArticles ? (
 										allArticles.map((article, i) => {
 											for (let articleSlug of currentUser.userInfo.savedArticles) {
