@@ -55,8 +55,8 @@ export default function Feed() {
 
 	return (
 		<div className={classNames('feed', styles.feed)}>
-			<Container fluid>
-				<h2>News feed</h2>
+			<Container fluid className="mt-5">
+				<h2>Today&apos;s top stories</h2>
 
 				<Row>
 					{loading ? (	
@@ -79,12 +79,12 @@ export default function Feed() {
 						filteredData && (
 							<>
 								<Col>
-									<div className="mb-4">{data.articles.length} articles</div>
-									<Row className="gx-3 gx-md-5">
+									<div className="mb-5">{data.articles.length} articles</div>
+									<Row className="gx-3 gx-md-4">
 										{filteredData &&
 											filteredData.map((article, i) => {
 												return (
-													<Col sm="6" lg="6" key={i} className="mb-4 mb-md-5">
+													<Col sm="6" lg="4" key={i} className="mb-4 mb-md-5">
 														<Link to={`articles/${getSlug(article.title)}`}>
 															<ArticleCard article={article} />
 														</Link>
