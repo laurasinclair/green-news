@@ -20,7 +20,7 @@ export default function Hero({ size = 'm', title, h3, leadText, hasLogo, classNa
                         {h3 && <h3 className={styles['mb-3']}>{h3}</h3>}
                         {hasLogo && <Logo size='s' hasText />}
                         <h1 className={styles['mt-2']}>{title}</h1>
-                        {leadText && <p className={styles.hero_leadText}>{leadText}</p>}
+                        {leadText && <p className={classNames('leadText', styles.hero_slogan)}>{leadText}</p>}
                     </Col>
                 </Row>
             </Container>
