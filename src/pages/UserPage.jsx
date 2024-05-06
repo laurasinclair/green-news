@@ -11,7 +11,6 @@ export default function UserPage() {
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState('')
 
-
 	// just updating the page title to the user name
 	useEffect(() => {
 		if (currentUser && currentUser?.userInfo.firstName && currentUser?.userInfo.lastName) {
@@ -19,7 +18,6 @@ export default function UserPage() {
 			document.title = `${window.name} | ${currentUser?.userInfo.firstName} ${currentUser?.userInfo.lastName} ⛭ User settings`
 		}
 	}, [currentUser])
-
 
 	// displaying saved articles
 	const [allArticles, setAllArticles] = useState([])
@@ -30,7 +28,6 @@ export default function UserPage() {
 			.catch((err) => setError(`Data couldn't be fetched - ${err}`))
 	}, [])
 
-
 	// matching the url with the right article
 	function getSlug(str) {
 		const tempString = str
@@ -40,14 +37,13 @@ export default function UserPage() {
 		return tempString.replace(/-+/g, '-').replace(/-$/, '')
 	}
 
-	
 	// logging out user
 	const handleLogOut = (e) => {
 		e.preventDefault()
 
 		setCurrentUser({
 			...currentUser,
-			isLoggedIn: false
+			isLoggedIn: false,
 		})
 		navigate('/')
 
@@ -68,28 +64,41 @@ export default function UserPage() {
 
 						<Section>
 							<Container fluid>
-								<h2>User settings</h2>
+								{/* <h2>User settings</h2> */}
 
 								<Row>
-									<Col>
-										<h4>Profile picture</h4>
-
-										<UploadImage />
+									<Col sm="3">
+										<h3>Personal info</h3>
 									</Col>
-									<Col className="d-flex">
-										<div>
-											<h4>Username</h4>
-											<p>{currentUser?.userInfo.username}</p>
-										</div>
+									<Col>
+										<div className="bg-01">
+											<Row>
+												<Col>
+													<div>
+														<h4>Username</h4>
+														<p className="inputfield">{currentUser?.userInfo.username}</p>
+													</div>
+												</Col>
+											</Row>
+											<Row>
+												<Col sm="6">
+													<div>
+														<h4>First name</h4>
+														<p className="inputfield">{currentUser?.userInfo.firstName}</p>
+													</div>
+												</Col>
+												<Col sm="6">
+													<div>
+														<h4>Last name</h4>
+														<p className="inputfield">{currentUser?.userInfo.lastName}</p>
+													</div>
+												</Col>
+											</Row>
 
-										<div>
-											<h4>First name</h4>
-											<p>{currentUser?.userInfo.firstName}</p>
-										</div>
-
-										<div>
-											<h4>Last name</h4>
-											<p>{currentUser?.userInfo.lastName}</p>
+											<div>
+												<h4>Profile picture</h4>
+												<UploadImage size="100px" />
+											</div>
 										</div>
 									</Col>
 								</Row>
@@ -109,7 +118,7 @@ export default function UserPage() {
 								</p>
 
 								<Row>
-									{currentUser?.userInfo.savedArticles && (
+									{currentUser?.userInfo.savedArticles && allArticles ? (
 										allArticles.map((article, i) => {
 											for (let articleSlug of currentUser.userInfo.savedArticles) {
 												if (articleSlug === getSlug(article.title)) {
@@ -123,6 +132,10 @@ export default function UserPage() {
 												}
 											}
 										})
+									) : (
+										<Col md="6" lg="4" className="mb-4">
+											<p>We can&apos;t access your saved articles now :(</p>
+										</Col>
 									)}
 								</Row>
 							</Container>

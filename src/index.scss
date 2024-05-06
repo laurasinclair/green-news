@@ -63,3 +63,8 @@ img {
 	color: $white;
 	background: $light-green;
 }
+
+.debug,
+.debug * {
+	outline: 1px solid red
+}

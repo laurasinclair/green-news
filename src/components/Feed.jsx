@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowLeftCircleFill, ArrowRightCircleFill } from 'react-bootstrap-icons'
 import { ArticleCard } from '@components'
+import classNames from 'classnames';
 
 import styles from './styles/Feed.module.sass'
 import { useUserContext } from './UserContext'
@@ -15,8 +16,8 @@ export default function Feed() {
 	const [error, setError] = useState('')
 
 	useEffect(() => {
-		// fetch(`BROKENLINK}`)
-		fetch(`https://newsapi.org/v2/everything?q=trees&apiKey=${import.meta.env.VITE_NEWS_API_TOKEN}`)
+		fetch(`BROKENLINK}`)
+		// fetch(`https://newsapi.org/v2/everything?q=trees&apiKey=${import.meta.env.VITE_NEWS_API_TOKEN}`)
 			.then((resp) => resp.json())
 			.then((data) => setData(data))
 			.catch((err) => setError(`Data couldn't be fetched - ${err}`))
@@ -53,7 +54,7 @@ export default function Feed() {
 	}
 
 	return (
-		<div className={styles.feed}>
+		<div className={classNames('feed', styles.feed)}>
 			<Container fluid>
 				<h2>News feed</h2>
 
