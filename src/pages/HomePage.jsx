@@ -9,7 +9,7 @@ export default function HomePage() {
 
 	return (
 		<div className={styles.homepage}>
-			<Hero title="Green News" size="m" leadText={window.slogan} className="tropical" />
+			<Hero title="Green News" size="l" leadText={window.slogan} />
 
 			<Feed />
 		</div>
