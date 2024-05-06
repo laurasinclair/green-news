@@ -10,6 +10,12 @@
 	flex-direction: column
 	align-items: stretch
 	flex: 1
+	&:hover,
+	&:focus,
+	&:active
+		transition: all .3s ease-in-out
+		box-shadow: 0 10px 30px transparentize($forest-green, 0.8)
+		background-color: lighten($light, 3%)
 	&_thumbnail
 		height: 220px
 		position: relative

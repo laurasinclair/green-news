@@ -3,13 +3,13 @@ import { useState, useEffect, useContext } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import placeholder from '@img/bart-zimny-W5XTTLpk1-I-unsplash.jpg'
 
-import { Button, Hero, SaveBtn } from '@components'
+import { BackButton, SaveBtn } from '@components'
 import { useUserContext } from '../components/UserContext'
 import styles from './styles/Article.module.sass'
 
 export default function Article() {
 	const { currentUser } = useUserContext()
-	// const navigate = useNavigate()
+	const navigate = useNavigate()
 
 	// fetching the data
 	const [data, setData] = useState([])
@@ -112,6 +112,10 @@ export default function Article() {
 								</div>
 
 								{currentUser.isLoggedIn && <SaveBtn articleSlug={getSlug(article.title)} />}
+
+								<div className="pt-5">
+									<BackButton label="Back to all articles" />
+								</div>
 							</Col>
 						)
 					)}

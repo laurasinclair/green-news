@@ -3,6 +3,7 @@ import Button from './Button'
 import Logo from './Logo'
 import UserContext from './UserContext'
 import UserPicture from './UserPicture'
+import BackButton from './BackButton'
 
 
 // Layout
@@ -22,6 +23,7 @@ import UploadImage from './UploadImage'
 
 export {
     Button,
+    BackButton,
     Logo,
     Main,
     Footer,
