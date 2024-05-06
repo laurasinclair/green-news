@@ -75,7 +75,6 @@ export default function Article() {
 	return (
 		<>
 			<div className={styles.article_top} style={{ backgroundImage: 'url(' + (article.urlToImage || placeholder) + ')' }}>
-				{}
 				<Container fluid>
 					<div className={styles.article_top_content}>
 						<h3>{article.title}</h3>
