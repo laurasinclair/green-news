@@ -20,6 +20,10 @@ export default function ArticleCard({article}) {
 		return tempString.replace(/-+/g, '-').replace(/-$/, '')
 	}
 
+	function truncate(str) {
+		return str && str.length > 145 ? str.substring(0, 145) + '...' : str
+	}
+
 	return (
 		<div className={styles.articleCard}>
 			<div className={styles.articleCard_thumbnail}>
@@ -27,7 +31,7 @@ export default function ArticleCard({article}) {
 				<img src={article.urlToImage || placeholder} alt={article.title | window.name} />
 			</div>
 			<div className={styles.articleCard_body}>
-				<p>{article.description}</p>
+				<p>{truncate(article.description)}</p>
 			</div>
 			<div className={styles.articleCard_footer}>
 				{currentUser.isLoggedIn && (
