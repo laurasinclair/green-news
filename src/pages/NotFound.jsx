@@ -4,12 +4,12 @@ import classNames from 'classnames'
 
 export default function NotFound () {
 	return (
-		<main className={classNames(styles.notfound, 'main')}>	
+		<main className={classNames(styles.notFound, 'main')}>	
 			<Container fluid>
 				<Row>
-					<Col className={classNames(styles.layout, 'mt-5', 'px-0')}>
+					<Col className={classNames(styles.layout, 'mt-5', 'mb-4')}>
+						<div className={classNames(styles.errorNumber, 'mb-4')}>&nbsp;</div>
 						<p>Oops. Page not found.</p>
-						<div className={styles.errorNumber}>&nbsp;</div>
 					</Col>
 				</Row>
 			</Container>
