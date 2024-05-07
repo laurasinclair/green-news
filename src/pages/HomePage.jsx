@@ -1,6 +1,10 @@
 import { Hero, Feed } from '@components'
 import { useEffect } from 'react'
-import styles from './styles/HomePage.module.sass';
+import styles from './styles/HomePage.module.sass'
+import { Container } from 'react-bootstrap'
+import classNames from 'classnames'
+import bgImage from '@img/bart-zimny-W5XTTLpk1-I-unsplash.jpg'
+import logoImage from '@img/greennews_logo.png'
 
 export default function HomePage() {
 	useEffect(() => {
@@ -9,8 +13,12 @@ export default function HomePage() {
 
 	return (
 		<div className={styles.homepage}>
-			<Hero title="Green News" size="m" leadText={window.slogan} className="tropical" />
-
+			<Container fluid className={styles.homepage_top} style={{ backgroundImage: 'url(' + bgImage + ')' }}>
+				<div>
+					<img src={logoImage} alt={window.name + ' | ' + window.slogan} width={'400px'} />
+					<p className={classNames('leadText', 'slogan')}>{window.slogan}</p>
+				</div>
+			</Container>
 			<Feed />
 		</div>
 	)
