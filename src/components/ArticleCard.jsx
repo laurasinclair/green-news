@@ -2,7 +2,7 @@ import { Row, Col } from 'react-bootstrap'
 import ReactPaginate from 'react-paginate'
 import { useEffect, useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
-import placeholder from '@img/placeholder_1-1.jpg'
+import placeholder from '@img/bart-zimny-W5XTTLpk1-I-unsplash.jpg'
 import { ArrowLeftCircleFill, ArrowRightCircleFill, ArrowRight } from 'react-bootstrap-icons'
 import { Button, SaveBtn } from '@components'
 
@@ -20,19 +20,23 @@ export default function ArticleCard({article}) {
 		return tempString.replace(/-+/g, '-').replace(/-$/, '')
 	}
 
+	function truncate(str) {
+		return str && str.length > 145 ? str.substring(0, 145) + '...' : str
+	}
+
 	return (
 		<div className={styles.articleCard}>
 			<div className={styles.articleCard_thumbnail}>
+				<h3>{article.title}</h3>
 				<img src={article.urlToImage || placeholder} alt={article.title | window.name} />
 			</div>
 			<div className={styles.articleCard_body}>
-				<h3>{article.title}</h3>
-				<p>{article.description}</p>
+				<p>{truncate(article.description)}</p>
 			</div>
 			<div className={styles.articleCard_footer}>
 				{currentUser.isLoggedIn && (
 					<div>
-						<SaveBtn articleSlug={getSlug(article.title)} />
+						<SaveBtn articleSlug={getSlug(article.title)} fullWidth />
 					</div>
 				)}
 				<div>

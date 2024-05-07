@@ -16,8 +16,8 @@ export default function Feed() {
 	const [error, setError] = useState('')
 
 	useEffect(() => {
-		fetch(`BROKENLINK}`)
-		// fetch(`https://newsapi.org/v2/everything?q=trees&apiKey=${import.meta.env.VITE_NEWS_API_TOKEN}`)
+		// fetch(`BROKENLINK}`)
+		fetch(`https://newsapi.org/v2/everything?q=wildlife+forest&apiKey=${import.meta.env.VITE_NEWS_API_TOKEN}`)
 			.then((resp) => resp.json())
 			.then((data) => setData(data))
 			.catch((err) => setError(`Data couldn't be fetched - ${err}`))
@@ -55,8 +55,8 @@ export default function Feed() {
 
 	return (
 		<div className={classNames('feed', styles.feed)}>
-			<Container fluid>
-				<h2>News feed</h2>
+			<Container fluid className="mt-5">
+				<h2>Today&apos;s top stories</h2>
 
 				<Row>
 					{loading ? (	
@@ -79,23 +79,12 @@ export default function Feed() {
 						filteredData && (
 							<>
 								<Col>
-									<Row>
-										<Col md="6">
-											<Link to={`articles/${getSlug(filteredData[0].title)}`}>
-												<div className={styles.featuredImage}>
-													<h3>{filteredData[0].title}</h3>
-													<img src={filteredData[0].urlToImage} alt={filteredData[0].title} />
-												</div>
-											</Link>
-										</Col>
-									</Row>
-
-									<div className="mb-4">{data.articles.length} articles</div>
-									<Row>
+									<div className="mb-5">{data.articles.length} articles</div>
+									<Row className="gx-3 gx-md-4">
 										{filteredData &&
 											filteredData.map((article, i) => {
 												return (
-													<Col sm="6" lg="4" key={i} className="mb-4">
+													<Col sm="6" lg="4" key={i} className="mb-4 mb-md-5">
 														<Link to={`articles/${getSlug(article.title)}`}>
 															<ArticleCard article={article} />
 														</Link>

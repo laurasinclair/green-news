@@ -1,23 +1,24 @@
 import { Container, Row, Col } from 'react-bootstrap'
 import { useState, useEffect, useContext } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
+import placeholder from '@img/bart-zimny-W5XTTLpk1-I-unsplash.jpg'
 
-import { Button, Hero, SaveBtn } from '@components'
+import { BackButton, SaveBtn } from '@components'
 import { useUserContext } from '../components/UserContext'
+import styles from './styles/Article.module.sass'
 
 export default function Article() {
-	const { currentUser } = useUserContext();
-	// const navigate = useNavigate()
+	const { currentUser } = useUserContext()
+	const navigate = useNavigate()
 
 	// fetching the data
 	const [data, setData] = useState([])
 	const [article, setArticle] = useState({})
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState('')
-	const [savedArticle, setSavedArticle] = useState([])
 
 	useEffect(() => {
-		fetch(`https://newsapi.org/v2/everything?q=trees&apiKey=${import.meta.env.VITE_NEWS_API_TOKEN}`)
+		fetch(`https://newsapi.org/v2/everything?q=wildlife+forest&apiKey=${import.meta.env.VITE_NEWS_API_TOKEN}`)
 			.then((resp) => resp.json())
 			.then((data) => setData(data))
 			.catch((err) => setError(`Data couldn't be fetched - ${err}`))
@@ -25,11 +26,13 @@ export default function Article() {
 
 	// matching the url with the right article
 	function getSlug(str) {
-		const tempString = str
-			.replaceAll(/[^a-zA-Z0-9]/g, '-')
-			.toLowerCase()
-			.substring(0, 50)
-		return tempString.replace(/-+/g, '-').replace(/-$/, '')
+		if (typeof str === 'string') {
+			const tempString = str
+				.replaceAll(/[^a-zA-Z0-9]/g, '-')
+				.toLowerCase()
+				.substring(0, 50)
+			return tempString.replace(/-+/g, '-').replace(/-$/, '')
+		}
 	}
 
 	const articleUrl = useParams().articleSlug
@@ -42,6 +45,7 @@ export default function Article() {
 			if (findArticle) {
 				setArticle(findArticle)
 			}
+			setError('')
 			setLoading(false)
 		} else {
 			setError('No data to display')
@@ -54,44 +58,65 @@ export default function Article() {
 		}
 	}, [article])
 
+	const publishedDate = (d) => {
+		const date = new Date(d)
+
+		const options = {
+			year: 'numeric',
+			month: 'long',
+			day: 'numeric',
+			timeZone: 'UTC',
+			hour12: false,
+		}
+
+		return date.toLocaleString('en-GB', options)
+	}
 
 	return (
 		<>
-			<Container fluid>
-				<Hero title={article.title} size="m" />
+			<div className={styles.article_top} style={{ backgroundImage: 'url(' + (article.urlToImage || placeholder) + ')' }}>
+				<Container fluid>
+					<div className={styles.article_top_content}>
+						<h3>{article.title}</h3>
+					</div>
+				</Container>
+			</div>
 
+			<Container fluid>
 				<Row>
 					{loading ? (
-						<div>Loading...</div>
-					) : !article ? (
-						error && (
-							<Col>
-								<div>
-									OH NO. <br />
-									{error}
-								</div>
-							</Col>
-						)
+						<Col>
+							<div>
+								<p>Loading...</p>
+							</div>
+						</Col>
+					) : error ? (
+						<Col>
+							<div>
+								<p>{error}</p>
+							</div>
+						</Col>
 					) : (
 						article && (
-							<>
-								<Col md="6" lg="4" className="mb-4">
-									<div>
-										{currentUser.isLoggedIn && (
-											<SaveBtn articleSlug={getSlug(article.title)} />
-										)}
+							<Col sm="10" md="8" lg="6" className="mx-auto pt-5 pb-3">
+								<div>
+									<p className={styles.article_details}>
+										<strong>{article.author ? article.author : 'Author unknown :('}</strong> {article.source && article.source.name && ('  -  ' + article.source.name)}<br />
+										Published on {article.publishedAt && (publishedDate(article.publishedAt))}
+									</p>
+								</div>
 
-										<div>Author: {article.author}</div>
-										<div>
-											<a href={article.url}>{article.source.name}</a>
-										</div>
-										<img src={article.urlToImage} alt="" />
-										<div>publishedAt: {article.publishedAt}</div>
-										<div>description: {article.description}</div>
-										<div>content: {article.content}</div>
-									</div>
-								</Col>
-							</>
+								<div className="pb-3 pb-md-5">
+									<div className={styles.article_description}>{article.description}</div>
+									<div className={styles.article_content}>{article.content}</div>
+								</div>
+
+								{currentUser.isLoggedIn && <SaveBtn articleSlug={getSlug(article.title)} />}
+
+								<div className="pt-5">
+									<BackButton label="Back to all articles" />
+								</div>
+							</Col>
 						)
 					)}
 				</Row>
