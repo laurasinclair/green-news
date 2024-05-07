@@ -21,14 +21,15 @@ Green News is an innovative application that provides the latest news and update
 
 
 ## Technologies used
-**Front-end Technologies**
+**Frontend**
 - React
-- Bootstrap - only for grid layout and little css helpers (margin, padding)
+- Bootstrap - for grid layout and little css helpers (margin, padding)
 - Sass
+- A LOT of custom CSS because it's fun ❤️
 
-**Back-end Technologies**
+**Backend**
 - Node.js
-- json-server-backend
+- json-server-backend for (fake) user data
 
 **API Integration**
 - NewsAPI: a REST API that provides news articles and headlines from various sources.
