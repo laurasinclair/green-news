@@ -17,7 +17,7 @@ export default function Feed() {
 
 	useEffect(() => {
 		// fetch(`BROKENLINK}`)
-		fetch(`https://newsapi.org/v2/everything?q=trees&apiKey=${import.meta.env.VITE_NEWS_API_TOKEN}`)
+		fetch(`https://newsapi.org/v2/everything?q=wildlife+forest&apiKey=${import.meta.env.VITE_NEWS_API_TOKEN}`)
 			.then((resp) => resp.json())
 			.then((data) => setData(data))
 			.catch((err) => setError(`Data couldn't be fetched - ${err}`))

@@ -22,7 +22,7 @@ export default function UserPage() {
 	// displaying saved articles
 	const [allArticles, setAllArticles] = useState([])
 	useEffect(() => {
-		fetch(`https://newsapi.org/v2/everything?q=trees&apiKey=${import.meta.env.VITE_NEWS_API_TOKEN}`)
+		fetch(`https://newsapi.org/v2/everything?q=wildlife+forest&apiKey=${import.meta.env.VITE_NEWS_API_TOKEN}`)
 			.then((resp) => resp.json())
 			.then((data) => setAllArticles(data.articles))
 			.catch((err) => setError(`Data couldn't be fetched - ${err}`))
@@ -117,13 +117,13 @@ export default function UserPage() {
 									)}
 								</p>
 
-								<Row className="gx-3 gx-md-5">
+								<Row className="gx-3 gx-md-4">
 									{currentUser?.userInfo.savedArticles && allArticles ? (
 										allArticles.map((article, i) => {
 											for (let articleSlug of currentUser.userInfo.savedArticles) {
 												if (articleSlug === getSlug(article.title)) {
 													return (
-														<Col md="6" lg="4" key={i} className="mb-4">
+														<Col sm="6" md="4" key={i} className="mb-4">
 															<Link to={`/articles/${getSlug(article.title)}`}>
 																<ArticleCard article={article} />
 															</Link>
