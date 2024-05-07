@@ -14,11 +14,11 @@ export default function Footer() {
 					</Col>
 					<Col md="2" className="d-flex justify-content-center justify-content-md-end">
 						<p>
-							<a href="https://www.linkedin.com/in/laurasnclr/" target="_blank" rel="noreferrer" className="m-2">
+							<a href="https://github.com/laurasinclair" target="_blank" rel="noreferrer" className="m-2">
 								<Github size="30" color="#2B3B20" />
 							</a>
 
-							<a href="https://www.instagram.com/laura.snclr/" target="_blank" rel="noreferrer" className="m-2">
+							<a href="https://www.linkedin.com/in/laurasnclr/" target="_blank" rel="noreferrer" className="m-2">
 								<Linkedin size="30" color="#2B3B20" />
 							</a>
 						</p>
