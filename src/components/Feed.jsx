@@ -10,18 +10,7 @@ import styles from './styles/Feed.module.sass'
 import { useUserContext } from './UserContext'
 
 export default function Feed() {
-	// fetching the data
-	const [data, setData] = useState([])
-	const [loading, setLoading] = useState(true)
-	const [error, setError] = useState('')
-
-	useEffect(() => {
-		// fetch(`BROKENLINK}`)
-		fetch(`https://newsapi.org/v2/everything?q=wildlife+forest&apiKey=${import.meta.env.VITE_NEWS_API_TOKEN}`)
-			.then((resp) => resp.json())
-			.then((data) => setData(data))
-			.catch((err) => setError(`Data couldn't be fetched - ${err}`))
-	}, [])
+	
 
 	// pagination
 	const [page, setPage] = useState(0) // current page number
