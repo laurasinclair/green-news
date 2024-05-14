@@ -53,7 +53,7 @@ export default function Navbar() {
 						{currentUser && currentUser.isLoggedIn ? (
 							Object.keys(currentUser.userInfo).length !== 0 ? (
 								<NavLink to="/user/johndoe" className="d-flex align-items-center">
-									Welcome, {currentUser.userInfo.firstName} {currentUser.userInfo.lastName}
+									<div className="d-none d-sm-inline">Welcome, {currentUser.userInfo.firstName} {currentUser.userInfo.lastName}</div>
 									
 									<UserPicture src={currentUser.userInfo.profilePicture || placeholder} alt={`${currentUser.userInfo.firstName} ${currentUser.userInfo.lastName}`} className="ms-4" size="50px" />
 								</NavLink>
