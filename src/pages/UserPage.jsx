@@ -4,12 +4,13 @@ import { Link, useNavigate } from 'react-router-dom'
 
 import { Button, Hero, Section, UploadImage, ArticleCard } from '@components'
 import { useUserContext } from '../components/UserContext'
+import { useFeedContext } from '@components/FeedContext'
 
 export default function UserPage() {
 	const navigate = useNavigate()
 	const { currentUser, setCurrentUser } = useUserContext()
+	const { data, setData, error, setError } = useFeedContext()
 	const [loading, setLoading] = useState(true)
-	const [error, setError] = useState('')
 
 	// just updating the page title to the user name
 	useEffect(() => {
@@ -21,12 +22,12 @@ export default function UserPage() {
 
 	// displaying saved articles
 	const [allArticles, setAllArticles] = useState([])
-	useEffect(() => {
-		fetch(`https://newsapi.org/v2/everything?q=wildlife+forest&apiKey=${import.meta.env.VITE_NEWS_API_TOKEN}`)
-			.then((resp) => resp.json())
-			.then((data) => setAllArticles(data.articles))
-			.catch((err) => setError(`Data couldn't be fetched - ${err}`))
-	}, [])
+	// useEffect(() => {
+	// 	fetch(`https://newsapi.org/v2/everything?q=wildlife+forest&apiKey=${import.meta.env.VITE_NEWS_API_TOKEN}`)
+	// 		.then((resp) => resp.json())
+	// 		.then((data) => setAllArticles(data.articles))
+	// 		.catch((err) => setError(`Data couldn't be fetched - ${err}`))
+	// }, [])
 
 	// matching the url with the right article
 	function getSlug(str) {
@@ -118,13 +119,13 @@ export default function UserPage() {
 								</p>
 
 								<Row className="gx-3 gx-md-4">
-									{currentUser?.userInfo.savedArticles && allArticles ? (
-										allArticles.map((article, i) => {
+									{currentUser?.userInfo.savedArticles && data ? (
+										data.map((article, i) => {
 											for (let articleSlug of currentUser.userInfo.savedArticles) {
-												if (articleSlug === getSlug(article.title)) {
+												if (articleSlug === getSlug(article.headline.main)) {
 													return (
 														<Col sm="6" md="4" key={i} className="mb-4">
-															<Link to={`/articles/${getSlug(article.title)}`}>
+															<Link to={`/articles/${getSlug(article.headline.main)}`}>
 																<ArticleCard article={article} />
 															</Link>
 														</Col>
