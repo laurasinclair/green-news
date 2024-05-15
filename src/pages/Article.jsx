@@ -2,6 +2,7 @@ import { Container, Row, Col } from 'react-bootstrap'
 import { useState, useEffect, useContext } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import placeholder from '@img/bart-zimny-W5XTTLpk1-I-unsplash.jpg'
+import classNames from 'classnames'
 
 import { BackButton, SaveBtn } from '@components'
 import { useUserContext } from '@components/UserContext'
@@ -106,10 +107,10 @@ export default function Article() {
 								{article ? (
 									<>
 									<div className="pb-3 pb-md-5">
-										<div className={styles.article_description}>{article.snippet}</div>
-										<div className={styles.article_content}>{article.lead_paragraph}</div>
+										<div className={styles.article_snippet}>{article.snippet}</div>
+										<div className={styles.article_leadParagraph}>{article.lead_paragraph}</div>
 									</div>
-									<p>
+									<p className={classNames(styles.article_link, "pb-3 pb-md-5")}>
 										<a href={article.web_url} target='_blank' rel='noreferrer'>Link to the full article</a>
 									</p>
 									</>
