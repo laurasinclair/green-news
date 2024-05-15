@@ -18,7 +18,6 @@ function App() {
 							<Route path="/" element={<HomePage />} />
 							<Route path="/articles/:articleSlug" element={<Article />} />
 							<Route path="/user/johndoe" element={<UserPage />} />
-
 						<Route path="*" element={<NotFound />} />
 					</Routes>
 				</Main>
