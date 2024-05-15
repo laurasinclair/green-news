@@ -5,7 +5,7 @@ import removeConsole from "vite-plugin-remove-console";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	base: '/projects/green-news/', // Set the base directory
+	base: '/', // Set the base directory
 	plugins: [react(), removeConsole()],
 	resolve: {
 		alias: {
