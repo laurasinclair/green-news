@@ -15,10 +15,10 @@ function App() {
 				
 				<Main>
 					<Routes>
-							<Route path="/" element={<HomePage />} />
-							<Route path="/articles/:articleSlug" element={<Article />} />
-							<Route path="/user/johndoe" element={<UserPage />} />
-						<Route path="*" element={<NotFound />} />
+						<Route path="/" element={<HomePage />} />
+						<Route path="/articles/:articleSlug" element={<Article />} />
+						<Route path="/user/johndoe" element={<UserPage />} />
+						<Route path="/*" element={<NotFound />} />
 					</Routes>
 				</Main>
 
