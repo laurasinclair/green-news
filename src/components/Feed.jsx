@@ -7,50 +7,55 @@ import { ArticleCard } from '@components'
 import classNames from 'classnames';
 
 import styles from './styles/Feed.module.sass'
-import { useUserContext } from './UserContext'
+import { useUserContext } from '@components/UserContext'
+import { useFeedContext } from '@components/FeedContext'
 
 export default function Feed() {
-	// fetching the data
-	const [data, setData] = useState([])
-	const [loading, setLoading] = useState(true)
-	const [error, setError] = useState('')
-
-	useEffect(() => {
-		// fetch(`BROKENLINK}`)
-		fetch(`https://newsapi.org/v2/everything?q=wildlife+forest&apiKey=${import.meta.env.VITE_NEWS_API_TOKEN}`)
-			.then((resp) => resp.json())
-			.then((data) => setData(data))
-			.catch((err) => setError(`Data couldn't be fetched - ${err}`))
-	}, [])
+	const { data, setData, error, setError } = useFeedContext()
+	const [loading, setLoading] = useState('')
 
 	// pagination
 	const [page, setPage] = useState(0) // current page number
 	const [filteredData, setFilteredData] = useState()
 	const perPage = 9
 
-	useEffect(() => {
-		data && data.articles && (
-			setFilteredData(
-				data.articles.filter((item, index) => {
-					return (index >= page * perPage) & (index < (page + 1) * perPage)
-				})
-			),
-			setError(''),
-			setLoading(false)
-		)
+	// useEffect(() => {
+	// 	console.log(data[0])
+	// }, [data])
+	
+	// useEffect(() => {
+	// 	const test = data.map((article, i) => {
+	// 		return article.headline.main
+	// 	})
+
+	// 	console.log('test', test)
+
+
+	// 	// data && (
+	// 	// 	setFilteredData(
+	// 	// 		data.filter((item, index) => {
+	// 	// 			return (index >= page * perPage) & (index < (page + 1) * perPage)
+	// 	// 		})
+	// 	// 	),
+	// 	// 	setError(''),
+	// 	// 	setLoading(false)
+	// 	// )
 		
-		!data || !data.articles && (
-			setError('No articles to display.'),
-			setLoading(false)
-		)
-	}, [page, data, error])
+	// 	!data && (
+	// 		setError('No articles to display.'),
+	// 		setLoading(false)
+	// 	)
+	// }, [page, data, error, setError])
 
 	function getSlug(str) {
-		const tempString = str
-			.replaceAll(/[^a-zA-Z0-9]/g, '-')
-			.toLowerCase()
-			.substring(0, 50)
-		return tempString.replace(/-+/g, '-').replace(/-$/, '')
+		if (!str) return
+		if (typeof str === 'string') {
+			const tempString = str
+				.replaceAll(/[^a-zA-Z0-9]/g, '-')
+				.toLowerCase()
+				.substring(0, 50)
+			return tempString.replace(/-+/g, '-').replace(/-$/, '')
+		}
 	}
 
 	return (
@@ -76,23 +81,23 @@ export default function Feed() {
 							</div>
 						</Col>
 					) : (
-						filteredData && (
+						data && (
 							<>
 								<Col>
-									<div className="mb-5">{data.articles.length} articles</div>
+									<div className="mb-5">{data && data.length} articles</div>
 									<Row className="gx-3 gx-md-4">
-										{filteredData &&
-											filteredData.map((article, i) => {
+										{data &&
+											data.map((article, i) => {
 												return (
 													<Col sm="6" lg="4" key={i} className="mb-4 mb-md-5">
-														<Link to={`articles/${getSlug(article.title)}`}>
+														<Link to={`articles/${getSlug(article.headline.main)}`}>
 															<ArticleCard article={article} />
 														</Link>
 													</Col>
 												)
 											})}
 
-										<ReactPaginate containerClassName={styles.feed_pagination} pageClassName={styles.pageItem} activeClassName={styles.active} onPageChange={(event) => setPage(event.selected)} pageCount={Math.ceil(data.articles.length / perPage)} breakLabel="..." previousLabel={<ArrowLeftCircleFill color="#aab5a2" size="40" className="mt-2 me-3" />} nextLabel={<ArrowRightCircleFill color="#aab5a2" size="40" className="mt-2 ms-3" />} />
+										{/* <ReactPaginate containerClassName={styles.feed_pagination} pageClassName={styles.pageItem} activeClassName={styles.active} onPageChange={(event) => setPage(event.selected)} pageCount={Math.ceil(data.articles.length / perPage)} breakLabel="..." previousLabel={<ArrowLeftCircleFill color="#aab5a2" size="40" className="mt-2 me-3" />} nextLabel={<ArrowRightCircleFill color="#aab5a2" size="40" className="mt-2 ms-3" />} /> */}
 									</Row>
 								</Col>
 							</>
