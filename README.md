@@ -28,7 +28,7 @@ Green News is an innovative application that provides the latest news and update
 - React
 - Bootstrap - for grid layout and little css helpers (margin, padding)
 - Sass
-- A LOT of custom CSS because it's fun ❤️
+- A LOT of custom CSS, because it's fun ❤️
 
 **Backend**
 - Node.js
