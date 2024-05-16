@@ -4,26 +4,28 @@ import { Navbar, Footer, Main } from '@components'
 import FeedContextProvider from '@components/FeedContext'
 import UserContextProvider from '@components/UserContext'
 
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 
 function App() {
 	return (
 		<div className="App">
 			<UserContextProvider>
-			<FeedContextProvider>
-				<Navbar />
-				
-				<Main>
-					<Routes>
-						<Route path="/" element={<HomePage />} />
-						<Route path="/articles/:articleSlug" element={<Article />} />
-						<Route path="/user/johndoe" element={<UserPage />} />
-						<Route path="/*" element={<NotFound />} />
-					</Routes>
-				</Main>
+				<FeedContextProvider>
+					<Navbar />
 
-			<Footer />
-			</FeedContextProvider>
+					<Main>
+						<Routes>
+							<Route path="/" element={<Navigate to="/projects/green-news" />} />
+
+							<Route path="/projects/green-news" element={<HomePage />} />
+							<Route path="/projects/green-news/articles/:articleSlug" element={<Article />} />
+							<Route path="/projects/green-news/user/johndoe" element={<UserPage />} />
+							<Route path="*" element={<NotFound />} />
+						</Routes>
+					</Main>
+
+					<Footer />
+				</FeedContextProvider>
 			</UserContextProvider>
 		</div>
 	)
