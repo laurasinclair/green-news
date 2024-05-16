@@ -1,2 +1,7 @@
 [build]
   command = "npm run build"
+
+[[redirects]]
+  from = "/projects/green-news/*"
+  to = "/projects/green-news/index.html"
+  status = 200
