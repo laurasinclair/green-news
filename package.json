@@ -2,13 +2,13 @@
   "name": "project-3-green-news",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://green-news577328.netlify.app/",
+  "homepage": "https://green-news577328.netlify.app/projects/green-news/",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build --outDir projects/green-news",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
+    "preview": "vite preview --outDir projects/green-news",
     "test": "vitest --ui"
   },
   "dependencies": {
