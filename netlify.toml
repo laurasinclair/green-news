@@ -1,6 +1,3 @@
-// File-based configuration settings take precedence
-// Settings specified in netlify.toml override any corresponding settings in the Netlify UI.
-
 [build]
   command = "npm run build"
   publish = "/projects/green-news"
