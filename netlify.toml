@@ -1,3 +1,7 @@
 [build]
   command = "npm run build"
-  publish = "/projects/green-news"
+
+[[redirects]]
+  from = "/projects/green-news/*"
+  to = "/projects/green-news/index.html"
+  status = 200
