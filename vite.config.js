@@ -4,7 +4,7 @@ import * as path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	base: '/projects/green-news/', // Set the base directory
+	base: './', // Set the base directory
 	plugins: [react()],
 	resolve: {
 		alias: {
