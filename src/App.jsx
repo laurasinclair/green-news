@@ -10,20 +10,20 @@ function App() {
 	return (
 		<div className="App">
 			<UserContextProvider>
-			<FeedContextProvider>
-				<Navbar />
-				
-				<Main>
-					<Routes>
-						<Route path="/" element={<HomePage />} />
-						<Route path="/articles/:articleSlug" element={<Article />} />
-						<Route path="/user/johndoe" element={<UserPage />} />
-						<Route path="/*" element={<NotFound />} />
-					</Routes>
-				</Main>
+				<FeedContextProvider>
+					<Navbar />
 
-			<Footer />
-			</FeedContextProvider>
+					<Main>
+						<Routes>
+							<Route path="/" element={<HomePage />} />
+							<Route path="/articles/:articleSlug" element={<Article />} />
+							<Route path="/user/johndoe" element={<UserPage />} />
+							<Route path="*" element={<NotFound />} />
+						</Routes>
+					</Main>
+
+					<Footer />
+				</FeedContextProvider>
 			</UserContextProvider>
 		</div>
 	)
