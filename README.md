@@ -1,7 +1,7 @@
 # Green News
 
 Have a look! 
-[🌿 Green News | Your daily dose of nature](https://green-news577328.netlify.app/)
+[🌿 Green News | Your daily dose of nature](https://dev.laurasnclr.com/projects/green-news/)
 
 
 ## Description
