@@ -1,9 +1,5 @@
-import { Row, Col } from 'react-bootstrap'
-import ReactPaginate from 'react-paginate'
-import { useEffect, useState, useContext } from 'react'
-import { Link } from 'react-router-dom'
 import placeholder from '@img/bart-zimny-W5XTTLpk1-I-unsplash.jpg'
-import { ArrowLeftCircleFill, ArrowRightCircleFill, ArrowRight } from 'react-bootstrap-icons'
+import { ArrowRight } from 'react-bootstrap-icons'
 import { Button, SaveBtn } from '@components'
 import { getSlug, truncate } from "@utils";
 

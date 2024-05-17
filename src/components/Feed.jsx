@@ -1,14 +1,12 @@
 import { Container, Row, Col } from 'react-bootstrap'
-import ReactPaginate from 'react-paginate'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowLeftCircleFill, ArrowRightCircleFill } from 'react-bootstrap-icons'
 import { ArticleCard } from '@components'
 import { getSlug } from "@utils";
 import classNames from 'classnames';
 
 import styles from './styles/Feed.module.sass'
-import { useFeedContext, useUserContext } from '@context'
+import { useFeedContext } from '@context'
 
 export default function Feed() {
 	const { data, setData, error, setError } = useFeedContext()

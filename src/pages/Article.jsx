@@ -1,6 +1,6 @@
 import { Container, Row, Col } from 'react-bootstrap'
-import { useState, useEffect, useContext } from 'react'
-import { Link, useParams, useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
 import placeholder from '@img/bart-zimny-W5XTTLpk1-I-unsplash.jpg'
 import classNames from 'classnames'
 import { getSlug, publishedDate } from "@utils";

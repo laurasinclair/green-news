@@ -8,7 +8,7 @@ import { useUserContext, useFeedContext } from '@context'
 export default function UserPage() {
 	const navigate = useNavigate()
 	const { currentUser, setCurrentUser } = useUserContext()
-	const { data, setData, error, setError } = useFeedContext()
+	const { data } = useFeedContext()
 	const [loading, setLoading] = useState(true)
 
 	// just updating the page title to the user name
