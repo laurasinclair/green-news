@@ -5,8 +5,7 @@ import placeholder from '@img/bart-zimny-W5XTTLpk1-I-unsplash.jpg'
 import classNames from 'classnames'
 
 import { BackButton, SaveBtn } from '@components'
-import { useUserContext } from '@components/UserContext'
-import { useFeedContext } from '@components/FeedContext'
+import { useUserContext, useFeedContext } from '@context'
 
 import styles from './styles/Article.module.sass'
 

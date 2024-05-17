@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { Logo, Button, UserPicture } from '@components'
 import placeholder from '@img/placeholder_1-1.jpg'
 import styles from './styles/Navbar.module.sass'
-import { useUserContext } from './UserContext'
+import { useUserContext } from '@context'
 
 export default function Navbar() {
 	const { currentUser, setCurrentUser } = useUserContext()

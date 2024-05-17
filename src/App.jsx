@@ -1,8 +1,7 @@
 import './App.sass'
 import { HomePage, Article, UserPage, NotFound } from '@pages'
 import { Navbar, Footer, Main } from '@components'
-import FeedContextProvider from '@components/FeedContext'
-import UserContextProvider from '@components/UserContext'
+import { FeedContextProvider, UserContextProvider } from '@context'
 
 import { Routes, Route, Navigate } from 'react-router-dom'
 

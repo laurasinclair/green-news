@@ -7,7 +7,7 @@ import { ArrowLeftCircleFill, ArrowRightCircleFill, ArrowRight } from 'react-boo
 import { Button, SaveBtn } from '@components'
 
 import styles from './styles/ArticleCard.module.sass'
-import { useUserContext } from '../components/UserContext'
+import { useUserContext } from '@context'
 
 export default function ArticleCard({ article }) {
 	const { currentUser } = useUserContext()

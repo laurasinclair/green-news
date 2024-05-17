@@ -1,7 +1,6 @@
 // Basics
 import Button from './Button'
 import Logo from './Logo'
-import UserContext from './UserContext'
 import UserPicture from './UserPicture'
 import BackButton from './BackButton'
 
@@ -34,6 +33,5 @@ export {
     Feed,
     ArticleCard,
     SaveBtn,
-    UploadImage,
-    UserContext
+    UploadImage
 }

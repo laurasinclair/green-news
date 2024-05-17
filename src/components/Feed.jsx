@@ -7,8 +7,7 @@ import { ArticleCard } from '@components'
 import classNames from 'classnames';
 
 import styles from './styles/Feed.module.sass'
-import { useUserContext } from '@components/UserContext'
-import { useFeedContext } from '@components/FeedContext'
+import { useFeedContext, useUserContext } from '@context'
 
 export default function Feed() {
 	const { data, setData, error, setError } = useFeedContext()

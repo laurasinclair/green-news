@@ -4,12 +4,13 @@ import * as path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	base: './', // Set the base directory
+	base: '', // Set the base directory
 	plugins: [react()],
 	resolve: {
 		alias: {
 			'@': path.resolve(__dirname, 'src'),
 			'@components': `${path.resolve(__dirname, 'src/components/')}`,
+			'@context': `${path.resolve(__dirname, 'src/context/')}`,
 			'@assets': `${path.resolve(__dirname, 'src/assets/')}`,
 			'@img': `${path.resolve(__dirname, 'src/assets/images/')}`,
 			'@pages': path.resolve(__dirname, 'src/pages')

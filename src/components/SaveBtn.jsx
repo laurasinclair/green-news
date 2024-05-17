@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Heart, HeartFill } from 'react-bootstrap-icons'
-import { useUserContext } from '../components/UserContext'
+import { useUserContext } from '@context'
 
 import { Button } from '@components'
 

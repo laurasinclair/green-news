@@ -3,8 +3,7 @@ import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { Button, Hero, Section, UploadImage, ArticleCard } from '@components'
-import { useUserContext } from '../components/UserContext'
-import { useFeedContext } from '@components/FeedContext'
+import { useUserContext, useFeedContext } from '@context'
 
 export default function UserPage() {
 	const navigate = useNavigate()
