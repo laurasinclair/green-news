@@ -13,7 +13,8 @@ export default defineConfig({
 			'@context': `${path.resolve(__dirname, 'src/context/')}`,
 			'@assets': `${path.resolve(__dirname, 'src/assets/')}`,
 			'@img': `${path.resolve(__dirname, 'src/assets/images/')}`,
-			'@pages': path.resolve(__dirname, 'src/pages')
+			'@pages': path.resolve(__dirname, 'src/pages'),
+			'@utils': path.resolve(__dirname, 'src/utils')
 		},
 	},
 	build: {

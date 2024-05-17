@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import placeholder from '@img/bart-zimny-W5XTTLpk1-I-unsplash.jpg'
 import { ArrowLeftCircleFill, ArrowRightCircleFill, ArrowRight } from 'react-bootstrap-icons'
 import { Button, SaveBtn } from '@components'
+import { getSlug, truncate } from "@utils";
 
 import styles from './styles/ArticleCard.module.sass'
 import { useUserContext } from '@context'
@@ -12,23 +13,6 @@ import { useUserContext } from '@context'
 export default function ArticleCard({ article }) {
 	const { currentUser } = useUserContext()
 
-	// matching the url with the right article
-	function getSlug(str) {
-		if (!str) return
-		if (typeof str === 'string') {
-			const tempString = str
-				.replaceAll(/[^a-zA-Z0-9]/g, '-')
-				.toLowerCase()
-				.substring(0, 50)
-			return tempString.replace(/-+/g, '-').replace(/-$/, '')
-		}
-	}
-
-	function truncate(str) {
-		return str && str.length > 145 ? str.substring(0, 145) + '...' : str
-	}
-
-	console.log('????', article)
 	return (
 		<>
 			{article && (
