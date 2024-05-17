@@ -58,15 +58,11 @@ export default function Navbar() {
 									<UserPicture src={currentUser.userInfo.profilePicture || placeholder} alt={`${currentUser.userInfo.firstName} ${currentUser.userInfo.lastName}`} className="ms-4" size="50px" />
 								</NavLink>
 							) : (
-								<NavLink to="/user/johndoe">
-									<Button type="primary-outline" label="Log in" onClick={handleLogin} />
-								</NavLink>
+								<Button type="primary-outline" label="Log in" onClick={handleLogin} to="/user/johndoe" />
 							)
 						) : (
 							<div>
-								<NavLink to="/user/johndoe">
-									<Button type="primary-outline" label="Log in" onClick={handleLogin} />
-								</NavLink>
+								<Button type="primary-outline" label="Log in" onClick={handleLogin} to="/user/johndoe" />
 							</div>
 						)}
 					</Col>
