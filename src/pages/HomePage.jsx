@@ -1,4 +1,4 @@
-import { Hero, Feed } from '@components'
+import { Feed } from '@components'
 import { useEffect } from 'react'
 import styles from './styles/HomePage.module.sass'
 import { Container } from 'react-bootstrap'

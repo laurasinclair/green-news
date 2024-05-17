@@ -1,10 +1,10 @@
 import { Container, Row, Col } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { Logo, Button, UserPicture } from '@components'
 import placeholder from '@img/placeholder_1-1.jpg'
 import styles from './styles/Navbar.module.sass'
-import { useUserContext } from './UserContext'
+import { useUserContext } from '@context'
 
 export default function Navbar() {
 	const { currentUser, setCurrentUser } = useUserContext()
@@ -58,15 +58,11 @@ export default function Navbar() {
 									<UserPicture src={currentUser.userInfo.profilePicture || placeholder} alt={`${currentUser.userInfo.firstName} ${currentUser.userInfo.lastName}`} className="ms-4" size="50px" />
 								</NavLink>
 							) : (
-								<NavLink to="/user/johndoe">
-									<Button type="primary-outline" label="Log in" onClick={handleLogin} />
-								</NavLink>
+								<Button type="primary-outline" label="Log in" onClick={handleLogin} to="/user/johndoe" />
 							)
 						) : (
 							<div>
-								<NavLink to="/user/johndoe">
-									<Button type="primary-outline" label="Log in" onClick={handleLogin} />
-								</NavLink>
+								<Button type="primary-outline" label="Log in" onClick={handleLogin} to="/user/johndoe" />
 							</div>
 						)}
 					</Col>

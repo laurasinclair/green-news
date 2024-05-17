@@ -1,4 +1,4 @@
-import { BoxArrowUpRight, Github, Linkedin } from 'react-bootstrap-icons'
+import { Github, Linkedin } from 'react-bootstrap-icons'
 import { Container, Row, Col } from 'react-bootstrap'
 import styles from './styles/Footer.module.sass'
 

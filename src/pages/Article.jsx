@@ -1,12 +1,12 @@
 import { Container, Row, Col } from 'react-bootstrap'
-import { useState, useEffect, useContext } from 'react'
-import { Link, useParams, useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
 import placeholder from '@img/bart-zimny-W5XTTLpk1-I-unsplash.jpg'
 import classNames from 'classnames'
+import { getSlug, publishedDate } from "@utils";
 
 import { BackButton, SaveBtn } from '@components'
-import { useUserContext } from '@components/UserContext'
-import { useFeedContext } from '@components/FeedContext'
+import { useUserContext, useFeedContext } from '@context'
 
 import styles from './styles/Article.module.sass'
 
@@ -15,18 +15,6 @@ export default function Article() {
 	const { currentUser } = useUserContext()
 	const [loading, setLoading] = useState('')
 	const navigate = useNavigate()
-
-	// matching the url with the right article
-	function getSlug(str) {
-		if (!str) return
-		if (typeof str === 'string') {
-			const tempString = str
-				.replaceAll(/[^a-zA-Z0-9]/g, '-')
-				.toLowerCase()
-				.substring(0, 50)
-			return tempString.replace(/-+/g, '-').replace(/-$/, '')
-		}
-	}
 
 	const [article, setArticle] = useState({})
 	const articleUrl = useParams().articleSlug
@@ -53,22 +41,6 @@ export default function Article() {
 	console.log(article)
 
 	}, [article])
-
-
-
-	const publishedDate = (d) => {
-		const date = new Date(d)
-
-		const options = {
-			year: 'numeric',
-			month: 'long',
-			day: 'numeric',
-			timeZone: 'UTC',
-			hour12: false,
-		}
-
-		return date.toLocaleString('en-GB', options)
-	}
 
 	return (
 		<>

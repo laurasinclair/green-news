@@ -4,7 +4,7 @@ import styles from './styles/UploadImage.module.sass'
 import './styles/Button.module.sass'
 import { Row, Col } from 'react-bootstrap'
 import { Button, UserPicture } from '@components'
-import { useUserContext } from '../components/UserContext'
+import { useUserContext } from '@context'
 
 const UploadImage = ({imageSize}) => {
 	const { currentUser } = useUserContext()

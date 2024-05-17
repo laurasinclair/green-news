@@ -1,14 +1,12 @@
 import { Container, Row, Col } from 'react-bootstrap'
-import ReactPaginate from 'react-paginate'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowLeftCircleFill, ArrowRightCircleFill } from 'react-bootstrap-icons'
 import { ArticleCard } from '@components'
+import { getSlug } from "@utils";
 import classNames from 'classnames';
 
 import styles from './styles/Feed.module.sass'
-import { useUserContext } from '@components/UserContext'
-import { useFeedContext } from '@components/FeedContext'
+import { useFeedContext } from '@context'
 
 export default function Feed() {
 	const { data, setData, error, setError } = useFeedContext()
@@ -46,17 +44,6 @@ export default function Feed() {
 	// 		setLoading(false)
 	// 	)
 	// }, [page, data, error, setError])
-
-	function getSlug(str) {
-		if (!str) return
-		if (typeof str === 'string') {
-			const tempString = str
-				.replaceAll(/[^a-zA-Z0-9]/g, '-')
-				.toLowerCase()
-				.substring(0, 50)
-			return tempString.replace(/-+/g, '-').replace(/-$/, '')
-		}
-	}
 
 	return (
 		<div className={classNames('feed', styles.feed)}>
