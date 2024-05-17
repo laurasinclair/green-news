@@ -4,7 +4,7 @@ import * as path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	base: process.env.VITE_APP_BASE_URL || '', // Set the base directory
+	base: process.env.NODE_ENV === 'production' ? '/projects/green-news/' : '/',
 	plugins: [react()],
 	resolve: {
 		alias: {
