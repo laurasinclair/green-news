@@ -27,4 +27,4 @@ dist-ssr
 .env.production
 *notes*
 *projects*
-data
+data/
