@@ -14,11 +14,11 @@ function App() {
 
 					<Main>
 						<Routes>
-							<Route path="/" element={<Navigate to="/projects/green-news" />} />
+							{/* <Route path="/" element={<Navigate to="/projects/green-news" />} /> */}
 
-							<Route path="/projects/green-news" element={<HomePage />} />
-							<Route path="/projects/green-news/articles/:articleSlug" element={<Article />} />
-							<Route path="/projects/green-news/user/johndoe" element={<UserPage />} />
+							<Route path="/" element={<HomePage />} />
+							<Route path="/articles/:articleSlug" element={<Article />} />
+							<Route path="/user/johndoe" element={<UserPage />} />
 							<Route path="*" element={<NotFound />} />
 						</Routes>
 					</Main>
