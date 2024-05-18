@@ -21,6 +21,7 @@ export default defineConfig({
 	build: {
 		outDir: '/projects/green-news/',
 		cssCodeSplit: false,
-		cssMinify: 'esbuild'
+		cssMinify: 'esbuild',
+		minify: 'esbuild'
 	}
 })
