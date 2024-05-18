@@ -10,28 +10,18 @@ export default function FeedContextProvider({ children }) {
 	const [error, setError] = useState('')
 	const [isDataFetched, setIsDataFetched] = useState(false)
 
-	const fetchData = (data) => {
-		return new Promise((resolve, reject) => {
+	const fetchData = () => {
 		axios
 			.get(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=nature&api-key=${import.meta.env.VITE_NYTIMES_API_TOKEN}`)
-			.then((resp) => resolve({ data, ...resp }))
-			.catch((error) => reject(error))
-		})
-	}
-
-	useEffect(() => {
-		if (!isDataFetched) {
-			fetchData()
-				.then((result) => {
-					setData(result.data.response.docs)
-					setIsDataFetched(true)
-				})
-				.catch((error) => {
-					setError("Data couldn't be fetched")
-					console.error("Data couldn't be fetched", error)
-				})
+			.then(({data}) => setData(data.response.docs))
+			.catch((error) => setError(error))
 		}
-	}, [isDataFetched])
+
+		useEffect(() => {
+			if (!isDataFetched) {
+				fetchData();
+			}
+		}, [isDataFetched])
 
 	return <FeedContext.Provider value={{ data, setData, error, setError }}>{children}</FeedContext.Provider>
 }
