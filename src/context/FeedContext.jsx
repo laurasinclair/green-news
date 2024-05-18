@@ -8,38 +8,30 @@ export default function FeedContextProvider({ children }) {
 	// fetching the data
 	const [data, setData] = useState([])
 	const [error, setError] = useState('')
+	const [isDataFetched, setIsDataFetched] = useState(false)
+
+	const fetchData = (data) => {
+		return new Promise((resolve, reject) => {
+		axios
+			.get(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=nature&api-key=${import.meta.env.VITE_NYTIMES_API_TOKEN}`)
+			.then((resp) => resolve({ data, ...resp }))
+			.catch((error) => reject(error))
+		})
+	}
 
 	useEffect(() => {
-		const fetchData = (data) => {
-			return new Promise((resolve, reject) => {
-				setTimeout(() => {
-					axios
-						.get(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=nature&api-key=${import.meta.env.VITE_NYTIMES_API_TOKEN}`)
-						.then((resp) => resolve({ data, ...resp }))
-						.catch((error) => reject(error))
-				}, 12000)
-			})
+		if (!isDataFetched) {
+			fetchData()
+				.then((result) => {
+					setData(result.data.response.docs)
+					setIsDataFetched(true)
+				})
+				.catch((error) => {
+					setError("Data couldn't be fetched")
+					console.error("Data couldn't be fetched", error)
+				})
 		}
-
-		fetchData()
-			.then((result) => {
-				setData(result.data.response.docs)
-			})
-			.catch((error) => {
-				setError("Data couldn't be fetched")
-				console.error("Data couldn't be fetched", error)
-			})
-	}, [])
-
-	// fetch(`BROKENLINK}`)
-	// fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=nature&api-key=${import.meta.env.VITE_NYTIMES_API_TOKEN}`)
-	// 	.then((resp) => resp.json())
-	// 	.then((data) => setData(data.response.docs))
-	// 	.catch((err) => {
-	// 		setError('Data couldn\'t be fetched')
-	// 		console.error('Data couldn\'t be fetched', err)
-	// 	})
-	// }, [])
+	}, [isDataFetched])
 
 	return <FeedContext.Provider value={{ data, setData, error, setError }}>{children}</FeedContext.Provider>
 }
