@@ -12,7 +12,7 @@ Green News is an innovative application that provides the latest news and update
 
 ## MVP
 - [x] API
-    - [x] Fetching articles from [NewsAPI](https://newsapi.org/docs/)
+    - [x] Fetching articles from [NYTimes API](https://developer.nytimes.com/apis/)
     - [x] Article page
     - [x] Placeholder image if no image is provided
 
@@ -22,17 +22,18 @@ Green News is an innovative application that provides the latest news and update
     - [x] Can be logged in/out
     - [x] Can save/unsave articles
 
-
 ## Technologies used
 **Frontend**
-- React
+- React.js
 - Bootstrap - for grid layout and little css helpers (margin, padding)
-- Sass
+- SASS
 - A LOT of custom CSS, because it's fun ❤️
 
 **Backend**
 - Node.js
-- json-server-backend for (fake) user data
+- MongoDB
+- Express.js
+- Mongoose
 
 **API Integration**
 - NewsAPI: a REST API that provides news articles and headlines from various sources.
@@ -43,5 +44,4 @@ Green News is an innovative application that provides the latest news and update
 
 ## Links
 
-- [Github repository](https://github.com/laurasinclair/green-news)
-- [Deployed version](https://green-news577328.netlify.app/)
+- [Live demo](https://dev.laurasnclr.com/projects/green-news/)
