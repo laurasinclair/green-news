@@ -2,37 +2,6 @@
 @import '/src/styles/_variables.sass'
 
 .feed
-	&_pagination
-		list-style: none
-		display: flex
-		justify-content: center
-		align-items: center
-		margin-top: 2px
-		cursor: pointer
-		font-weight: 800
-		.pageItem
-			height: 40px
-			width: 40px
-			margin-left: 4px
-			margin-right: 4px
-			padding: 2px 12px
-			display: flex
-			justify-content: center
-			align-items: center
-			border-radius: 50%
-			list-style: none
-			a
-				color: $forest-green
-			&:hover,
-			&:focus,
-			&:active
-				background-color: $light-green
-				a
-					color: $white !important
-			&.active
-				background-color: $forest-green
-				a
-					color: $white !important
 	&_articleCard
 		border: 2px solid $light-green
 		height: 100%
@@ -91,4 +60,64 @@
 				width: 80%
 			line-height: 1.2
 			z-index: 777
-	
+
+.pagination
+	display: flex
+	justify-content: center
+	align-items: center
+	margin: 10px auto
+	&_arrows,
+	&_numbers_number
+		font-size: 1rem
+		font-family: $font-family-sans-serif
+		border: 0
+		padding: 0
+		width: 44px
+		height: 44px
+		margin: 0 4px 6px
+		display: flex
+		align-items: center
+		justify-content: center
+		border-radius: 50%
+		&:disabled
+			cursor: auto
+			&:hover
+				background-color: transparent
+			svg path
+				fill: $light-green
+		&:hover
+			cursor: pointer
+
+	&_arrows
+		background-color: transparent
+		svg path
+			fill: $pine-green
+		&:hover
+			background-color: $white
+
+	&_numbers
+		display: flex
+		flex-wrap: wrap
+		justify-content: center
+		font-weight: 800
+		&_number
+			background-color: $light-green
+			color: $light
+			&:hover
+				background-color: darken($light-green, 10%)
+				color: $white
+		&_current
+			background-color: $pine-green
+			color: $white
+
+	&_perPage
+		display: flex
+		align-items: center
+		margin-bottom: 20px
+		&_select
+			margin: 0 8px
+			display: inline
+			width: fit-content
+			padding: 8px 10px
+			background-color: $white
+			border: 0

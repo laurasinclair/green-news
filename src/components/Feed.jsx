@@ -1,98 +1,128 @@
-import { Container, Row, Col } from 'react-bootstrap'
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { ArticleCard } from '@components'
-import { getSlug } from "@utils";
-import classNames from 'classnames';
+import { useCallback, useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-import styles from './styles/Feed.module.sass'
-import { useFeedContext } from '@context'
+import { Container, Row, Col } from 'react-bootstrap';
+import classNames from 'classnames';
+import { ChevronLeft, ChevronRight } from 'react-bootstrap-icons';
+
+import { ArticleCard, Loading, Error } from '@components';
+import { getSlug } from '@utils';
+import styles from './styles/Feed.module.sass';
+import { useFeedContext } from '@context';
 
 export default function Feed() {
-	const { data, setData, error, setError } = useFeedContext()
-	const [loading, setLoading] = useState('')
+	const { data, error, setError, totalArticles, fetchData } = useFeedContext();
+	const [loading, setLoading] = useState(true);
 
-	// pagination
-	const [page, setPage] = useState(0) // current page number
-	const [filteredData, setFilteredData] = useState()
-	const perPage = 9
+	const location = useLocation();
+	const params = new URLSearchParams(location.search);
+	const [currentPage, setCurrentPage] = useState(params.get('page') || 1);
 
-	// useEffect(() => {
-	// 	console.log(data[0])
-	// }, [data])
-	
-	// useEffect(() => {
-	// 	const test = data.map((article, i) => {
-	// 		return article.headline.main
-	// 	})
+	const navigate = useNavigate();
 
-	// 	console.log('test', test)
+	useEffect(() => {
+		fetchData(currentPage);
+		if (data && data.length > 0) {
+			setLoading(false);
+			paginationNumbers();
+			navigate(`?page=${currentPage}`);
+		}
+	}, [currentPage]);
 
+	const handlePrevPage = () => {
+		if (currentPage > 1) {
+			setCurrentPage(currentPage - 1);
+		}
+	};
 
-	// 	// data && (
-	// 	// 	setFilteredData(
-	// 	// 		data.filter((item, index) => {
-	// 	// 			return (index >= page * perPage) & (index < (page + 1) * perPage)
-	// 	// 		})
-	// 	// 	),
-	// 	// 	setError(''),
-	// 	// 	setLoading(false)
-	// 	// )
-		
-	// 	!data && (
-	// 		setError('No articles to display.'),
-	// 		setLoading(false)
-	// 	)
-	// }, [page, data, error, setError])
+	const handleNextPage = () => {
+		if (currentPage < (totalArticles / 10)) {
+			setCurrentPage(currentPage + 1);
+		}
+	};
+
+	const paginationNumbers = () => {
+		let buttons = [];
+		for (let i = 0; i < 12; i++) {
+			buttons.push(
+				<button
+					className={classNames(styles.pagination_numbers_number, {
+						[styles.pagination_numbers_current]: i + 1 === currentPage,
+					})}
+					key={i}
+					onClick={() => setCurrentPage(i + 1)}>
+					{i + 1}
+				</button>
+			);
+		}
+		return buttons;
+	};
 
 	return (
 		<div className={classNames('feed', styles.feed)}>
-			<Container fluid className="mt-5">
+			<Container
+				fluid
+				className='mt-5'>
 				<h2>Today&apos;s top stories</h2>
 
 				<Row>
-					{loading ? (	
-						<Col>
-							<div>
-								<p>
-									Loading...
-								</p>
-							</div>
-						</Col>
-					) : ( error ? (
-						<Col>
-							<div>
-								<p>
-									{error}
-								</p>
-							</div>
-						</Col>
+					{loading ? (
+						<Loading />
+					) : error ? (
+						'Oops, there was a problem...'
 					) : (
 						data && (
 							<>
 								<Col>
-									<div className="mb-5">{data && data.length} articles</div>
-									<Row className="gx-3 gx-md-4">
+									<div className='mb-5'>
+										{data &&
+											(data.length > 0 ? (
+												<>{data.length} articles</>
+											) : (
+												<>Loading...</>
+											))}{' '}
+									</div>
+									<Row className='gx-3 gx-md-4'>
 										{data &&
 											data.map((article, i) => {
 												return (
-													<Col sm="6" lg="4" key={i} className="mb-4 mb-md-5">
-														<Link to={`articles/${getSlug(article.headline.main)}`}>
+													<Col
+														sm='6'
+														lg='4'
+														key={i}
+														className='mb-4 mb-md-5'>
+														<Link
+															to={`articles/${getSlug(article.headline.main)}`}>
 															<ArticleCard article={article} />
 														</Link>
 													</Col>
-												)
+												);
 											})}
-
-										{/* <ReactPaginate containerClassName={styles.feed_pagination} pageClassName={styles.pageItem} activeClassName={styles.active} onPageChange={(event) => setPage(event.selected)} pageCount={Math.ceil(data.articles.length / perPage)} breakLabel="..." previousLabel={<ArrowLeftCircleFill color="#aab5a2" size="40" className="mt-2 me-3" />} nextLabel={<ArrowRightCircleFill color="#aab5a2" size="40" className="mt-2 ms-3" />} /> */}
 									</Row>
 								</Col>
 							</>
 						)
-					)
 					)}
 				</Row>
+
+				<div className={styles.pagination}>
+					<button
+						onClick={handlePrevPage}
+						disabled={currentPage === 1}
+						className={styles.pagination_arrows}>
+						<ChevronLeft size={24} />
+					</button>
+
+					<div className={styles.pagination_numbers}>{paginationNumbers()}</div>
+
+					<button
+						onClick={handleNextPage}
+						disabled={currentPage === (totalArticles / 10)}
+						className={styles.pagination_arrows}>
+						<ChevronRight size={24} />
+					</button>
+				</div>
 			</Container>
 		</div>
-	)
+	);
 }
