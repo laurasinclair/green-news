@@ -9,30 +9,24 @@ export default function FeedContextProvider({ children }) {
 	const [data, setData] = useState([]);
 	const [error, setError] = useState('');
 
-	useEffect(() => {
-		let isMounted = true;
-
-		const fetchData = () => {
-			return new Promise((resolve, reject) => {
-				axios
-					.get('http://localhost:5005/api/articles?page=0' || `${import.meta.env.VITE_MONGODB_BASE_URL}/articles?page=0`)
-					.then((resp) => {
-						setData(resp.data.docs);
-					})
-					.catch((error) => {
-						setError("Data couldn't be fetched");
-						console.error("Data couldn't be fetched", error);
-						reject(error);
-					});
-			});
-		};
-
-		fetchData(); // Fetch data initially
-
-		return () => {
-            isMounted = false;
-        };
-	}, []);
+	const fetchData = (page) => {
+		return new Promise((resolve, reject) => {
+			axios
+				.get(
+					`${
+						'http://localhost:5005' || import.meta.env.VITE_MONGODB_BASE_URL
+					}/api/articles?page=${page || 0}`
+				)
+				.then((resp) => {
+					setData(resp.data.docs);
+				})
+				.catch((error) => {
+					setError("Data couldn't be fetched");
+					console.error("Data couldn't be fetched", error);
+					reject(error);
+				});
+		});
+	};
 
 	return (
 		<FeedContext.Provider
@@ -41,6 +35,7 @@ export default function FeedContextProvider({ children }) {
 				setData,
 				error,
 				setError,
+				fetchData,
 			}}>
 			{children}
 		</FeedContext.Provider>
