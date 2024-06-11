@@ -9,8 +9,6 @@ import { useUserContext } from '@context';
 export default function ArticleCard({ article }) {
 	const { currentUser } = useUserContext();
 
-	console.log(article)
-
 	return (
 		<>
 			{article && (

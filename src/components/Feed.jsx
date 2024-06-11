@@ -21,13 +21,11 @@ export default function Feed() {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		fetchData(currentPage);
-		if (data && data.length > 0) {
-			setLoading(false);
-			paginationNumbers();
-			navigate(`?page=${currentPage}`);
-		}
-	}, [currentPage]);
+		fetchData(currentPage)
+		setLoading(false);
+		paginationNumbers();
+		navigate(`?page=${currentPage}`);
+	}, [currentPage, navigate]);
 
 	const handlePrevPage = () => {
 		if (currentPage > 1) {
