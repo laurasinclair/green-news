@@ -1,0 +1,20 @@
+@import 'bootstrap/scss/bootstrap-grid.scss'
+@import '/src/styles/_variables.sass'
+
+.loading
+	display: flex
+	flex-direction: column
+	align-items: center
+	justify-content: center
+	padding: 20px
+	height: 100%
+	&_image
+		animation: spin 2.5s ease-in-out infinite
+		width: 50px
+		height: 50px
+
+@keyframes spin
+	from
+		transform: rotate(0deg)
+	to
+		transform: rotate(360deg)

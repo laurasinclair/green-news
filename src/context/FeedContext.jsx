@@ -7,6 +7,7 @@ export const useFeedContext = () => useContext(FeedContext);
 export default function FeedContextProvider({ children }) {
 	// fetching the data
 	const [data, setData] = useState([]);
+	const [totalArticles, setTotalArticles] = useState(undefined);
 	const [error, setError] = useState('');
 
 	const fetchData = (page) => {
@@ -18,10 +19,11 @@ export default function FeedContextProvider({ children }) {
 					}/api/articles?page=${page || 0}`
 				)
 				.then((resp) => {
-					setData(resp.data.docs);
+					const { articles, totalArticles } = resp.data;
+					setData(articles);
+					setTotalArticles(totalArticles)
 				})
 				.catch((error) => {
-					setError("Data couldn't be fetched");
 					console.error("Data couldn't be fetched", error);
 					reject(error);
 				});
@@ -36,6 +38,7 @@ export default function FeedContextProvider({ children }) {
 				error,
 				setError,
 				fetchData,
+				totalArticles
 			}}>
 			{children}
 		</FeedContext.Provider>

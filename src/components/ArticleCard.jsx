@@ -9,6 +9,8 @@ import { useUserContext } from '@context';
 export default function ArticleCard({ article }) {
 	const { currentUser } = useUserContext();
 
+	console.log(article)
+
 	return (
 		<>
 			{article && (
@@ -17,13 +19,13 @@ export default function ArticleCard({ article }) {
 						<h3>{article.headline && article.headline.main}</h3>
 						<img
 							src={
-								'http://static01.nyt.com/' + article.multimedia?.[0]?.url ||
+								'https://static01.nyt.com/' + article.multimedia?.[0]?.url ||
 								placeholder
 							}
 							alt={(article.headline && article.headline.main) | window.name}
 							onError={(e) => {
 								e.target.onerror = null; // Prevent infinite loop in case placeholder image fails to load
-								e.target.src = placeholder; // Set placeholder image
+								e.target.src = placeholder;
 							}}
 						/>
 					</div>

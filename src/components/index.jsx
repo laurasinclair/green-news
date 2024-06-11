@@ -19,8 +19,18 @@ import ArticleCard from './ArticleCard'
 import SaveBtn from './SaveBtn'
 import UploadImage from './UploadImage'
 
+// States
+import Loading from './states/Loading'
+import Success from './states/Success'
+import Error from './states/Error'
+import Warning from './states/Warning'
+
 
 export {
+    Loading,
+    Success,
+    Error,
+    Warning,
     Button,
     BackButton,
     Logo,
