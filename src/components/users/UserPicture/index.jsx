@@ -1,6 +1,6 @@
 import placeholder from '@img/placeholder_1-1.jpg'
 import classnames from 'classnames'
-import styles from './styles/UserPicture.module.sass';
+import styles from './index.module.sass';
 
 export default function UserPicture ({src, alt, size = '100px', className}) {
     return (

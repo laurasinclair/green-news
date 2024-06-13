@@ -1,10 +1,12 @@
-import { Container, Row, Col } from 'react-bootstrap'
-import { NavLink } from 'react-router-dom'
 import { useEffect } from 'react'
+
+import { NavLink } from 'react-router-dom'
+import { Container, Row, Col } from 'react-bootstrap'
+
 import { Logo, Button, UserPicture } from '@components'
-import placeholder from '@img/placeholder_1-1.jpg'
-import styles from './styles/Navbar.module.sass'
 import { useUserContext } from '@context'
+import placeholder from '@img/placeholder_1-1.jpg'
+import styles from './index.module.sass'
 
 export default function Navbar() {
 	const { currentUser, setCurrentUser } = useUserContext()

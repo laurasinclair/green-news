@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
-import styles from './styles/Button.module.sass';
+
 import classNames from 'classnames';
+
+import styles from './index.module.sass';
 
 export default function Button({ to, label, type = 'primary', fullWidth = false, iconRight, iconLeft, onClick, stretchedLink }) {
     const typeStyles = {

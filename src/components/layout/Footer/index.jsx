@@ -1,6 +1,6 @@
 import { Github, Linkedin } from 'react-bootstrap-icons'
 import { Container, Row, Col } from 'react-bootstrap'
-import styles from './styles/Footer.module.sass'
+import styles from './index.module.sass'
 
 export default function Footer() {
 	return (

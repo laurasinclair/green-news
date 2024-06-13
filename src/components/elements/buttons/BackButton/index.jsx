@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom'
-import styles from './styles/BackButton.module.sass'
+import styles from './index.module.sass'
 import { ArrowLeftShort } from 'react-bootstrap-icons'
 
 export default function BackButton({label = 'Back to previous page'}) {

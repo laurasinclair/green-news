@@ -1,6 +1,7 @@
 import { Container, Row, Col } from 'react-bootstrap';
+
 import { Logo } from '@components';
-import styles from './styles/Hero.module.sass';
+import styles from './index.module.sass';
 import classNames from 'classnames';
 
 export default function Hero({ size = 'm', title, h3, leadText, hasLogo, className }) {

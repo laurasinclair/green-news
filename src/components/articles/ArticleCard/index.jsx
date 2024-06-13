@@ -1,10 +1,10 @@
-import placeholder from '@img/bart-zimny-W5XTTLpk1-I-unsplash.jpg';
 import { ArrowRight } from 'react-bootstrap-icons';
-import { Button, SaveBtn } from '@components';
-import { getSlug, truncate } from '@utils';
 
-import styles from './styles/ArticleCard.module.sass';
+import { Button, SaveButton } from '@components';
+import { getSlug, truncate } from '@utils';
 import { useUserContext } from '@context';
+import styles from './index.module.sass';
+import placeholder from '@img/bart-zimny-W5XTTLpk1-I-unsplash.jpg';
 
 export default function ArticleCard({ article }) {
 	const { currentUser } = useUserContext();
@@ -33,7 +33,7 @@ export default function ArticleCard({ article }) {
 					<div className={styles.articleCard_footer}>
 						{currentUser.isLoggedIn && (
 							<div>
-								<SaveBtn
+								<SaveButton
 									articleSlug={getSlug(
 										article.headline && article.headline.main
 									)}

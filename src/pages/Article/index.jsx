@@ -1,14 +1,15 @@
-import { Container, Row, Col } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
+
+import { Container, Row, Col } from 'react-bootstrap';
 import { useParams, useNavigate } from 'react-router-dom';
-import placeholder from '@img/bart-zimny-W5XTTLpk1-I-unsplash.jpg';
 import classNames from 'classnames';
-import { getSlug, publishedDate } from '@utils';
 
-import { BackButton, SaveBtn } from '@components';
+import { BackButton, SaveButton } from '@components';
 import { useUserContext, useFeedContext } from '@context';
+import placeholder from '@img/bart-zimny-W5XTTLpk1-I-unsplash.jpg';
+import { getSlug, publishedDate } from '@utils';
+import styles from './index.module.sass';
 
-import styles from './styles/Article.module.sass';
 
 export default function Article() {
 	const { articles, setArticles} = useFeedContext();
@@ -127,7 +128,7 @@ export default function Article() {
 								)}
 
 								{currentUser.isLoggedIn && (
-									<SaveBtn articleSlug={getSlug(article.title)} />
+									<SaveButton articleSlug={getSlug(article.title)} />
 								)}
 
 								<div className='pt-5'>

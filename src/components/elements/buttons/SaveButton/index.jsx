@@ -6,7 +6,7 @@ import { Heart, HeartFill } from 'react-bootstrap-icons'
 import { useUserContext } from '@context'
 import { Button } from '@components'
 
-export default function SaveBtn({articleSlug, fullWidth}) {
+export default function SaveButton({articleSlug, fullWidth}) {
 	const { currentUser } = useUserContext()
 	const [error, setError] = useState('')
     

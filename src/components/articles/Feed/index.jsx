@@ -7,8 +7,8 @@ import { ChevronLeft, ChevronRight } from 'react-bootstrap-icons';
 
 import { ArticleCard, Loading, Error } from '@components';
 import { getSlug } from '@utils';
-import styles from './styles/Feed.module.sass';
-import { fetchArticles } from '../api/Api';
+import styles from './index.module.sass';
+import { fetchArticles } from '../../../api/Api';
 import { useFeedContext } from '@context';
 
 console.clear();
