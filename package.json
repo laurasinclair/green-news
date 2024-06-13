@@ -5,9 +5,7 @@
   "homepage": "https://green-news577328.netlify.app/projects/green-news/",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"npm run dev:client\" \"npm run dev:data\"",
-    "dev:data": "npm run dev --prefix data",
-    "dev:client": "vite",
+    "dev": "vite",
     "build": "vite build --outDir projects/green-news",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview --outDir projects/green-news",

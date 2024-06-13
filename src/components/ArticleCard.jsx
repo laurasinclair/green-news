@@ -47,6 +47,7 @@ export default function ArticleCard({ article }) {
 								label='Read more'
 								fullWidth
 								iconRight={<ArrowRight size='18' />}
+								stretchedLink
 							/>
 						</div>
 					</div>

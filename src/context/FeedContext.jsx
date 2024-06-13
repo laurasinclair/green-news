@@ -1,44 +1,45 @@
 import { createContext, useContext, useEffect, useState } from 'react';
+import { fetchArticles } from '../api/Api';
 import axios from 'axios';
 
 const FeedContext = createContext({});
 export const useFeedContext = () => useContext(FeedContext);
 
 export default function FeedContextProvider({ children }) {
-	// fetching the data
-	const [data, setData] = useState([]);
+	const [articles, setArticles] = useState({});
 	const [totalArticles, setTotalArticles] = useState(undefined);
-	const [error, setError] = useState('');
 
-	const fetchData = (page) => {
-		return new Promise((resolve, reject) => {
-			axios
-				.get(
-					`${
-						'http://localhost:5005' || import.meta.env.VITE_MONGODB_BASE_URL
-					}/api/articles?page=${page || 0}`
-				)
-				.then((resp) => {
-					const { articles, totalArticles } = resp.data;
-					setData(articles);
-					setTotalArticles(totalArticles)
-				})
-				.catch((error) => {
-					console.error("Data couldn't be fetched", error);
-					reject(error);
-				});
-		});
-	};
+	// const fetchData = async (page) => {
+	// 	try {
+	// 		const response = await axios.get(
+	// 			`${'http://localhost:5005'}/api/articles?page=${page | 0}`
+	// 		);
+	// 		return response.data;
+	// 	} catch (error) {
+	// 		console.log('❌ -', error.message);
+	// 	}
+	// };
+
+	useEffect(() => {
+		fetchArticles()
+		.then((data) => {
+			console.log(data)
+			if (data.articles) {
+				setArticles(data.articles)
+			}
+		})
+		.catch((err) => console.log('There was an error fetching data'))
+	}, [articles]);
+
 
 	return (
 		<FeedContext.Provider
 			value={{
-				data,
-				setData,
-				error,
-				setError,
-				fetchData,
-				totalArticles
+				articles,
+				setArticles,
+				// fetchData,
+				totalArticles,
+				setTotalArticles,
 			}}>
 			{children}
 		</FeedContext.Provider>

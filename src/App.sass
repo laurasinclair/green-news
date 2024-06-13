@@ -124,3 +124,16 @@ a
 			width: 80%
 		line-height: 1.2
 		z-index: 777
+
+.stretched-link
+	border: 1px solid red !important
+	&::after
+		position: absolute
+		top: 0
+		right: 0
+		bottom: 0
+		left: 0
+		z-index: 1
+		pointer-events: auto
+		content: ""
+		background-color: rgba(0,0,0,0)
