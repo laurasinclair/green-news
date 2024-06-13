@@ -10,7 +10,7 @@ export default function BackButton({label = 'Back to previous page'}) {
 			onClick={() => {
 				navigate(-1)
 			}}
-			className={styles.backbutton}>
+			className={styles.btn_back}>
 			<ArrowLeftShort size="26" /> {label}
 		</Link>
 	)

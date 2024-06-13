@@ -33,7 +33,7 @@ export default function Feed() {
 		fetchArticles(currentPage)
 			.then((data) => {
 				if (data && Array.isArray(articles)) {
-					console.log('🍓', data.articles, articles);
+					// console.log('🍓', data.articles, articles);
 					
 					setArticles(data.articles);
 					setTotalArticles(totalArticles);

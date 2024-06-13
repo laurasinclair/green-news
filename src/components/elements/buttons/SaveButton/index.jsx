@@ -2,15 +2,15 @@ import { useState, useEffect } from 'react'
 
 import axios from 'axios'
 import { Heart, HeartFill } from 'react-bootstrap-icons'
+import classNames from 'classnames';
 
+import styles from './index.module.sass';
 import { useUserContext } from '@context'
 import { Button } from '@components'
 
-export default function SaveButton({articleSlug, fullWidth}) {
+export default function SaveButton({articleSlug, fullWidth, className}) {
 	const { currentUser } = useUserContext()
-	const [error, setError] = useState('')
     
-
 	// saving article to user page
 	const [saveButtonState, setSaveButtonState] = useState({
 		saved: false,
@@ -79,9 +79,9 @@ export default function SaveButton({articleSlug, fullWidth}) {
 				updatedResponse: updatedResponse.status,
 			})
 		} catch (error) {
-			setError("Article couldn't be saved :(", error)
+			console.log("Article couldn't be saved :(", error)
 		}
 	}
 
-	return <Button onClick={handleClick} label={saveButtonState.label} iconRight={saveButtonState.icon} type="tertiary" {...(fullWidth && { fullWidth })} />
+	return <Button onClick={handleClick} label={saveButtonState.label} iconRight={saveButtonState.icon} type="tertiary" className={classNames([styles.btn_save], className)} {...(fullWidth && { fullWidth })} />
 }
