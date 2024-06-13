@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react'
-import { Heart, HeartFill } from 'react-bootstrap-icons'
-import { useUserContext } from '@context'
 
+import axios from 'axios'
+import { Heart, HeartFill } from 'react-bootstrap-icons'
+
+import { useUserContext } from '@context'
 import { Button } from '@components'
 
 export default function SaveBtn({articleSlug, fullWidth}) {
@@ -28,6 +30,7 @@ export default function SaveBtn({articleSlug, fullWidth}) {
             const index = currentUser.userInfo.savedArticles.indexOf(articleSlug)
 
             if (index === -1) {
+				axios.put(`${import.meta.env.VITE_MONGODB_BASE_URL}/users/johndoe01`, req)
                 setSaveButtonState({
                     saved: false,
                     label: 'Save article',
@@ -47,7 +50,7 @@ export default function SaveBtn({articleSlug, fullWidth}) {
 		e.preventDefault()
 
 		try {
-			const userResponse = await fetch('http://localhost:7200/users/1')
+			const userResponse = await fetch(`${import.meta.env.BASE_URL}/users/johndoe01`)
 			const user = await userResponse.json()
 			const index = user.userInfo.savedArticles.indexOf(articleSlug)
 
@@ -67,12 +70,14 @@ export default function SaveBtn({articleSlug, fullWidth}) {
 				})
 			}
 
-			const updatedResponse = await fetch('http://localhost:7200/users/1', {
+			const updatedResponse = await fetch(`${import.meta.env.BASE_URL}/users/johndoe01`, {
 				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json',
 				},
-				body: JSON.stringify(user),
+				body: JSON.stringify({
+					...user
+				}),
 			})
 			console.table({
 				'saved articles': user.userInfo.savedArticles.length,

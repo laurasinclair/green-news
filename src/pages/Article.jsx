@@ -51,7 +51,7 @@ export default function Article() {
 					backgroundImage:
 						'url(' +
 						(article.multimedia && article.multimedia[0]?.url
-							? 'http://static01.nyt.com/' + article.multimedia[0].url
+							? 'https://static01.nyt.com/' + article.multimedia[0].url
 							: placeholder) +
 						')',
 				}}>

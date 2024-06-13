@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { fetchItems } from '../api/Api';
+import { fetchUsers } from '../api/Api';
 import axios from 'axios';
 
 const UserContext = createContext({});
@@ -14,7 +14,7 @@ export default function UserContextProvider({ children }) {
 	const [error, setError] = useState('Oops');
 
 	useEffect(() => {
-		fetchItems()
+		fetchUsers()
 		.then((res) => {
 			if (res.userInfo) {
 				setCurrentUser({

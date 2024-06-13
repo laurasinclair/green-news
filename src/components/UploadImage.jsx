@@ -36,7 +36,7 @@ const UploadImage = ({imageSize}) => {
 
 			try {
 				currentUser.userInfo.profilePicture = base64
-				await fetch('http://localhost:7200/users/1', {
+				await fetch(`${import.meta.env.BASE_URL}/users/johndoe01`, {
 					method: 'PUT',
 					headers: {
 						'Content-Type': 'application/json',

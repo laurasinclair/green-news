@@ -9,8 +9,6 @@ import { useUserContext } from '@context';
 export default function ArticleCard({ article }) {
 	const { currentUser } = useUserContext();
 
-	console.log(article)
-
 	return (
 		<>
 			{article && (
@@ -49,6 +47,7 @@ export default function ArticleCard({ article }) {
 								label='Read more'
 								fullWidth
 								iconRight={<ArrowRight size='18' />}
+								stretchedLink
 							/>
 						</div>
 					</div>
