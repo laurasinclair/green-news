@@ -18,19 +18,12 @@ export default function SaveBtn({articleSlug, fullWidth}) {
 		icon: <Heart />,
 	})
 
-    // useEffect(() => {
-    //     fetch('http://localhost:7200/users/1')
-    //     .then((resp) => resp.json())
-    //     .then((data) => setcurrentUser(data))
-    //     .catch((err) => 'Error fetching currentUser')
-    // }, [])
-
     useEffect(() => {
         if (currentUser && currentUser.userInfo.savedArticles) {
             const index = currentUser.userInfo.savedArticles.indexOf(articleSlug)
 
             if (index === -1) {
-				axios.put(`${import.meta.env.VITE_MONGODB_BASE_URL}/users/johndoe01`, req)
+				axios.put(`${import.meta.env.VITE_MONGODB_BASE_URL}/users/johndoe01`)//, req)
                 setSaveButtonState({
                     saved: false,
                     label: 'Save article',

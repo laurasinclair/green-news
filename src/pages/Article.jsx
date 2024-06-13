@@ -11,16 +11,17 @@ import { useUserContext, useFeedContext } from '@context';
 import styles from './styles/Article.module.sass';
 
 export default function Article() {
-	const { data, setData, error, setError } = useFeedContext();
+	const { articles, setArticles} = useFeedContext();
 	const { currentUser } = useUserContext();
-	const [loading, setLoading] = useState('');
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(undefined);
 	const navigate = useNavigate();
 
 	const [article, setArticle] = useState({});
 	const articleUrl = useParams().articleSlug;
 	useEffect(() => {
-		if (data) {
-			const findArticle = data.find((article) => {
+		if (articles) {
+			const findArticle = articles.find((article) => {
 				return getSlug(article.headline.main) === articleUrl;
 			});
 
@@ -34,7 +35,7 @@ export default function Article() {
 		} else {
 			setError('No data to display');
 		}
-	}, [articleUrl, data, setError]);
+	}, [articleUrl, articles]);
 
 	useEffect(() => {
 		if (article && article.headline && article.headline.main) {
