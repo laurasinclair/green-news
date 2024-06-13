@@ -17,7 +17,7 @@ export const fetchUsers = async () => {
 
 export const fetchArticles = async (page) => {
 	const response = await axios
-		.get(`${BASE_URL}/api/articles?page=${page | 0}`, {
+		.get(`${BASE_URL}/api/articles?page=${page}`, {
 			headers: {
 				'Cache-Control': 'no-cache',
 			},

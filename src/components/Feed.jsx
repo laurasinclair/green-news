@@ -30,7 +30,7 @@ export default function Feed() {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		fetchArticles()
+		fetchArticles(currentPage)
 			.then((data) => {
 				if (data && Array.isArray(articles)) {
 					console.log('🍓', data.articles, articles);
