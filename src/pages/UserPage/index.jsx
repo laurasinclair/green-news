@@ -149,8 +149,6 @@ useEffect(() => {
 											})
 										) : (
 											<Col
-												md='6'
-												lg='4'
 												className='mb-4'>
 												<p>We can&apos;t access your saved articles now :(</p>
 											</Col>
