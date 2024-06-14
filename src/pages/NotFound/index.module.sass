@@ -1,9 +1,8 @@
+@import '/src/styles/_mixins.sass'
+
 .notFound
 	.layout
-		display: flex
-		align-items: center
-		justify-content: center
-		flex-direction: column
+		@include flex-align(column, center)
 	h1
 		font-size: 26vw
 		margin: 0

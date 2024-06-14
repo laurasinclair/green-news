@@ -1,11 +1,13 @@
 @import 'bootstrap/scss/bootstrap-grid.scss'
 @import '/src/styles/_color-palette.sass'
+@import '/src/styles/_mixins.sass'
 
 .article
     &_top
         overflow: hidden
         position: relative
         background-size: cover
+        min-height: 350px
         @include media-breakpoint-up(sm)
             height: 500px
         &:after

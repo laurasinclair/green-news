@@ -1,13 +1,12 @@
 @import 'bootstrap/scss/bootstrap-grid.scss'
 @import '/src/styles/_color-palette.sass'
+@import '/src/styles/_mixins.sass'
 
 .homepage
 	&_top
+		@include flex-align(row, center)
 		background-size: cover
 		background-position: center center
-		display: flex
-		align-items: center
-		justify-content: center
 		padding-top: 150px
 		padding-bottom: 150px
 		h1, h2, h3, h4, h5, h6, p, a
