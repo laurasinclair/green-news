@@ -19,23 +19,23 @@ export default function Article() {
 
 	const [article, setArticle] = useState({});
 	const articleUrl = useParams().articleSlug;
-	useEffect(() => {
-		if (articles) {
-			const findArticle = articles.find((article) => {
-				return getSlug(article.headline.main) === articleUrl;
-			});
+	// useEffect(() => {
+	// 	if (articles) {
+	// 		const findArticle = articles.find((article) => {
+	// 			return getSlug(article.headline.main) === articleUrl;
+	// 		});
 
-			if (findArticle) {
-				setArticle(findArticle);
-			}
+	// 		if (findArticle) {
+	// 			setArticle(findArticle);
+	// 		}
 
-			// console.log(findArticle)
-			setError('');
-			setLoading(false);
-		} else {
-			setError('No data to display');
-		}
-	}, [articleUrl, articles]);
+	// 		// console.log(findArticle)
+	// 		setError(undefined);
+	// 		setLoading(false);
+	// 	} else {
+	// 		setError('No data to display');
+	// 	}
+	// }, [articleUrl, articles]);
 
 	useEffect(() => {
 		if (article && article.headline && article.headline.main) {
@@ -69,7 +69,7 @@ export default function Article() {
 			<Container fluid>
 				<Row>
 					{loading ? (
-						<Col>
+						<Col className="py-5">
 							<Loading />
 						</Col>
 					) : error ? (
