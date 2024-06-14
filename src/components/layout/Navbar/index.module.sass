@@ -1,5 +1,6 @@
 @import 'bootstrap/scss/bootstrap-grid.scss'
 @import '/src/styles/_color-palette.sass'
+@import '/src/styles/_mixins.sass'
 
 .navbar
 	display: flex
@@ -7,10 +8,7 @@
 	padding-top: 20px
 	padding-bottom: 20px
 	.userPicture
-		border-radius: 50%
-		overflow: hidden
-		width: 34px
-		height: 34px
+		@include circle(34px)
 		margin-left: 10px
 	&_welcome
 		font-weight: 400

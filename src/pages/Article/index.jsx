@@ -4,7 +4,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { useParams, useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
 
-import { BackButton, SaveButton } from '@components';
+import { BackButton, SaveButton, Loading } from '@components';
 import { useUserContext, useFeedContext } from '@context';
 import placeholder from '@img/bart-zimny-W5XTTLpk1-I-unsplash.jpg';
 import { getSlug, publishedDate } from '@utils';
@@ -19,6 +19,7 @@ export default function Article() {
 
 	const [article, setArticle] = useState({});
 	const articleUrl = useParams().articleSlug;
+	
 	useEffect(() => {
 		if (articles) {
 			const findArticle = articles.find((article) => {
@@ -30,7 +31,7 @@ export default function Article() {
 			}
 
 			// console.log(findArticle)
-			setError('');
+			setError(undefined);
 			setLoading(false);
 		} else {
 			setError('No data to display');
@@ -58,7 +59,10 @@ export default function Article() {
 				}}>
 				<Container fluid>
 					<div className={styles.article_top_content}>
-						<h3>{article && article.headline && article.headline.main}</h3>
+						<h3>
+							{(article && article.headline && article.headline.main) ||
+								'Are We Rediscovering the Healing Power of Forests?'}
+						</h3>
 					</div>
 				</Container>
 			</div>
@@ -66,10 +70,8 @@ export default function Article() {
 			<Container fluid>
 				<Row>
 					{loading ? (
-						<Col>
-							<div>
-								<p>Loading...</p>
-							</div>
+						<Col className="py-5">
+							<Loading />
 						</Col>
 					) : error ? (
 						<Col>
@@ -89,7 +91,7 @@ export default function Article() {
 										<strong>
 											{article.byline
 												? article.byline.original
-												: 'Author unknown'}
+												: 'Guest Author'}
 										</strong>{' '}
 										{article.source && '  -  ' + article.source}
 										<br />
@@ -106,21 +108,25 @@ export default function Article() {
 												{article.snippet}
 											</div>
 											<div className={styles.article_leadParagraph}>
-												{article.lead_paragraph}
+												{article.lead_paragraph
+													? article.lead_paragraph
+													: 'Nature and wildlife encompass the diverse ecosystems and the myriad of species that inhabit them. From lush forests and expansive grasslands to vibrant coral reefs and arid deserts, nature provides a home for countless creatures. Wildlife includes animals ranging from the tiniest insects to the largest mammals, each playing a crucial role in maintaining ecological balance. Observing wildlife in their natural habitats not only offers breathtaking sights but also reminds us of the importance of preserving these environments for future generations.'}
 											</div>
 										</div>
-										<p
-											className={classNames(
-												styles.article_link,
-												'pb-3 pb-md-5'
-											)}>
-											<a
-												href={article.web_url}
-												target='_blank'
-												rel='noreferrer'>
-												Link to the full article
-											</a>
-										</p>
+										{article.web_url && (
+											<p
+												className={classNames(
+													styles.article_link,
+													'pb-3 pb-md-5'
+												)}>
+												<a
+													href={article.web_url}
+													target='_blank'
+													rel='noreferrer'>
+													Link to the full article
+												</a>
+											</p>
+										)}
 									</>
 								) : (
 									<div>No content to display at the moment.</div>

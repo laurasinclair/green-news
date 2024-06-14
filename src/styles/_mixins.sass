@@ -1,0 +1,32 @@
+@mixin debug($all: false, $outline: false)
+	border: 2px solid red !important
+	@if $all == all
+		*
+			border: 2px solid blue !important
+	@if $outline == outline
+		outline: 2px solid blue !important
+
+@mixin circle($size)
+	border-radius: 50%
+	width: $size
+	height: $size
+	overflow: hidden
+	img
+		object-fit: cover
+		width: 100%
+		height: 100%
+
+@mixin flex-align($where, $how)
+	display: flex
+
+	@if $where == 'column'
+		flex-direction: column
+
+	@if $where == 'row'
+		flex-direction: row
+
+	@if $how == 'center'
+		align-items: center
+		justify-content: center
+
+$border-radius: 4px

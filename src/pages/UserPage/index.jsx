@@ -1,6 +1,6 @@
 import { Container, Row, Col } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import {
 	Button,
@@ -13,6 +13,7 @@ import {
 import { useUserContext, useFeedContext } from '@context';
 
 export default function UserPage() {
+	const navigate = useNavigate();
 	const { currentUser, setCurrentUser, handleLogOut } = useUserContext();
 	const { data } = useFeedContext();
 	const [loading, setLoading] = useState(true);
@@ -33,6 +34,13 @@ export default function UserPage() {
 	// 		.then((data) => setAllArticles(data.articles))
 	// 		.catch((err) => setError(`Data couldn't be fetched - ${err}`))
 	// }, [])
+
+	// displaying saved articles
+	useEffect(() => {
+		if (!currentUser.userInfo.firstName) {
+			navigate('/')
+		}
+	}, [currentUser.userInfo.firstName])
 
 	
 	return (

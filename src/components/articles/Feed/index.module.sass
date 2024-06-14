@@ -1,5 +1,6 @@
 @import 'bootstrap/scss/bootstrap-grid.scss'
 @import '/src/styles/_color-palette.sass'
+@import '/src/styles/_mixins.sass'
 
 .feed
 	.featuredImage
@@ -42,23 +43,19 @@
 			z-index: 777
 
 .pagination
-	display: flex
-	justify-content: center
-	align-items: center
-	margin: 10px auto
+	@include flex-align(row, center)
+	padding: 20px
+	margin: 10px auto 60px
 	&_arrows,
 	&_numbers_number
+		@include circle(44px)
+		@include flex-align(row, center)
 		font-size: 1rem
 		font-family: $font-family-sans-serif
+		font-weight: 800
 		border: 0
 		padding: 0
-		width: 44px
-		height: 44px
 		margin: 0 4px 6px
-		display: flex
-		align-items: center
-		justify-content: center
-		border-radius: 50%
 		&:disabled
 			cursor: auto
 			&:hover
@@ -76,10 +73,8 @@
 			background-color: $white
 
 	&_numbers
-		display: flex
+		@include flex-align(row, center)
 		flex-wrap: wrap
-		justify-content: center
-		font-weight: 800
 		&_number
 			background-color: $light-green
 			color: $light
@@ -90,14 +85,14 @@
 			background-color: $pine-green
 			color: $white
 
-	&_perPage
-		display: flex
-		align-items: center
-		margin-bottom: 20px
-		&_select
-			margin: 0 8px
-			display: inline
-			width: fit-content
-			padding: 8px 10px
-			background-color: $white
-			border: 0
+	// &_perPage
+	// 	display: flex
+	// 	align-items: center
+	// 	margin-bottom: 20px
+	// 	&_select
+	// 		margin: 0 8px
+	// 		display: inline
+	// 		width: fit-content
+	// 		padding: 8px 10px
+	// 		background-color: $white
+	// 		border: 0

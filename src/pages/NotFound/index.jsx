@@ -1,10 +1,11 @@
-import { Container, Row, Col } from 'react-bootstrap'
-import styles from './index.module.sass'
-import classNames from 'classnames'
+import { Container, Row, Col } from 'react-bootstrap';
+import styles from './index.module.sass';
+import classNames from 'classnames';
+import placeholder from '@img/bart-zimny-W5XTTLpk1-I-unsplash.jpg';
 
-export default function NotFound () {
+export default function NotFound() {
 	return (
-		<main className={classNames(styles.notFound, 'main')}>	
+		<main className={classNames(styles.notFound, 'main')}>
 			<Container fluid>
 				<Row>
 					<Col className={classNames(styles.layout, 'mt-5', 'mb-4')}>
@@ -14,5 +15,5 @@ export default function NotFound () {
 				</Row>
 			</Container>
 		</main>
-	)
+	);
 }
