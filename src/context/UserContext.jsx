@@ -17,7 +17,7 @@ export default function UserContextProvider({ children }) {
 		userInfo: {},
 	});
 
-	useEffect(() => {
+	const getUser = () => {
 		const storedUser = getData('storedUser');
 
 		if (!storedUser) {
@@ -43,17 +43,25 @@ export default function UserContextProvider({ children }) {
 				...storedUser,
 			});
 		}
+	};
+
+	useEffect(() => {
+		getUser();
 	}, []);
 
 	const handleLogIn = (e) => {
 		e.preventDefault();
 
-		currentUser &&
-			Object.keys(currentUser.userInfo).length !== 0 &&
+		if (currentUser && !currentUser.isLoggedIn) {
+			console.log('user exists but is not logged in')
 			setCurrentUser({
 				...currentUser,
 				isLoggedIn: true,
-			});
+			})
+		} else {
+			console.log('user doesnt exist and isnt logged in')
+			getUser();
+		}
 	};
 
 	const handleLogOut = (e) => {

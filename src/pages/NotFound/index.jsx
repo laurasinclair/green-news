@@ -9,14 +9,6 @@ export default function NotFound() {
 			<Container fluid>
 				<Row>
 					<Col className={classNames(styles.layout, 'mt-5', 'mb-4')}>
-						
-						{/* <div className='test'>
-							<img
-								src={placeholder}
-								alt={'hello'}
-							/>
-						</div> */}
-
 						<div className={classNames(styles.errorNumber, 'mb-4')}>&nbsp;</div>
 						<p>Oops. Page not found.</p>
 					</Col>
