@@ -122,14 +122,14 @@ export default function UserPage() {
 									<h2>Saved articles</h2>
 									<p>
 										{currentUser.isLoggedIn && (
-											<>
+											<strong>
 												{currentUser.userInfo.savedArticles.length} article
 												{currentUser.userInfo.savedArticles.length > 1
 													? 's'
 													: ''}{' '}
 												saved
 												{currentUser.userInfo.savedArticles.length < 1 && ' :('}
-											</>
+											</strong>
 										)}
 									</p>
 

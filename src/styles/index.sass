@@ -1,21 +1,11 @@
 @import 'bootstrap/scss/bootstrap-grid.scss'
 @import './_font-rubik.sass'
 @import './_color-palette.sass'
+@import './_form-fields.sass'
 @import './_typography.sass'
 
 *
 	box-sizing: border-box
-
-:root
-	line-height: 1.5
-	font-weight: 400
-	font-family: $font-family-sans-serif
-
-	font-synthesis: none
-	text-rendering: optimizeLegibility
-	-webkit-font-smoothing: antialiased
-	-moz-osx-font-smoothing: grayscale
-	-webkit-text-size-adjust: 100%
 
 ::-moz-selection
 	color: $white
@@ -45,8 +35,6 @@ body
 	color: $dark
 	margin: 0
 	padding: 0
-	font-weight: 200
-	font-size: 17px
 	min-height: 100vh
 
 .slogan // used on homepage header
@@ -64,29 +52,6 @@ body
 	border-radius: 6px
 	padding: 30px 40px
 	box-sizing: border-box
-
-.inputfield
-	border: 2px solid $light-green
-	padding: 8px 12px
-	border-radius: 4px
-	cursor: pointer
-	position: relative
-	&:after
-		content: ''
-		width: 16px
-		height: 16px
-		display: block
-		position: absolute
-		right: 10px
-		transition: all .2s ease-in-out
-		top: 12px
-		opacity: 0
-		background-image: url('/src/assets/images/icon_pencil-fill.svg')
-		background-repeat: no-repeat
-		background-position: center right
-	&:hover
-		&:after
-			opacity: 1
 
 .stretched-link
 	&:after

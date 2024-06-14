@@ -1,0 +1,22 @@
+.inputfield
+	border: 2px solid $light-green
+	padding: 8px 12px
+	border-radius: 4px
+	cursor: pointer
+	position: relative
+	&:after
+		content: ''
+		width: 16px
+		height: 16px
+		display: block
+		position: absolute
+		right: 10px
+		transition: all .2s ease-in-out
+		top: 12px
+		opacity: 0
+		background-image: url('/src/assets/images/icon_pencil-fill.svg')
+		background-repeat: no-repeat
+		background-position: center right
+	&:hover
+		&:after
+			opacity: 1
