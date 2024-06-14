@@ -36,7 +36,7 @@ export default function Feed() {
 					// console.log('🍓', data.articles, articles);
 					
 					setArticles(data.articles);
-					setTotalArticles(totalArticles);
+					setTotalArticles(data.totalArticles);
 					paginationNumbers();
 					navigate(`?page=${currentPage}`);
 					setLoading(false);
@@ -55,7 +55,7 @@ export default function Feed() {
 	};
 
 	const handleNextPage = () => {
-		if (currentPage < totalArticles / 10) {
+		if (currentPage < totalArticles / 12) {
 			setCurrentPage(currentPage + 1);
 		}
 	};
@@ -94,12 +94,9 @@ export default function Feed() {
 							<>
 								<Col>
 									<div className='mb-5'>
-										{articles &&
-											(articles.length > 0 ? (
-												<>{articles.length} articles</>
-											) : (
-												<>Loading...</>
-											))}{' '}
+											{totalArticles > 0 && (
+												<>{totalArticles} articles</>
+											)}
 									</div>
 									<Row className='gx-3 gx-md-4'>
 										{articles &&

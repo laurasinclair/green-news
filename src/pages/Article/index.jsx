@@ -140,7 +140,7 @@ export default function Article() {
 									/>
 								)}
 
-								<div className='pt-5'>
+								<div className='py-5'>
 									<BackButton label='Back to all articles' />
 								</div>
 							</Col>
