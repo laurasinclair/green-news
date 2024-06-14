@@ -10,9 +10,8 @@ import placeholder from '@img/bart-zimny-W5XTTLpk1-I-unsplash.jpg';
 import { getSlug, publishedDate } from '@utils';
 import styles from './index.module.sass';
 
-
 export default function Article() {
-	const { articles, setArticles} = useFeedContext();
+	const { articles, setArticles } = useFeedContext();
 	const { currentUser } = useUserContext();
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(undefined);
@@ -30,7 +29,7 @@ export default function Article() {
 				setArticle(findArticle);
 			}
 
-			console.log(findArticle)
+			// console.log(findArticle)
 			setError('');
 			setLoading(false);
 		} else {
@@ -42,7 +41,7 @@ export default function Article() {
 		if (article && article.headline && article.headline.main) {
 			document.title = window.name + ' | ' + article.headline.main;
 		}
-		console.log(article);
+		// console.log(article);
 	}, [article]);
 
 	return (
@@ -128,7 +127,11 @@ export default function Article() {
 								)}
 
 								{currentUser.isLoggedIn && (
-									<SaveButton articleSlug={getSlug(article.title)} />
+									<SaveButton
+										articleSlug={getSlug(
+											article.headline && article.headline.main
+										)}
+									/>
 								)}
 
 								<div className='pt-5'>

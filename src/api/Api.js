@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL =
-	'http://localhost:5005' || import.meta.env.VITE_MONGODB_BASE_URL;
+const BASE_URL = 'http://localhost:5005' || import.meta.env.VITE_MONGODB_BASE_URL;
 const API_KEY = import.meta.env.VITE_MONGODB_API_KEY;
 
 export const fetchUsers = async () => {
@@ -16,12 +15,9 @@ export const fetchUsers = async () => {
 };
 
 export const fetchArticles = async (page) => {
-	const response = await axios
-		.get(`${BASE_URL}/api/articles?page=${page}`, {
-			headers: {
-				'Cache-Control': 'no-cache',
-			},
-		})
-		const {articles, totalArticles} = response.data
-    return {articles, totalArticles}
+	const response = await axios.get(
+		`${BASE_URL}/api/articles?page=${page || 0}`
+	);
+	const { articles, totalArticles } = response.data;
+	return { articles, totalArticles };
 };
