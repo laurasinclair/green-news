@@ -6,6 +6,7 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
+		"merge": "./git-merge.sh",
 		"build": "vite build --outDir projects/green-news",
 		"lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
 		"preview": "vite preview --outDir projects/green-news",
