@@ -1,0 +1,66 @@
+@import 'bootstrap/scss/bootstrap-grid.scss'
+@import './_font-rubik.sass'
+@import './_color-palette.sass'
+@import './_form-fields.sass'
+@import './_typography.sass'
+
+*
+	box-sizing: border-box
+
+::-moz-selection
+	color: $white
+	background: $light-green
+
+::-webkit-selection
+	color: $white
+	background: $light-green
+
+::selection
+	color: $white
+	background: $light-green
+
+.debug,
+.debug *
+	outline: 1px solid red
+
+#root
+	margin: 0
+	overflow-x: hidden
+
+img
+	max-width: 100%
+
+body
+	background-color: $light
+	color: $dark
+	margin: 0
+	padding: 0
+	min-height: 100vh
+
+.slogan // used on homepage header
+	text-align: center
+	font-weight: 400
+	letter-spacing: 1px
+
+.App
+	display: flex
+	flex-direction: column
+	min-height: 100vh
+
+.bg-01
+	background-color: $white
+	border-radius: 6px
+	padding: 30px 40px
+	box-sizing: border-box
+
+.stretched-link
+	&:after
+		position: absolute
+		top: 0
+		right: 0
+		bottom: 0
+		left: 0
+		z-index: 1
+		pointer-events: auto
+		content: ""
+		background-color: rgba(0,0,0,0)
