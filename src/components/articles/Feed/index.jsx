@@ -8,18 +8,14 @@ import { ChevronLeft, ChevronRight } from 'react-bootstrap-icons';
 import { ArticleCard, Loading, Error } from '@components';
 import { getSlug } from '@utils';
 import styles from './index.module.sass';
-import { fetchArticles } from '../../../api/Api';
+import { fetchArticles } from 'api';
 import { useFeedContext } from '@context';
 
 console.clear();
 
 export default function Feed() {
-	const {
-		articles,
-		setArticles,
-		totalArticles,
-		setTotalArticles,
-	} = useFeedContext();
+	const { articles, setArticles, totalArticles, setTotalArticles } =
+		useFeedContext();
 
 	const [loading, setLoading] = useState(true),
 		[error, setError] = useState(undefined);
@@ -33,10 +29,8 @@ export default function Feed() {
 		fetchArticles(currentPage)
 			.then((data) => {
 				if (data && Array.isArray(articles)) {
-					// console.log('🍓', data.articles, articles);
-					
 					setArticles(data.articles);
-					setTotalArticles(totalArticles);
+					setTotalArticles(data.totalArticles);
 					paginationNumbers();
 					navigate(`?page=${currentPage}`);
 					setLoading(false);
@@ -44,9 +38,10 @@ export default function Feed() {
 					console.log('Articles not found');
 				}
 			})
-			.catch((err) => console.log('There was an error fetching data', err.message));
+			.catch((err) =>
+				console.log('There was an error fetching data', err.message)
+			);
 	}, [currentPage, navigate]);
-
 
 	const handlePrevPage = () => {
 		if (currentPage > 1) {
@@ -55,7 +50,7 @@ export default function Feed() {
 	};
 
 	const handleNextPage = () => {
-		if (currentPage < totalArticles / 10) {
+		if (currentPage < totalArticles / 12) {
 			setCurrentPage(currentPage + 1);
 		}
 	};
@@ -66,7 +61,7 @@ export default function Feed() {
 			buttons.push(
 				<button
 					className={classNames(styles.pagination_numbers_number, {
-						[styles.pagination_numbers_current]: i + 1 === currentPage,
+						[styles.pagination_numbers_current]: i + 1 === currentPage
 					})}
 					key={i}
 					onClick={() => setCurrentPage(i + 1)}>
@@ -84,47 +79,43 @@ export default function Feed() {
 				className='mt-5'>
 				<h2>Today&apos;s top stories</h2>
 
-				<Row>
-					{loading ? (
-						<Loading />
-					) : error ? (
-						'Oops, there was a problem...'
-					) : (
-						articles && (
-							<>
-								<Col>
-									<div className='mb-5'>
-										{articles &&
-											(articles.length > 0 ? (
-												<>{articles.length} articles</>
-											) : (
-												<>Loading...</>
-											))}{' '}
-									</div>
-									<Row className='gx-3 gx-md-4'>
-										{articles &&
-											articles.map((article, i) => {
-												return (
-													<Col
-														sm='6'
-														lg='4'
-														key={i}
-														className='mb-4 mb-md-5'>
-														<ArticleCard
-															article={article}
-															link={`articles/${getSlug(
-																article.headline.main
-															)}`}
-														/>
-													</Col>
-												);
-											})}
-									</Row>
-								</Col>
-							</>
-						)
-					)}
-				</Row>
+				{loading ? (
+					<Loading />
+				) : error ? (
+					'Oops, there seems to be a problem here'
+				) : (
+					articles && (
+						<Row>
+							<Col>
+								<div className='mb-5'>
+									{totalArticles > 0 &&
+										(totalArticles <= 100 ? (
+											<>{totalArticles} articles</>
+										) : (
+											<>100+ articles</>
+										))}
+								</div>
+								<Row className='gx-3 gx-md-4'>
+									{articles &&
+										articles.map((article, i) => {
+											return (
+												<Col
+													sm='6'
+													lg='4'
+													key={i}
+													className='mb-4 mb-md-5'>
+													<ArticleCard
+														article={article}
+														link={`articles/${getSlug(article.headline.main)}`}
+													/>
+												</Col>
+											);
+										})}
+								</Row>
+							</Col>
+						</Row>
+					)
+				)}
 
 				<div className={styles.pagination}>
 					<button

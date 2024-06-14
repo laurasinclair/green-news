@@ -5,7 +5,7 @@ export const useFeedContext = () => useContext(FeedContext);
 
 export default function FeedContextProvider({ children }) {
 	const [articles, setArticles] = useState([]);
-	const [totalArticles, setTotalArticles] = useState(undefined);
+	const [totalArticles, setTotalArticles] = useState(0);
 
 	return (
 		<FeedContext.Provider

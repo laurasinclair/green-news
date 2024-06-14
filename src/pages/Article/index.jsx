@@ -18,12 +18,12 @@ export default function Article() {
 	const navigate = useNavigate();
 
 	const [article, setArticle] = useState({});
-	const articleUrl = useParams().articleSlug;
+	const articleSlug = useParams().articleSlug;
 	
 	useEffect(() => {
 		if (articles) {
 			const findArticle = articles.find((article) => {
-				return getSlug(article.headline.main) === articleUrl;
+				return getSlug(article.headline.main) === articleSlug;
 			});
 
 			if (findArticle) {
@@ -36,7 +36,7 @@ export default function Article() {
 		} else {
 			setError('No data to display');
 		}
-	}, [articleUrl, articles]);
+	}, [articleSlug, articles]);
 
 	useEffect(() => {
 		if (article && article.headline && article.headline.main) {
@@ -60,7 +60,7 @@ export default function Article() {
 				<Container fluid>
 					<div className={styles.article_top_content}>
 						<h3>
-							{(article && article.headline && article.headline.main) ||
+							{(article && article.headline && article.headline.main) || 
 								'Are We Rediscovering the Healing Power of Forests?'}
 						</h3>
 					</div>
@@ -134,13 +134,11 @@ export default function Article() {
 
 								{currentUser.isLoggedIn && (
 									<SaveButton
-										articleSlug={getSlug(
-											article.headline && article.headline.main
-										)}
+										articleId={article._id}
 									/>
 								)}
 
-								<div className='pt-5'>
+								<div className='py-5'>
 									<BackButton label='Back to all articles' />
 								</div>
 							</Col>

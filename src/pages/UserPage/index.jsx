@@ -1,6 +1,9 @@
-import { Container, Row, Col } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+
+import { Container, Row, Col } from 'react-bootstrap';
+
+import { fetchSavedArticles } from 'api';
 
 import {
 	Button,
@@ -20,27 +23,25 @@ export default function UserPage() {
 
 	// just updating the page title to the user name
 	useEffect(() => {
-		if ( currentUser && currentUser.userInfo ) {
+		if (currentUser && currentUser.userInfo) {
 			setLoading(false);
 			document.title = `${window.name} | ${currentUser.userInfo.firstName} ${currentUser?.userInfo.lastName} ⛭ User settings`;
 		}
 	}, [currentUser]);
 
-	// displaying saved articles
-	const [allArticles, setAllArticles] = useState([]);
-	// useEffect(() => {
-	// 	fetch(`https://newsapi.org/v2/everything?q=wildlife+forest&apiKey=${import.meta.env.VITE_NEWS_API_TOKEN}`)
-	// 		.then((resp) => resp.json())
-	// 		.then((data) => setAllArticles(data.articles))
-	// 		.catch((err) => setError(`Data couldn't be fetched - ${err}`))
-	// }, [])
+
+
+useEffect(() => {
+	// console.log(currentUser.userInfo)
+	console.clear()
+
+	// const test = fetchSavedArticles('johndoe01').then(data => console.log(data.response))
+
+}, [])
+	// fetchSavedArticles()
+
 
 	// displaying saved articles
-	useEffect(() => {
-		if (!currentUser.userInfo.firstName) {
-			navigate('/')
-		}
-	}, [currentUser.userInfo.firstName])
 
 	
 	return (

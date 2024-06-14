@@ -37,9 +37,7 @@ export default function ArticleCard({ article }) {
 						{currentUser.isLoggedIn && (
 							<div>
 								<SaveButton
-									articleSlug={getSlug(
-										article.headline && article.headline.main
-									)}
+									articleId={article._id}
 									fullWidth
 								/>
 							</div>
