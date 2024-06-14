@@ -1,6 +1,6 @@
 import { Container, Row, Col } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import {
 	Button,
@@ -13,25 +13,15 @@ import {
 import { useUserContext, useFeedContext } from '@context';
 
 export default function UserPage() {
-	const navigate = useNavigate();
 	const { currentUser, setCurrentUser, handleLogOut } = useUserContext();
 	const { data } = useFeedContext();
 	const [loading, setLoading] = useState(true);
 
 	// just updating the page title to the user name
 	useEffect(() => {
-		if (
-			currentUser &&
-			currentUser.userInfo
-		) {
+		if ( currentUser && currentUser.userInfo ) {
 			setLoading(false);
 			document.title = `${window.name} | ${currentUser.userInfo.firstName} ${currentUser?.userInfo.lastName} ⛭ User settings`;
-		}
-	}, [currentUser]);
-
-	useEffect(() => {
-		if (!currentUser || !currentUser.isLoggedIn) {
-			navigate('/');
 		}
 	}, [currentUser]);
 
@@ -44,15 +34,7 @@ export default function UserPage() {
 	// 		.catch((err) => setError(`Data couldn't be fetched - ${err}`))
 	// }, [])
 
-	// matching the url with the right article
-	function getSlug(str) {
-		const tempString = str
-			.replaceAll(/[^a-zA-Z0-9]/g, '-')
-			.toLowerCase()
-			.substring(0, 50);
-		return tempString.replace(/-+/g, '-').replace(/-$/, '');
-	}
-
+	
 	return (
 		<>
 			<Row>

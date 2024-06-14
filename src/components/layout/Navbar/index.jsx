@@ -28,9 +28,8 @@ export default function Navbar() {
 							<NavLink
 								to='/user/johndoe'
 								className='d-flex align-items-center'>
-								<div className='d-none d-sm-inline'>
-									Welcome, {currentUser.userInfo.firstName}{' '}
-									{currentUser.userInfo.lastName}
+								<div className={styles.navbar_welcome}>
+									Welcome, {currentUser.userInfo.firstName}{' '}{currentUser.userInfo.lastName}
 								</div>
 
 								<UserPicture
