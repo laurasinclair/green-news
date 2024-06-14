@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
-import placeholder from '@img/placeholder_1-1.jpg'
-import styles from './styles/UploadImage.module.sass'
-import './styles/Button.module.sass'
+
 import { Row, Col } from 'react-bootstrap'
+
 import { Button, UserPicture } from '@components'
 import { useUserContext } from '@context'
+import placeholder from '@img/placeholder_1-1.jpg'
+import styles from './index.module.sass'
 
 const UploadImage = ({imageSize}) => {
 	const { currentUser } = useUserContext()

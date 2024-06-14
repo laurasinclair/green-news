@@ -1,10 +1,11 @@
-import placeholder from '@img/bart-zimny-W5XTTLpk1-I-unsplash.jpg';
+import { Link } from 'react-router-dom';
 import { ArrowRight } from 'react-bootstrap-icons';
-import { Button, SaveBtn } from '@components';
-import { getSlug, truncate } from '@utils';
 
-import styles from './styles/ArticleCard.module.sass';
+import { Button, SaveButton } from '@components';
+import { getSlug, truncate } from '@utils';
 import { useUserContext } from '@context';
+import styles from './index.module.sass';
+import placeholder from '@img/bart-zimny-W5XTTLpk1-I-unsplash.jpg';
 
 export default function ArticleCard({ article }) {
 	const { currentUser } = useUserContext();
@@ -15,17 +16,19 @@ export default function ArticleCard({ article }) {
 				<div className={styles.articleCard}>
 					<div className={styles.articleCard_thumbnail}>
 						<h3>{article.headline && article.headline.main}</h3>
-						<img
-							src={
-								'https://static01.nyt.com/' + article.multimedia?.[0]?.url ||
-								placeholder
-							}
-							alt={(article.headline && article.headline.main) | window.name}
-							onError={(e) => {
-								e.target.onerror = null; // Prevent infinite loop in case placeholder image fails to load
-								e.target.src = placeholder;
-							}}
-						/>
+						<Link to={`/articles/${getSlug(article.headline.main)}`}>
+							<img
+								src={
+									'https://static01.nyt.com/' + article.multimedia?.[0]?.url ||
+									placeholder
+								}
+								alt={(article.headline && article.headline.main) | window.name}
+								onError={(e) => {
+									e.target.onerror = null; // Prevent infinite loop in case placeholder image fails to load
+									e.target.src = placeholder;
+								}}
+							/>
+						</Link>
 					</div>
 					<div className={styles.articleCard_body}>
 						<p>{truncate(article.snippet)}</p>
@@ -33,7 +36,7 @@ export default function ArticleCard({ article }) {
 					<div className={styles.articleCard_footer}>
 						{currentUser.isLoggedIn && (
 							<div>
-								<SaveBtn
+								<SaveButton
 									articleSlug={getSlug(
 										article.headline && article.headline.main
 									)}
@@ -47,7 +50,7 @@ export default function ArticleCard({ article }) {
 								label='Read more'
 								fullWidth
 								iconRight={<ArrowRight size='18' />}
-								stretchedLink
+								// stretchedLink
 							/>
 						</div>
 					</div>

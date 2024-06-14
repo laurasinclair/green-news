@@ -1,23 +1,21 @@
-// Basics
-import Button from './Button'
-import Logo from './Logo'
-import UserPicture from './UserPicture'
-import BackButton from './BackButton'
+// Elements
+import Logo from './elements/Logo'
 
+// Buttons
+import Button from './elements/buttons/Button'
+import BackButton from './elements/buttons/BackButton'
+import SaveButton from './elements/buttons/SaveButton'
 
 // Layout
-import Main from './Main'
-import Footer from './Footer'
-import Hero from './Hero'
-import Navbar from './Navbar'
-import Section from './Section'
+import Main from './layout/Main'
+import Footer from './layout/Footer'
+import Hero from './layout/Hero'
+import Navbar from './layout/Navbar'
+import Section from './layout/Section'
 
-
-// Specific
-import Feed from './Feed'
-import ArticleCard from './ArticleCard'
-import SaveBtn from './SaveBtn'
-import UploadImage from './UploadImage'
+// Articles
+import Feed from './articles/Feed'
+import ArticleCard from './articles/ArticleCard'
 
 // States
 import Loading from './states/Loading'
@@ -25,23 +23,15 @@ import Success from './states/Success'
 import Error from './states/Error'
 import Warning from './states/Warning'
 
+// User-related
+import UploadImage from './users/UploadImage'
+import UserPicture from './users/UserPicture'
 
 export {
-    Loading,
-    Success,
-    Error,
-    Warning,
-    Button,
-    BackButton,
+    Loading, Success, Error, Warning,
     Logo,
-    Main,
-    Footer,
-    Hero,
-    UserPicture,
-    Navbar,
-    Section,
-    Feed,
-    ArticleCard,
-    SaveBtn,
-    UploadImage
+    Button, BackButton, SaveButton,
+    Main, Hero, Footer, Navbar, Section,
+    Feed, ArticleCard,
+    UploadImage, UserPicture,
 }

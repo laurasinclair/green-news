@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import styles from './styles/Section.module.sass'
+import styles from './index.module.sass'
 
 export default function Section({children, size = 's'}) {
 	const sizeClasses = {

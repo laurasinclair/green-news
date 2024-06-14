@@ -7,6 +7,7 @@ export const useUserContext = () => useContext(UserContext);
 
 export default function UserContextProvider({ children }) {
 	const [currentUser, setCurrentUser] = useState({
+		id: undefined,
 		isLoggedIn: false,
 		userInfo: {},
 	});
@@ -18,6 +19,7 @@ export default function UserContextProvider({ children }) {
 		.then((res) => {
 			if (res.userInfo) {
 				setCurrentUser({
+					id: res._id,
 					isLoggedIn: true,
 					userInfo: res.userInfo,
 				});

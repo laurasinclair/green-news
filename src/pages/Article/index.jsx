@@ -1,26 +1,27 @@
-import { Container, Row, Col } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
+
+import { Container, Row, Col } from 'react-bootstrap';
 import { useParams, useNavigate } from 'react-router-dom';
-import placeholder from '@img/bart-zimny-W5XTTLpk1-I-unsplash.jpg';
 import classNames from 'classnames';
-import { getSlug, publishedDate } from '@utils';
 
-import { BackButton, SaveBtn } from '@components';
+import { BackButton, SaveButton } from '@components';
 import { useUserContext, useFeedContext } from '@context';
-
-import styles from './styles/Article.module.sass';
+import placeholder from '@img/bart-zimny-W5XTTLpk1-I-unsplash.jpg';
+import { getSlug, publishedDate } from '@utils';
+import styles from './index.module.sass';
 
 export default function Article() {
-	const { data, setData, error, setError } = useFeedContext();
+	const { articles, setArticles } = useFeedContext();
 	const { currentUser } = useUserContext();
-	const [loading, setLoading] = useState('');
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(undefined);
 	const navigate = useNavigate();
 
 	const [article, setArticle] = useState({});
 	const articleUrl = useParams().articleSlug;
 	useEffect(() => {
-		if (data) {
-			const findArticle = data.find((article) => {
+		if (articles) {
+			const findArticle = articles.find((article) => {
 				return getSlug(article.headline.main) === articleUrl;
 			});
 
@@ -28,19 +29,19 @@ export default function Article() {
 				setArticle(findArticle);
 			}
 
-			console.log(findArticle)
+			// console.log(findArticle)
 			setError('');
 			setLoading(false);
 		} else {
 			setError('No data to display');
 		}
-	}, [articleUrl, data, setError]);
+	}, [articleUrl, articles]);
 
 	useEffect(() => {
 		if (article && article.headline && article.headline.main) {
 			document.title = window.name + ' | ' + article.headline.main;
 		}
-		console.log(article);
+		// console.log(article);
 	}, [article]);
 
 	return (
@@ -126,7 +127,11 @@ export default function Article() {
 								)}
 
 								{currentUser.isLoggedIn && (
-									<SaveBtn articleSlug={getSlug(article.title)} />
+									<SaveButton
+										articleSlug={getSlug(
+											article.headline && article.headline.main
+										)}
+									/>
 								)}
 
 								<div className='pt-5'>

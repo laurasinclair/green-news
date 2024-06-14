@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import styles from './styles/Main.module.sass'
+import styles from './index.module.sass'
 
 export default function Main({children, className}) {
 	return (

@@ -1,5 +1,5 @@
 import logo from '@img/logo.png'
-import styles from './styles/Logo.module.sass'
+import styles from './index.module.sass'
 
 export default function Logo({ size, hasText }) {
 	const sizes = {

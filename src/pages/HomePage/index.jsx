@@ -1,8 +1,10 @@
-import { Feed } from '@components'
 import { useEffect } from 'react'
-import styles from './styles/HomePage.module.sass'
+
 import { Container } from 'react-bootstrap'
 import classNames from 'classnames'
+
+import { Feed } from '@components'
+import styles from './index.module.sass'
 import bgImage from '@img/bart-zimny-W5XTTLpk1-I-unsplash.jpg'
 import logoImage from '@img/greennews_logo.svg'
 
