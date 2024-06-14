@@ -26,6 +26,9 @@ export default function UserPage() {
 		}
 	}, [currentUser]);
 
+	console.log(currentUser)
+
+
 	// displaying saved articles
 	const [allArticles, setAllArticles] = useState([]);
 	// useEffect(() => {
