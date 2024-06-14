@@ -21,11 +21,9 @@ export default function Logo({ size, hasText }) {
 }
 
 const LogoSVG = ({width = '300px', color = '#fff'}) => {
-	const height = width / 1.78
 	return (
 		<svg
 			width={width}
-			height={height}
 			version='1.1'
 			viewBox='0 0 300.62 168.86'
 			xmlSpace='preserve'
