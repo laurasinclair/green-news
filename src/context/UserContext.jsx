@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-import { fetchUsers } from '../api/Api';
+import { fetchUsers } from 'api';
 import { getData, storeData } from '@utils';
 
 const UserContext = createContext({});
@@ -53,13 +53,11 @@ export default function UserContextProvider({ children }) {
 		e.preventDefault();
 
 		if (currentUser && !currentUser.isLoggedIn) {
-			console.log('user exists but is not logged in')
 			setCurrentUser({
 				...currentUser,
 				isLoggedIn: true,
 			})
 		} else {
-			console.log('user doesnt exist and isnt logged in')
 			getUser();
 		}
 	};
