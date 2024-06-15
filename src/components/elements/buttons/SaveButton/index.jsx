@@ -53,7 +53,7 @@ export default function SaveButton({ articleId, fullWidth, className }) {
 			axios
 				.put(
 					`${
-						'http://localhost:5005' || import.meta.env.VITE_BACKEND_BASE_URL
+						import.meta.env.VITE_BACKEND_BASE_URL
 					}/users/johndoe01/savedarticles`,
 					req
 				)

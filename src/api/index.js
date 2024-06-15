@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL =
-	'http://localhost:5005' || import.meta.env.VITE_MONGODB_BASE_URL;
+const BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
 const API_KEY = import.meta.env.VITE_MONGODB_API_KEY;
 
 export const fetchUsers = async () => {
