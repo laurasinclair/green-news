@@ -33,7 +33,7 @@ Green News is an application that provides the latest news and updates on enviro
 - Netlify
 
 **Backend**
-Here is the [backend repository](https://github.com/laurasinclair/green-news_backend).
+- 👉 Here is the [backend repository](https://github.com/laurasinclair/green-news_backend).
 - Express.js
 - Mongoose
 - CRUD operations (GET/POST/PUT/DELETE)
