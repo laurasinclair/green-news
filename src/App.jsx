@@ -13,8 +13,6 @@ function App() {
 
                     <Main>
                         <Routes>
-                            {/* <Route path="/" element={<Navigate to="/projects/green-news" />} /> */}
-
                             <Route path="/" element={<HomePage />} />
                             <Route
                                 path="/articles/:articleSlug"
