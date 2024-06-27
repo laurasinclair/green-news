@@ -7,11 +7,17 @@ import classNames from 'classnames';
 import styles from './index.module.sass';
 import { useUserContext } from '@context';
 import { Button } from '@components';
-import { getSlug } from '@utils'
+import { getSlug } from '@utils';
 
-export default function SaveButton({ articleId, articleTitle, fullWidth, className }) {
+export default function SaveButton({
+	articleId,
+	articleTitle,
+	fullWidth,
+	className,
+}) {
 	const { currentUser, setCurrentUser } = useUserContext();
 	const savedArticles = currentUser.userInfo.savedArticles;
+	const [isSaved, setIsSaved] = useState(undefined);
 
 	// saving article to user page
 	const [saveButtonState, setSaveButtonState] = useState({
@@ -21,47 +27,50 @@ export default function SaveButton({ articleId, articleTitle, fullWidth, classNa
 	});
 
 	useEffect(() => {
-		const index = savedArticles.some((article) => article.articleId === articleId)
+		setIsSaved(
+			savedArticles.some((article) => article.articleId === articleId)
+		);
+	}, [currentUser]);
 
-		if (!index) {
-			setSaveButtonState({
-				saved: false,
-				label: 'Save article',
-				icon: <Heart />,
-			});
-		} else {
+	useEffect(() => {
+		if (isSaved) {
 			setSaveButtonState({
 				saved: true,
 				label: 'Article saved!',
 				icon: <HeartFill />,
 			});
+		} else {
+			setSaveButtonState({
+				saved: false,
+				label: 'Save article',
+				icon: <Heart />,
+			});
 		}
-	}, [articleId, savedArticles]);
+	}, [isSaved, currentUser]);
 
 	async function handleClick(e) {
 		e.preventDefault();
-
-		const savedArticles = currentUser.userInfo.savedArticles;
-		const index = savedArticles.indexOf(articleId);
 
 		const req = {
 			userId: currentUser.id,
 			articleId: articleId,
 			articleTitle: articleTitle,
 			articleSlug: getSlug(articleTitle),
-			action: index === -1 ? 'add' : 'remove',
+			action: !isSaved ? 'add' : 'remove',
 		};
 
 		try {
 			axios
 				.put(
-					`${
-						import.meta.env.VITE_BACKEND_BASE_URL
-					}/users/johndoe01/savedarticles`,
+					`${import.meta.env.VITE_BACKEND_BASE_URL}/users/${
+						currentUser.username
+					}/savedarticles`,
 					req
 				)
 				.then((res) => {
 					if (res.status === 200) {
+						console.log(res.data.message);
+
 						setCurrentUser((prevState) => ({
 							...prevState,
 							userInfo: {
