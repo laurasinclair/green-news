@@ -14,11 +14,11 @@ import { useFeedContext } from '@context';
 console.clear();
 
 export default function Feed() {
-	const { articles, setArticles, totalArticles, setTotalArticles } =
-		useFeedContext();
-
-		const [loading, setLoading] = useState(true),
-		[error, setError] = useState(undefined);
+	// prettier-ignore
+	const	[loading, setLoading] = useState(true),
+			[error, setError] = useState(undefined)
+	
+	const { articles, setArticles, totalArticles, setTotalArticles } = useFeedContext();
 
 	const location = useLocation();
 	const params = new URLSearchParams(location.search);
@@ -61,7 +61,7 @@ export default function Feed() {
 			buttons.push(
 				<button
 					className={classNames(styles.pagination_numbers_number, {
-						[styles.pagination_numbers_current]: i + 1 === currentPage
+						[styles.pagination_numbers_current]: i + 1 === currentPage,
 					})}
 					key={i}
 					onClick={() => setCurrentPage(i + 1)}>

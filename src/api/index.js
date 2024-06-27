@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getData, storeData } from '@utils/LocalStorage';
 
 const BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
 const API_KEY = import.meta.env.VITE_MONGODB_API_KEY;
@@ -30,15 +31,34 @@ export const fetchArticle = async (articleId) => {
 	};
 
 	const response = await axios.get(
-		`${BASE_URL}/api/articles?articleId=${req}`, req
+		`${BASE_URL}/api/articles?articleId=${req}`,
+		req
 	);
 	const { articles, totalArticles } = response.data;
 	return { articles, totalArticles };
 };
 
 export const fetchSavedArticles = async (username) => {
-	const response = await axios.get(
-		`${BASE_URL}/users/${username}/savedarticles`
-	)
-	return response.data;
+	let savedArticles = []
+
+	const locallyStoredArticles = getData('savedArticles');
+	if (locallyStoredArticles) {
+		savedArticles = locallyStoredArticles
+		return savedArticles;
+	} else {
+		const response = await axios.get(
+			`${BASE_URL}/users/${username}/savedarticles`
+		);
+		response.then((data) => {
+			const fetchedArticles = data.map((article) => {
+				return article.docs;
+			});
+			if (fetchedArticles.length > 0) {
+				storeData(fetchedArticles);
+				console.log('savedArticles', savedArticles);
+				savedArticles = fetchedArticles
+				return savedArticles;
+			}
+		});
+	}
 };

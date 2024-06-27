@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import { Container, Row, Col } from 'react-bootstrap';
 
 import { fetchSavedArticles } from 'api';
-
 import {
 	Button,
 	Hero,
@@ -17,6 +16,7 @@ import { useUserContext, useFeedContext } from '@context';
 
 export default function UserPage() {
 	const navigate = useNavigate();
+    const username = useParams().username
 	const { currentUser, setCurrentUser, handleLogOut } = useUserContext();
 	const { data } = useFeedContext();
 	const [loading, setLoading] = useState(true);
@@ -29,16 +29,15 @@ export default function UserPage() {
 		}
 	}, [currentUser]);
 
-
-
 useEffect(() => {
 	// console.log(currentUser.userInfo)
 	console.clear()
+	console.log(username)
+	fetchSavedArticles(username)
 
 	// const test = fetchSavedArticles('johndoe01').then(data => console.log(data.response))
 
-}, [])
-	// fetchSavedArticles()
+}, [username])
 
 
 	// displaying saved articles
