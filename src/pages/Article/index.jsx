@@ -135,6 +135,7 @@ export default function Article() {
 								{currentUser.isLoggedIn && (
 									<SaveButton
 										articleId={article._id}
+										articleTitle={article.headline?.main}
 									/>
 								)}
 

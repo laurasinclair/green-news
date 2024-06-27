@@ -3,22 +3,18 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import { Container, Row, Col } from 'react-bootstrap';
 
-import { fetchSavedArticles } from 'api';
+import { getSlug } from '@utils';
 import {
 	Button,
 	Hero,
 	Section,
 	UploadImage,
-	ArticleCard,
 	Loading,
 } from '@components';
 import { useUserContext, useFeedContext } from '@context';
 
 export default function UserPage() {
-	const navigate = useNavigate();
-    const username = useParams().username
-	const { currentUser, setCurrentUser, handleLogOut } = useUserContext();
-	const { data } = useFeedContext();
+	const { currentUser, handleLogOut } = useUserContext();
 	const [loading, setLoading] = useState(true);
 
 	// just updating the page title to the user name
@@ -29,20 +25,6 @@ export default function UserPage() {
 		}
 	}, [currentUser]);
 
-useEffect(() => {
-	// console.log(currentUser.userInfo)
-	console.clear()
-	console.log(username)
-	fetchSavedArticles(username)
-
-	// const test = fetchSavedArticles('johndoe01').then(data => console.log(data.response))
-
-}, [username])
-
-
-	// displaying saved articles
-
-	
 	return (
 		<>
 			<Row>
@@ -124,31 +106,24 @@ useEffect(() => {
 									</p>
 
 									<Row className='gx-3 gx-md-4'>
-										{currentUser?.userInfo.savedArticles && data ? (
-											data.map((article, i) => {
-												for (let articleSlug of currentUser.userInfo
-													.savedArticles) {
-													if (articleSlug === getSlug(article.headline.main)) {
-														return (
-															<Col
-																sm='6'
-																md='4'
-																key={i}
-																className='mb-4'>
-																<Link
-																	to={`/articles/${getSlug(
-																		article.headline.main
-																	)}`}>
-																	<ArticleCard article={article} />
-																</Link>
-															</Col>
-														);
-													}
-												}
+										{currentUser.userInfo.savedArticles &&
+										currentUser.userInfo.savedArticles.length > 0 ? (
+											currentUser.userInfo.savedArticles.map((article, i) => {
+												console.log(article);
+												return (
+													<Col
+														sm={12}
+														key={i}
+														className='mb-4'>
+														<Link
+															to={`/articles/${getSlug(article.articleTitle)}`}>
+															{article.articleTitle}
+														</Link>
+													</Col>
+												);
 											})
 										) : (
-											<Col
-												className='mb-4'>
+											<Col className='mb-4'>
 												<p>We can&apos;t access your saved articles now :(</p>
 											</Col>
 										)}

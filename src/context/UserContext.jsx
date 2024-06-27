@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-import { fetchUsers } from 'api';
+import { fetchUser } from 'api';
 import { getData, storeData } from '@utils';
 
 const UserContext = createContext({});
@@ -21,7 +21,7 @@ export default function UserContextProvider({ children }) {
 		const storedUser = getData('storedUser');
 
 		if (!storedUser) {
-			fetchUsers()
+			fetchUser('johndoe01')
 				.then((res) => {
 					if (res.userInfo) {
 						setCurrentUser({

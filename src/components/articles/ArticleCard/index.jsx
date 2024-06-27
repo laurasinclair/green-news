@@ -38,6 +38,7 @@ export default function ArticleCard({ article }) {
 							<div>
 								<SaveButton
 									articleId={article._id}
+									articleTitle={article.headline.main}
 									fullWidth
 								/>
 							</div>

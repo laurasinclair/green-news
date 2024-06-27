@@ -7,9 +7,11 @@ import classNames from 'classnames';
 import styles from './index.module.sass';
 import { useUserContext } from '@context';
 import { Button } from '@components';
+import { getSlug } from '@utils'
 
-export default function SaveButton({ articleId, fullWidth, className }) {
+export default function SaveButton({ articleId, articleTitle, fullWidth, className }) {
 	const { currentUser, setCurrentUser } = useUserContext();
+	const savedArticles = currentUser.userInfo.savedArticles;
 
 	// saving article to user page
 	const [saveButtonState, setSaveButtonState] = useState({
@@ -19,10 +21,9 @@ export default function SaveButton({ articleId, fullWidth, className }) {
 	});
 
 	useEffect(() => {
-		const savedArticles = currentUser.userInfo.savedArticles;
-		const index = savedArticles.indexOf(articleId);
+		const index = savedArticles.some((article) => article.articleId === articleId)
 
-		if (index === -1) {
+		if (!index) {
 			setSaveButtonState({
 				saved: false,
 				label: 'Save article',
@@ -35,7 +36,7 @@ export default function SaveButton({ articleId, fullWidth, className }) {
 				icon: <HeartFill />,
 			});
 		}
-	}, [articleId, currentUser.userInfo.savedArticles]);
+	}, [articleId, savedArticles]);
 
 	async function handleClick(e) {
 		e.preventDefault();
@@ -46,6 +47,8 @@ export default function SaveButton({ articleId, fullWidth, className }) {
 		const req = {
 			userId: currentUser.id,
 			articleId: articleId,
+			articleTitle: articleTitle,
+			articleSlug: getSlug(articleTitle),
 			action: index === -1 ? 'add' : 'remove',
 		};
 
