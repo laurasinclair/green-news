@@ -17,7 +17,7 @@ export default function Feed() {
 	const { articles, setArticles, totalArticles, setTotalArticles } =
 		useFeedContext();
 
-	const [loading, setLoading] = useState(true),
+		const [loading, setLoading] = useState(true),
 		[error, setError] = useState(undefined);
 
 	const location = useLocation();
