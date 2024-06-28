@@ -3,12 +3,13 @@ import { ArrowRight } from 'react-bootstrap-icons';
 
 import { Button, SaveButton } from '@components';
 import { getSlug, truncate } from '@utils';
+import getPlaceholder from '@utils/Placeholder';
 import { useUserContext } from '@context';
 import styles from './index.module.sass';
-import placeholder from '@img/bart-zimny-W5XTTLpk1-I-unsplash.jpg';
 
 export default function ArticleCard({ article }) {
 	const { currentUser } = useUserContext();
+	const placeholder = getPlaceholder()
 
 	return (
 		<>
