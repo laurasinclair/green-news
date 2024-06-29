@@ -8,6 +8,7 @@ import styles from './index.module.sass';
 import { useUserContext } from '@context';
 import { Button } from '@components';
 import { getSlug } from '@utils';
+import { LoaderIcon } from '@components/states/Loading';
 
 export default function SaveButton({
 	articleId,
@@ -30,7 +31,7 @@ export default function SaveButton({
 		setIsSaved(
 			savedArticles.some((article) => article.articleId === articleId)
 		);
-	}, [currentUser]);
+	}, [articleId, savedArticles, currentUser]);
 
 	useEffect(() => {
 		if (isSaved) {
@@ -50,6 +51,16 @@ export default function SaveButton({
 
 	async function handleClick(e) {
 		e.preventDefault();
+
+		setSaveButtonState((prev) => ({
+			...prev,
+			icon: (
+				<LoaderIcon
+					size='30'
+					color='#fff'
+				/>
+			),
+		}));
 
 		const req = {
 			userId: currentUser.id,
