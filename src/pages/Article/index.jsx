@@ -6,8 +6,8 @@ import classNames from 'classnames';
 
 import { BackButton, SaveButton, Loading } from '@components';
 import { useUserContext, useFeedContext } from '@context';
-import placeholder from '@img/bart-zimny-W5XTTLpk1-I-unsplash.jpg';
 import { getSlug, publishedDate } from '@utils';
+import getPlaceholder from '@utils/Placeholder';
 import styles from './index.module.sass';
 
 export default function Article() {
@@ -16,6 +16,8 @@ export default function Article() {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(undefined);
 	const navigate = useNavigate();
+
+	const placeholder = getPlaceholder()
 
 	const [article, setArticle] = useState({});
 	const articleSlug = useParams().articleSlug;
@@ -56,7 +58,7 @@ export default function Article() {
 							? 'https://static01.nyt.com/' + article.multimedia[0].url
 							: placeholder) +
 						')',
-				}}>
+				}}> 
 				<Container fluid>
 					<div className={styles.article_top_content}>
 						<h3>
@@ -135,6 +137,7 @@ export default function Article() {
 								{currentUser.isLoggedIn && (
 									<SaveButton
 										articleId={article._id}
+										articleTitle={article.headline?.main}
 									/>
 								)}
 

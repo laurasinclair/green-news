@@ -19,7 +19,7 @@ function App() {
                                 element={<Article />}
                             />
                             <Route
-                                path="/user/johndoe"
+                                path="/user/:username"
                                 element={<UserPage />}
                             />
                             <Route path="*" element={<NotFound />} />

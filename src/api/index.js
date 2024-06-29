@@ -1,10 +1,11 @@
 import axios from 'axios';
+import { getData, storeData } from '@utils/LocalStorage';
 
 const BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
 const API_KEY = import.meta.env.VITE_MONGODB_API_KEY;
 
-export const fetchUsers = async () => {
-	const response = await fetch(`${BASE_URL}/users/johndoe01`, {
+export const fetchUser = async (username) => {
+	const response = await fetch(`${BASE_URL}/users/${username}`, {
 		headers: {
 			'api-key': API_KEY,
 		},
@@ -30,15 +31,9 @@ export const fetchArticle = async (articleId) => {
 	};
 
 	const response = await axios.get(
-		`${BASE_URL}/api/articles?articleId=${req}`, req
+		`${BASE_URL}/api/articles?articleId=${req}`,
+		req
 	);
 	const { articles, totalArticles } = response.data;
 	return { articles, totalArticles };
-};
-
-export const fetchSavedArticles = async (username) => {
-	const response = await axios.get(
-		`${BASE_URL}/users/${username}/savedarticles`
-	)
-	return response.data;
 };
