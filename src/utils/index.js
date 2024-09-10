@@ -34,3 +34,6 @@ export const publishedDate = (d) => {
 
 import { getData, storeData } from './LocalStorage';
 export { getData, storeData };
+
+import { paths } from 'router/paths';
+export const createPath = (path) => `${paths.base}/${path}`;

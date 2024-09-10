@@ -2,22 +2,23 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import App from '@/App.jsx';
 import { HomePage, Article, UserPage, NotFound } from '@pages';
+import { paths } from './paths';
 
 const Router = createBrowserRouter([
 	{
 		element: <App />,
-		path: 'projects/green-news',
+		path: paths.base,
 		children: [
 			{
 				index: true,
 				element: <HomePage />,
 			},
 			{
-				path: 'articles/:articleSlug',
+				path: paths.base + '/' + paths.articles + '/' + ':articleslug',
 				element: <Article />,
 			},
 			{
-				path: 'user/:username',
+				path: paths.base + '/' + paths.user + '/' + ':username',
 				element: <UserPage />,
 			},
 			{
@@ -25,6 +26,7 @@ const Router = createBrowserRouter([
 				element: <NotFound />,
 			},
 		],
+		errorElement: <NotFound />,
 	},
 ]);
 

@@ -17,7 +17,7 @@ export default function ArticleCard({ article }) {
 				<div className={styles.articleCard}>
 					<div className={styles.articleCard_thumbnail}>
 						<h3>{article.headline && article.headline.main}</h3>
-						<Link to={`/articles/${getSlug(article.headline.main)}`}>
+						<Link to={`articles/${getSlug(article.headline.main)}`}>
 							<img
 								src={
 									'https://static01.nyt.com/' +
@@ -50,11 +50,10 @@ export default function ArticleCard({ article }) {
 						)}
 						<div>
 							<Button
-								to={`/articles/${getSlug(article.headline.main)}`}
+								to={`articles/${getSlug(article.headline.main)}`}
 								label='Read more'
 								fullWidth
 								iconRight={<ArrowRight size='18' />}
-								// stretchedLink
 							/>
 						</div>
 					</div>

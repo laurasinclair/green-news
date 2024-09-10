@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { fetchUser } from 'api';
+import { paths } from 'router/paths';
 import { getData, storeData } from '@utils';
 
 const UserContext = createContext({});
@@ -68,7 +69,7 @@ export default function UserContextProvider({ children }) {
 			...currentUser,
 			isLoggedIn: false,
 		});
-		navigate('/');
+		navigate(paths.base);
 	};
 
 	useEffect(() => {

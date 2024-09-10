@@ -26,14 +26,17 @@ export default function Navbar() {
 					<Col className='d-flex align-items-center justify-content-end'>
 						{currentUser && currentUser.isLoggedIn ? (
 							<NavLink
-								to='/user/johndoe'
+								to='user/johndoe'
 								className='d-flex align-items-center'>
 								<div className={styles.navbar_welcome}>
-									Welcome, {currentUser.userInfo.firstName}{' '}{currentUser.userInfo.lastName}
+									Welcome, {currentUser.userInfo.firstName}{' '}
+									{currentUser.userInfo.lastName}
 								</div>
 
 								<UserPicture
-									src={currentUser.userInfo.profilePicture || placeholder}
+									src={
+										currentUser.userInfo.profilePicture || placeholder
+									}
 									alt={`${currentUser.userInfo.firstName} ${currentUser.userInfo.lastName}`}
 									className='ms-4'
 									size='50px'
@@ -45,7 +48,7 @@ export default function Navbar() {
 									type='primary-outline'
 									label='Log in'
 									onClick={handleLogIn}
-									to='/user/johndoe'
+									to='user/johndoe'
 								/>
 							</div>
 						)}
