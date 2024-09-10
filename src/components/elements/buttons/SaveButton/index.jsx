@@ -80,8 +80,6 @@ export default function SaveButton({
 				)
 				.then((res) => {
 					if (res.status === 200) {
-						console.log(res.data.message);
-
 						setCurrentUser((prevState) => ({
 							...prevState,
 							userInfo: {
@@ -92,7 +90,7 @@ export default function SaveButton({
 					}
 				});
 		} catch (error) {
-			console.log("Article couldn't be saved :(", error.message);
+			console.error("Article couldn't be saved :(", error.message);
 		}
 	}
 
