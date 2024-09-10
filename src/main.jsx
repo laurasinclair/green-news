@@ -10,9 +10,6 @@ window.slogan = 'Your daily dose of nature';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
 	<React.StrictMode>
-		<RouterProvider
-			router={Router}
-			basename='/projects/green-news'
-		/>
+		<RouterProvider router={Router} />
 	</React.StrictMode>
 );

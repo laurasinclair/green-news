@@ -6,17 +6,18 @@ import { HomePage, Article, UserPage, NotFound } from '@pages';
 const Router = createBrowserRouter([
 	{
 		element: <App />,
+		path: 'projects/green-news',
 		children: [
 			{
-				path: '/',
+				index: true,
 				element: <HomePage />,
 			},
 			{
-				path: '/articles/:articleSlug',
+				path: 'articles/:articleSlug',
 				element: <Article />,
 			},
 			{
-				path: '/user/:username',
+				path: 'user/:username',
 				element: <UserPage />,
 			},
 			{
