@@ -25,12 +25,15 @@ export const fetchUser = async (username) => {
 export const fetchArticles = async (page) => {
 	try {
 		const response = await axios.get(
-			`${BASE_URL}/api/articles?page=${page || 0}`
+			`${BASE_URL}/api/articles?page=${page || 1}`
 		);
+
 		if (response.status < 200 || response.status >= 300) {
 			throw new Error('There was a problem fetching articles');
 		}
-		const { articles, totalArticles } = response.data;
+		console.log(response);
+
+		const { articles, totalArticles } = await response.data;
 		return { articles, totalArticles };
 	} catch (error) {
 		console.error(error.message);

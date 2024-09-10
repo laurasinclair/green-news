@@ -72,7 +72,6 @@ export default function UserContextProvider({ children }) {
 	};
 
 	useEffect(() => {
-		console.log(currentUser);
 		currentUser.isLoggedIn
 			? console.info(
 					'%c👤 User successfully logged in!',

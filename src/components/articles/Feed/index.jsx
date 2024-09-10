@@ -1,47 +1,28 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Container, Row, Col } from 'react-bootstrap';
 import classNames from 'classnames';
 import { ChevronLeft, ChevronRight } from 'react-bootstrap-icons';
 
-import { ArticleCard, Loading, Error } from '@components';
+import { ArticleCard, Loading } from '@components';
 import { getSlug } from '@utils';
 import styles from './index.module.sass';
 import { fetchArticles } from 'api';
 import { useFeedContext } from '@context';
 
-console.clear();
-
 export default function Feed() {
 	// prettier-ignore
 	const	[loading, setLoading] = useState(true),
-			[error, setError] = useState(undefined)
-	
-	const { articles, setArticles, totalArticles, setTotalArticles } = useFeedContext();
+			[error] = useState(undefined)
+
+	const { articles, setArticles, totalArticles, setTotalArticles } =
+		useFeedContext();
 
 	const location = useLocation();
 	const params = new URLSearchParams(location.search);
 	const [currentPage, setCurrentPage] = useState(params.get('page') || 1);
 	const navigate = useNavigate();
-
-	useEffect(() => {
-		fetchArticles(currentPage)
-			.then((data) => {
-				if (data && Array.isArray(articles)) {
-					setArticles(data.articles);
-					setTotalArticles(data.totalArticles);
-					paginationNumbers();
-					navigate(`?page=${currentPage}`);
-					setLoading(false);
-				} else {
-					console.log('Articles not found');
-				}
-			})
-			.catch((err) =>
-				console.log('There was an error fetching data', err.message)
-			);
-	}, [currentPage, navigate]);
 
 	const handlePrevPage = () => {
 		if (currentPage > 1) {
@@ -55,7 +36,7 @@ export default function Feed() {
 		}
 	};
 
-	const paginationNumbers = () => {
+	const paginationNumbers = useCallback(() => {
 		let buttons = [];
 		for (let i = 0; i < 12; i++) {
 			buttons.push(
@@ -70,7 +51,30 @@ export default function Feed() {
 			);
 		}
 		return buttons;
-	};
+	}, [currentPage]);
+
+	const getArticles = useCallback(async () => {
+		try {
+			const articlesRes = await fetchArticles(currentPage);
+			if (!articlesRes) throw new Error('Error fetching articles');
+
+			setArticles(articlesRes.articles);
+			setTotalArticles(articlesRes.totalArticles);
+		} catch (error) {
+			console.error(error.message);
+		}
+	}, [setArticles, setTotalArticles, currentPage]);
+
+	useEffect(() => {
+		navigate(`?page=${currentPage}`);
+
+		paginationNumbers();
+	}, [navigate, currentPage, getArticles, articles, paginationNumbers]);
+
+	useEffect(() => {
+		getArticles(currentPage);
+		setLoading(false);
+	}, [getArticles]);
 
 	return (
 		<div className={classNames('feed', styles.feed)}>
@@ -106,7 +110,9 @@ export default function Feed() {
 													className='mb-4 mb-md-5'>
 													<ArticleCard
 														article={article}
-														link={`articles/${getSlug(article.headline.main)}`}
+														link={`articles/${getSlug(
+															article.headline.main
+														)}`}
 													/>
 												</Col>
 											);
@@ -125,7 +131,9 @@ export default function Feed() {
 						<ChevronLeft size={24} />
 					</button>
 
-					<div className={styles.pagination_numbers}>{paginationNumbers()}</div>
+					<div className={styles.pagination_numbers}>
+						{paginationNumbers()}
+					</div>
 
 					<button
 						onClick={handleNextPage}
