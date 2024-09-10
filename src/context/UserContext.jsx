@@ -1,6 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 import { fetchUser } from 'api';
 import { getData, storeData } from '@utils';
@@ -17,31 +16,31 @@ export default function UserContextProvider({ children }) {
 		userInfo: {},
 	});
 
-	const getUser = () => {
+	const getUser = async () => {
 		const storedUser = getData('storedUser');
 
 		if (!storedUser) {
-			fetchUser('johndoe01')
-				.then((res) => {
-					if (res.userInfo) {
-						setCurrentUser({
-							id: res._id,
-							isLoggedIn: true,
-							userInfo: res.userInfo,
-						});
+			try {
+				const userRes = await fetchUser('johndoe01');
 
-						storeData('storedUser', {
-							id: res._id,
-							isLoggedIn: true,
-							userInfo: res.userInfo,
-						});
-					}
-				})
-				.catch((err) => console.error(err));
-		} else {
-			setCurrentUser({
-				...storedUser,
-			});
+				if (!userRes._id) {
+					throw new Error('Problem fetching user');
+				}
+
+				setCurrentUser({
+					id: userRes._id,
+					isLoggedIn: true,
+					userInfo: userRes.userInfo,
+				});
+
+				storeData('storedUser', {
+					id: userRes._id,
+					isLoggedIn: true,
+					userInfo: userRes.userInfo,
+				});
+			} catch (error) {
+				console.error(error.message);
+			}
 		}
 	};
 
@@ -52,11 +51,11 @@ export default function UserContextProvider({ children }) {
 	const handleLogIn = (e) => {
 		e.preventDefault();
 
-		if (currentUser && !currentUser.isLoggedIn) {
+		if (currentUser.id !== undefined && !currentUser.isLoggedIn) {
 			setCurrentUser({
 				...currentUser,
 				isLoggedIn: true,
-			})
+			});
 		} else {
 			getUser();
 		}
@@ -73,6 +72,7 @@ export default function UserContextProvider({ children }) {
 	};
 
 	useEffect(() => {
+		console.log(currentUser);
 		currentUser.isLoggedIn
 			? console.info(
 					'%c👤 User successfully logged in!',
@@ -82,7 +82,7 @@ export default function UserContextProvider({ children }) {
 					'%c👤 User logged out',
 					'color: #FFDAD6; padding: 6px 8px; background-color: #4F3534; display: inline-block; border-radius: 4px;'
 			  );
-	}, [currentUser.isLoggedIn]);
+	}, [currentUser]);
 
 	return (
 		<UserContext.Provider

@@ -1,26 +1,40 @@
 import axios from 'axios';
-import { getData, storeData } from '@utils/LocalStorage';
 
 const BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
 const API_KEY = import.meta.env.VITE_MONGODB_API_KEY;
 
 export const fetchUser = async (username) => {
-	const response = await fetch(`${BASE_URL}/users/${username}`, {
-		headers: {
-			'api-key': API_KEY,
-		},
-	});
+	try {
+		const response = await axios.get(`${BASE_URL}/users/${username}`, {
+			headers: {
+				'api-key': API_KEY,
+			},
+		});
 
-	const data = await response.json();
-	return data;
+		if (response.status < 200 || response.status >= 300) {
+			throw new Error('There was a problem fetching articles');
+		}
+
+		const { data } = response;
+		return data;
+	} catch (error) {
+		return error.message;
+	}
 };
 
 export const fetchArticles = async (page) => {
-	const response = await axios.get(
-		`${BASE_URL}/api/articles?page=${page || 0}`
-	);
-	const { articles, totalArticles } = response.data;
-	return { articles, totalArticles };
+	try {
+		const response = await axios.get(
+			`${BASE_URL}/api/articles?page=${page || 0}`
+		);
+		if (response.status < 200 || response.status >= 300) {
+			throw new Error('There was a problem fetching articles');
+		}
+		const { articles, totalArticles } = response.data;
+		return { articles, totalArticles };
+	} catch (error) {
+		console.error(error.message);
+	}
 };
 
 export const fetchArticle = async (articleId) => {
@@ -29,11 +43,17 @@ export const fetchArticle = async (articleId) => {
 			articleId: articleId, // nyt://article/1c2d620b-c2f2-50e9-a3ed-c2a362ddbca4
 		},
 	};
-
-	const response = await axios.get(
-		`${BASE_URL}/api/articles?articleId=${req}`,
-		req
-	);
-	const { articles, totalArticles } = response.data;
-	return { articles, totalArticles };
+	try {
+		const response = await axios.get(
+			`${BASE_URL}/api/articles?articleId=${req}`,
+			req
+		);
+		if (response.status < 200 || response.status >= 300) {
+			throw new Error('There was a problem fetching articles');
+		}
+		const { articles, totalArticles } = response.data;
+		return { articles, totalArticles };
+	} catch (error) {
+		console.error(error.message);
+	}
 };
