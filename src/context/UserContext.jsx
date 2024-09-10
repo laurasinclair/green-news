@@ -72,18 +72,6 @@ export default function UserContextProvider({ children }) {
 		navigate(paths.base);
 	};
 
-	useEffect(() => {
-		currentUser.isLoggedIn
-			? console.info(
-					'%c👤 User successfully logged in!',
-					'color: #2B3B20; padding: 6px 8px; background-color: #6FBF6B; display: inline-block; border-radius: 4px;'
-			  )
-			: console.info(
-					'%c👤 User logged out',
-					'color: #FFDAD6; padding: 6px 8px; background-color: #4F3534; display: inline-block; border-radius: 4px;'
-			  );
-	}, [currentUser]);
-
 	return (
 		<UserContext.Provider
 			value={{ currentUser, setCurrentUser, handleLogIn, handleLogOut }}>

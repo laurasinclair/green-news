@@ -90,8 +90,6 @@ export default function SaveButton({
 					savedArticles: updateSavedArticles.savedArticles,
 				},
 			}));
-
-			console.log(updateSavedArticles);
 		} catch (error) {
 			console.error("Article couldn't be saved :(", error.message);
 		}
