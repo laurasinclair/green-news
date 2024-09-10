@@ -7,16 +7,17 @@ import { Logo, Button, UserPicture } from '@components';
 import { useUserContext } from '@context';
 import placeholder from '@img/placeholder_1-1.jpg';
 import styles from './index.module.sass';
+import { paths } from 'router/paths';
 
 export default function Navbar() {
-	const { currentUser, setCurrentUser, handleLogIn } = useUserContext();
+	const { currentUser, handleLogIn } = useUserContext();
 
 	return (
 		<nav className={styles.navbar}>
 			<Container fluid>
 				<Row>
 					<Col>
-						<NavLink to='/'>
+						<NavLink to={paths.base}>
 							<Logo
 								size='xs'
 								hasText
