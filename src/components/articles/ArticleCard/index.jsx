@@ -23,8 +23,7 @@ export default function ArticleCard({ article }) {
 									'https://static01.nyt.com/' +
 										article.multimedia?.[0]?.url || placeholder
 								}
-								alt={`${article.headline?.main} |
-									${window.name}`}
+								alt={`${article.headline?.main} | ${window.name}`}
 								onError={(e) => {
 									e.target.onerror = null; // Prevent infinite loop in case placeholder image fails to load
 									e.target.src = placeholder;
