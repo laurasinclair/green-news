@@ -27,12 +27,6 @@ export default function UserContextProvider({ children }) {
 					throw new Error('Problem fetching user');
 				}
 
-				setCurrentUser({
-					id: userRes._id,
-					isLoggedIn: true,
-					userInfo: userRes.userInfo,
-				});
-
 				storeData('storedUser', {
 					id: userRes._id,
 					isLoggedIn: true,
@@ -42,6 +36,12 @@ export default function UserContextProvider({ children }) {
 				console.error(error.message);
 			}
 		}
+
+		setCurrentUser({
+			id: storedUser.id,
+			isLoggedIn: true,
+			userInfo: storedUser.userInfo,
+		});
 	};
 
 	useEffect(() => {
