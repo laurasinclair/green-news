@@ -9,7 +9,7 @@ import styles from './index.module.sass';
 
 export default function ArticleCard({ article }) {
 	const { currentUser } = useUserContext();
-	const placeholder = getPlaceholder()
+	const placeholder = getPlaceholder();
 
 	return (
 		<>
@@ -20,14 +20,18 @@ export default function ArticleCard({ article }) {
 						<Link to={`/articles/${getSlug(article.headline.main)}`}>
 							<img
 								src={
-									'https://static01.nyt.com/' + article.multimedia?.[0]?.url ||
-									placeholder
+									'https://static01.nyt.com/' +
+										article.multimedia?.[0]?.url || placeholder
 								}
-								alt={(article.headline && article.headline.main) | window.name}
+								alt={
+									(article.headline && article.headline.main) |
+									window.name
+								}
 								onError={(e) => {
 									e.target.onerror = null; // Prevent infinite loop in case placeholder image fails to load
 									e.target.src = placeholder;
 								}}
+								loading='lazy'
 							/>
 						</Link>
 					</div>
