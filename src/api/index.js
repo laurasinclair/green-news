@@ -31,7 +31,6 @@ export const fetchArticles = async (page) => {
 		if (response.status < 200 || response.status >= 300) {
 			throw new Error('There was a problem fetching articles');
 		}
-		console.log(response);
 
 		const { articles, totalArticles } = await response.data;
 		return { articles, totalArticles };

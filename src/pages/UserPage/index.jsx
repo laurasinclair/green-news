@@ -109,7 +109,6 @@ export default function UserPage() {
 										{currentUser.userInfo.savedArticles &&
 										currentUser.userInfo.savedArticles.length > 0 ? (
 											currentUser.userInfo.savedArticles.map((article, i) => {
-												console.log(article);
 												return (
 													<Col
 														sm={12}

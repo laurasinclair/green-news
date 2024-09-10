@@ -17,11 +17,11 @@ export default function Article() {
 	const [error, setError] = useState(undefined);
 	const navigate = useNavigate();
 
-	const placeholder = getPlaceholder()
+	const placeholder = getPlaceholder();
 
 	const [article, setArticle] = useState({});
 	const articleSlug = useParams().articleSlug;
-	
+
 	useEffect(() => {
 		if (articles) {
 			const findArticle = articles.find((article) => {
@@ -32,7 +32,6 @@ export default function Article() {
 				setArticle(findArticle);
 			}
 
-			// console.log(findArticle)
 			setError(undefined);
 			setLoading(false);
 		} else {
@@ -44,7 +43,6 @@ export default function Article() {
 		if (article && article.headline && article.headline.main) {
 			document.title = window.name + ' | ' + article.headline.main;
 		}
-		// console.log(article);
 	}, [article]);
 
 	return (
@@ -58,11 +56,11 @@ export default function Article() {
 							? 'https://static01.nyt.com/' + article.multimedia[0].url
 							: placeholder) +
 						')',
-				}}> 
+				}}>
 				<Container fluid>
 					<div className={styles.article_top_content}>
 						<h3>
-							{(article && article.headline && article.headline.main) || 
+							{(article && article.headline && article.headline.main) ||
 								'Are We Rediscovering the Healing Power of Forests?'}
 						</h3>
 					</div>
@@ -72,7 +70,7 @@ export default function Article() {
 			<Container fluid>
 				<Row>
 					{loading ? (
-						<Col className="py-5">
+						<Col className='py-5'>
 							<Loading />
 						</Col>
 					) : error ? (
@@ -98,7 +96,8 @@ export default function Article() {
 										{article.source && '  -  ' + article.source}
 										<br />
 										{article.publishedAt
-											? 'Published on ' + publishedDate(article.pub_date)
+											? 'Published on ' +
+											  publishedDate(article.pub_date)
 											: 'Publication date unknown'}
 									</p>
 								</div>
