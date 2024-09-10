@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 
 import { Container, Row, Col } from 'react-bootstrap';
 
-import { getSlug } from '@utils';
 import { Button, Hero, Section, UploadImage, Loading } from '@components';
 import { useUserContext } from '@context';
 import SavedArticle from '../../components/articles/SavedArticle';
