@@ -1,8 +1,17 @@
 {
 	"compilerOptions": {
-		"baseUrl": ".",
+		"baseUrl": "/",
 		"paths": {
-			"@components/*": ["src/components/*"] // Same path as in Vite config
+			"@/*": ["src/*"],
+			"@components/*": ["src/components/*"],
+			"@context/*": ["src/context/*"],
+			"@assets/*": ["src/assets/*"],
+			"@img/*": ["src/assets/images/*"],
+			"@pages/*": ["src/pages/*"],
+			"@utils/*": ["src/utils/*"],
+			"router/*": ["src/router/*"],
+			"api/*": ["src/api/*"]
 		}
-	}
+	},
+	"include": ["src"]
 }
