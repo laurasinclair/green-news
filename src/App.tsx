@@ -1,6 +1,7 @@
+import * as React from 'react';
 import { Outlet } from 'react-router-dom';
-import { Navbar, Footer, Main } from '@components';
-import { FeedContextProvider, UserContextProvider } from '@context';
+import { Navbar, Footer, Main } from 'components';
+import { FeedContextProvider, UserContextProvider } from 'context';
 
 function App() {
 	return (

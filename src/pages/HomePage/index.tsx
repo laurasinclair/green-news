@@ -1,12 +1,13 @@
+import * as React from 'react';
 import { useEffect } from 'react';
 
 import { Container } from 'react-bootstrap';
 import classNames from 'classnames';
 
-import { Feed } from '@components';
+import { Feed } from 'components';
 import styles from './index.module.sass';
-import bgImage from '@img/bart-zimny-W5XTTLpk1-I-unsplash.jpg';
-import logoImage from '@img/greennews_logo.svg';
+import bgImage from 'images/bart-zimny-W5XTTLpk1-I-unsplash.jpg';
+import logoImage from 'images/greennews_logo.svg';
 
 export default function HomePage() {
 	useEffect(() => {
@@ -23,7 +24,8 @@ export default function HomePage() {
 					<img
 						src={logoImage}
 						alt={window.name + ' | ' + window.slogan}
-						width={400} loading='lazy'
+						width={400}
+						loading='lazy'
 					/>
 					<p className={classNames(styles.homepage_top_slogan, 'mb-0')}>
 						{window.slogan}

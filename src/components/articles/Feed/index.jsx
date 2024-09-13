@@ -5,11 +5,11 @@ import { Container, Row, Col } from 'react-bootstrap';
 import classNames from 'classnames';
 import { ChevronLeft, ChevronRight } from 'react-bootstrap-icons';
 
-import { ArticleCard, Loading } from '@components';
-import { getSlug } from '@utils';
+import { ArticleCard, Loading } from 'components';
+import { getSlug } from 'utils';
 import styles from './index.module.sass';
 import { fetchArticles } from 'api';
-import { useFeedContext } from '@context';
+import { useFeedContext } from 'context';
 
 export default function Feed() {
 	// prettier-ignore

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Github, Linkedin } from 'react-bootstrap-icons';
 import { Container, Row, Col } from 'react-bootstrap';
 import styles from './index.module.sass';

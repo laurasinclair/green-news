@@ -1,19 +1,12 @@
-import React from 'react';
+import * as React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 
-import { Logo } from '@components';
+import { Logo } from 'components';
 import styles from './index.module.sass';
 import classNames from 'classnames';
-import { Logo as LogoInterface } from '../../../types';
+import { HeroType } from '../../../types';
 
-export default function Hero({
-	size = 100,
-	title,
-	h3,
-	leadText,
-	hasLogo,
-	className,
-}: LogoInterface) {
+export default function Hero({ size = 's', ...props }: HeroType) {
 	const sizeClasses = {
 		s: styles['hero-small'],
 		m: styles['hero-medium'],
@@ -24,7 +17,12 @@ export default function Hero({
 
 	return (
 		<div
-			className={classNames('hero', styles.hero, heroSizeClass, className)}>
+			className={classNames(
+				'hero',
+				styles.hero,
+				heroSizeClass,
+				props.className
+			)}>
 			<Container
 				fluid
 				className={styles.test}>
@@ -32,17 +30,17 @@ export default function Hero({
 					<Col
 						sm={9}
 						lg={8}>
-						{h3 ?? <h3 className={styles['mb-3']}>{h3}</h3>}
-						{hasLogo && (
+						{props.h3 ?? <h3 className={styles['mb-3']}>{props.h3}</h3>}
+						{props.hasLogo && (
 							<Logo
-								size='s'
+								size={300}
 								hasText
 							/>
 						)}
-						<h1 className={styles['mt-2']}>{title}</h1>
-						{leadText && (
+						<h1 className={styles['mt-2']}>{props.title}</h1>
+						{props.leadText && (
 							<p className={classNames('leadText', styles.hero_slogan)}>
-								{leadText}
+								{props.leadText}
 							</p>
 						)}
 					</Col>

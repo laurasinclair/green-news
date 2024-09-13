@@ -1,11 +1,14 @@
+import * as React from 'react';
 import { useState, useEffect } from 'react';
 
 import { Row, Col } from 'react-bootstrap';
 
-import { Button, UserPicture } from '@components';
-import { useUserContext } from '@context';
-import placeholder from '@img/placeholder_1-1.jpg';
+import { Button, UserPicture } from 'components';
+import { useUserContext } from 'context';
+import placeholder from 'images/placeholder_1-1.jpg';
 import styles from './index.module.sass';
+
+const serverURL = import.meta.env.VITE_BACKEND_BASE_URL;
 
 const UploadImage = ({ imageSize }) => {
 	const { currentUser } = useUserContext();
@@ -14,7 +17,7 @@ const UploadImage = ({ imageSize }) => {
 		imageUrl: placeholder,
 		label: 'Upload profile picture',
 	});
-	const [error, setError] = useState(null);
+	const [error, setError] = useState('');
 
 	// convert image file to Base64 string
 	const convertToBase64 = (file) => {
@@ -37,7 +40,7 @@ const UploadImage = ({ imageSize }) => {
 
 			try {
 				currentUser.userInfo.profilePicture = base64;
-				await fetch(`${import.meta.env.BASE_URL}/users/johndoe01`, {
+				await fetch(`${serverURL}/users/johndoe01`, {
 					method: 'PUT',
 					headers: {
 						'Content-Type': 'application/json',
@@ -49,7 +52,7 @@ const UploadImage = ({ imageSize }) => {
 					imageUrl: base64,
 				});
 			} catch (error) {
-				setError("Image couldn't be saved :(", error);
+				setError("Image couldn't be saved :(");
 			}
 		}
 	};
@@ -73,7 +76,7 @@ const UploadImage = ({ imageSize }) => {
 				});
 			}
 		} catch (error) {
-			setError("Image couldn't be removed :(", error);
+			setError("Image couldn't be removed :(");
 		}
 	};
 
@@ -87,7 +90,7 @@ const UploadImage = ({ imageSize }) => {
 				});
 			}
 		} catch (error) {
-			setError("Image couldn't be loaded :(", error);
+			setError("Image couldn't be loaded :(");
 		}
 	}, [currentUser.userInfo.profilePicture]);
 
@@ -106,7 +109,7 @@ const UploadImage = ({ imageSize }) => {
 			<Col className='d-flex flex-column'>
 				<label
 					htmlFor='files'
-					name='userImage'
+					// name='userImage'
 					className={styles.imageBtn}
 					onChange={handleFileChange}>
 					{userImage.label}

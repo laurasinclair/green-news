@@ -1,4 +1,6 @@
-import placeholder from '@img/placeholder_1-1.jpg';
+import * as React from 'react';
+
+import placeholder from 'images/placeholder_1-1.jpg';
 import classnames from 'classnames';
 import styles from './index.module.sass';
 

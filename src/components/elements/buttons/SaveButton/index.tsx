@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { useState, useEffect } from 'react';
 
 import axios from 'axios';
@@ -5,10 +6,12 @@ import { Heart, HeartFill } from 'react-bootstrap-icons';
 import classNames from 'classnames';
 
 import styles from './index.module.sass';
-import { useUserContext } from '@context';
-import { Button } from '@components';
-import { getSlug } from '@utils';
-import { LoaderIcon } from '@components/states/Loading';
+import { useUserContext } from 'context';
+import { Button } from 'components';
+import { getSlug } from 'utils';
+import { LoaderIcon } from 'components/states/Loading';
+
+const serverURL = import.meta.env.VITE_BACKEND_BASE_URL;
 
 export default function SaveButton({
 	articleId,
@@ -74,9 +77,7 @@ export default function SaveButton({
 
 		try {
 			const response = await axios.put(
-				`${import.meta.env.VITE_BACKEND_BASE_URL}/users/${
-					currentUser.username
-				}/savedarticles`,
+				`${serverURL}/users/${currentUser.username}/savedarticles`,
 				req
 			);
 

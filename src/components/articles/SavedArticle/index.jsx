@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { getSlug } from '@utils';
+import { getSlug } from 'utils';
 import styles from './index.module.sass';
 import { paths } from 'router/paths';
 

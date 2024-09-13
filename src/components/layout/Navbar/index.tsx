@@ -1,11 +1,9 @@
-import { useEffect } from 'react';
-
 import { NavLink } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 
-import { Logo, Button, UserPicture } from '@components';
-import { useUserContext } from '@context';
-import placeholder from '@img/placeholder_1-1.jpg';
+import { Logo, Button, UserPicture } from 'components';
+import { useUserContext } from 'context';
+import placeholder from 'images/placeholder_1-1.jpg';
 import styles from './index.module.sass';
 import { paths } from 'router/paths';
 

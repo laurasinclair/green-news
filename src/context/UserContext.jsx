@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { fetchUser } from 'api';
 import { paths } from 'router/paths';
-import { getData, storeData } from '@utils';
+import { getData, storeData } from 'utils';
 
 const UserContext = createContext({});
 export const useUserContext = () => useContext(UserContext);

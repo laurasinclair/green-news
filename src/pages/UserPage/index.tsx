@@ -1,9 +1,10 @@
+import * as React from 'react';
 import { useState, useEffect } from 'react';
 
 import { Container, Row, Col } from 'react-bootstrap';
 
-import { Button, Hero, Section, UploadImage, Loading } from '@components';
-import { useUserContext } from '@context';
+import { Button, Hero, Section, UploadImage, Loading } from 'components';
+import { useUserContext } from 'context';
 import SavedArticle from '../../components/articles/SavedArticle';
 
 export default function UserPage() {
