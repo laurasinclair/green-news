@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import {
+	createContext,
+	useCallback,
+	useContext,
+	useEffect,
+	useState,
+} from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { fetchUser } from 'api';
@@ -17,25 +23,29 @@ export default function UserContextProvider({ children }) {
 		userInfo: {},
 	});
 
-	const getUser = async () => {
+	const getUser = useCallback(async () => {
+		try {
+			const userRes = await fetchUser('johndoe01');
+
+			if (!userRes._id) {
+				throw new Error('Problem fetching user');
+			}
+
+			storeData('storedUser', {
+				id: userRes._id,
+				isLoggedIn: true,
+				userInfo: userRes.userInfo,
+			});
+		} catch (error) {
+			console.error(error.message);
+		}
+	}, []);
+
+	useEffect(() => {
 		const storedUser = getData('storedUser');
 
 		if (!storedUser) {
-			try {
-				const userRes = await fetchUser('johndoe01');
-
-				if (!userRes._id) {
-					throw new Error('Problem fetching user');
-				}
-
-				storeData('storedUser', {
-					id: userRes._id,
-					isLoggedIn: true,
-					userInfo: userRes.userInfo,
-				});
-			} catch (error) {
-				console.error(error.message);
-			}
+			getUser();
 		}
 
 		setCurrentUser({
@@ -43,11 +53,7 @@ export default function UserContextProvider({ children }) {
 			isLoggedIn: true,
 			userInfo: storedUser.userInfo,
 		});
-	};
-
-	useEffect(() => {
-		getUser();
-	}, []);
+	}, [getUser]);
 
 	const handleLogIn = (e) => {
 		e.preventDefault();
