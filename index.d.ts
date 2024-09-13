@@ -1,3 +1,16 @@
+declare module '*.sass' {
+	const content: { [key: string]: any };
+	export = content;
+}
+declare module '*.scss' {
+	const content: { [key: string]: any };
+	export = content;
+}
+declare module '*.css' {
+	const content: { [key: string]: any };
+	export = content;
+}
+
 declare module 'components';
 declare module 'context';
 declare module 'images/*';
