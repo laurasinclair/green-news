@@ -1,9 +1,10 @@
 declare global {
-	interface Window {
-		name: string;
-		slogan: string;
+	namespace NodeJS {
+		interface Global {
+			name: string;
+			slogan: string;
+		}
 	}
-
 	type ErrorState = string | undefined;
 }
 

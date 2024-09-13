@@ -18,10 +18,10 @@ export function truncate(str) {
 }
 
 // turning date into a readable thing
-export const publishedDate = (d) => {
+export const publishedDate = (d: any) => {
 	const date = new Date(d);
 
-	const options = {
+	const options: Intl.DateTimeFormatOptions = {
 		year: 'numeric',
 		month: 'long',
 		day: 'numeric',
@@ -36,4 +36,5 @@ import { getData, storeData } from './LocalStorage';
 export { getData, storeData };
 
 import { paths } from 'router/paths';
-export const createPath = (path) => `${paths.base}/${path}`;
+
+export const createPath = (path: string) => `${paths.base}/${path}`;
