@@ -1,0 +1,8 @@
+{
+	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"@components/*": ["src/components/*"] // Same path as in Vite config
+		}
+	}
+}

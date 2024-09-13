@@ -25,7 +25,9 @@ export default function Navbar() {
 						</NavLink>
 					</Col>
 					<Col className='d-flex align-items-center justify-content-end'>
-						{currentUser && currentUser.isLoggedIn ? (
+						{currentUser &&
+						currentUser.userInfo &&
+						currentUser.isLoggedIn ? (
 							<NavLink
 								to='user/johndoe'
 								className='d-flex align-items-center'>

@@ -59,10 +59,10 @@ export default function UserContextProvider({ children }) {
 		e.preventDefault();
 
 		if (currentUser.id !== undefined && !currentUser.isLoggedIn) {
-			setCurrentUser({
-				...currentUser,
+			setCurrentUser((prev) => ({
+				...prev,
 				isLoggedIn: true,
-			});
+			}));
 		} else {
 			getUser();
 		}
@@ -71,10 +71,10 @@ export default function UserContextProvider({ children }) {
 	const handleLogOut = (e) => {
 		e.preventDefault();
 
-		setCurrentUser({
-			...currentUser,
+		setCurrentUser((prev) => ({
+			...prev,
 			isLoggedIn: false,
-		});
+		}));
 		navigate(paths.base);
 	};
 

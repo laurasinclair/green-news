@@ -17,7 +17,7 @@ export default function SaveButton({
 	className,
 }) {
 	const { currentUser, setCurrentUser } = useUserContext();
-	const savedArticles = currentUser.userInfo.savedArticles;
+	const savedArticles = currentUser?.userInfo?.savedArticles;
 	const [isSaved, setIsSaved] = useState(undefined);
 
 	// saving article to user page
@@ -28,9 +28,11 @@ export default function SaveButton({
 	});
 
 	useEffect(() => {
-		setIsSaved(
-			savedArticles.some((article) => article.articleId === articleId)
-		);
+		if (savedArticles) {
+			setIsSaved(
+				savedArticles.some((article) => article.articleId === articleId)
+			);
+		}
 	}, [articleId, savedArticles, currentUser]);
 
 	useEffect(() => {

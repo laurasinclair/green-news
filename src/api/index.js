@@ -15,8 +15,7 @@ export const fetchUser = async (username) => {
 			throw new Error('There was a problem fetching articles');
 		}
 
-		const { data } = response;
-		return data;
+		return response.data;
 	} catch (error) {
 		return error.message;
 	}
