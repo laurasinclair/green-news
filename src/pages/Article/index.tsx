@@ -1,25 +1,47 @@
+import * as React from 'react';
 import { useState, useEffect } from 'react';
 
 import { Container, Row, Col } from 'react-bootstrap';
 import { useParams, useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
 
-import { BackButton, SaveButton, Loading } from '@components';
-import { useUserContext, useFeedContext } from '@context';
-import { getSlug, publishedDate } from '@utils';
-import getPlaceholder from '@utils/Placeholder';
+import { BackButton, SaveButton, Loading } from 'components';
+import { useUserContext, useFeedContext } from 'context';
+import { getSlug, publishedDate } from 'utils';
+import getPlaceholder from 'utils/Placeholder';
 import styles from './index.module.sass';
+import { Article as ArticleType } from '../../types';
 
-export default function Article() {
-	const { articles, setArticles } = useFeedContext();
+const Article: React.FC = () => {
+	const { articles } = useFeedContext();
 	const { currentUser } = useUserContext();
 	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState(undefined);
+	const [error, setError] = useState<ErrorState>(undefined);
 	const navigate = useNavigate();
 
 	const placeholder = getPlaceholder();
 
-	const [article, setArticle] = useState({});
+	const [article, setArticle] = useState<ArticleType>({
+		_id: undefined,
+		headline: { main: undefined },
+		multimedia: [],
+		byline: {
+			original: undefined,
+			person: [
+				{
+					firstname: undefined,
+					middlename: undefined,
+					lastname: undefined,
+				},
+			],
+		},
+		pub_date: undefined,
+		source: undefined,
+		publishedAt: undefined,
+		snippet: undefined,
+		lead_paragraph: undefined,
+		web_url: undefined,
+	});
 	const articleSlug = useParams().articleSlug;
 
 	useEffect(() => {
@@ -40,8 +62,8 @@ export default function Article() {
 	}, [articleSlug, articles]);
 
 	useEffect(() => {
-		if (article && article.headline && article.headline.main) {
-			document.title = window.name + ' | ' + article.headline.main;
+		if (article && article.headline?.main) {
+			document.title = window.name + ' | ' + article.headline?.main;
 		}
 	}, [article]);
 
@@ -150,4 +172,6 @@ export default function Article() {
 			</Container>
 		</>
 	);
-}
+};
+
+export default Article;

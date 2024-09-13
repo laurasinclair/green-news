@@ -1,7 +1,8 @@
+import * as React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 
-import App from '@/App.jsx';
-import { HomePage, Article, UserPage, NotFound } from '@pages';
+import App from '../../src/App';
+import { HomePage, Article, UserPage, NotFound } from 'pages';
 import { paths } from './paths';
 
 const Router = createBrowserRouter([

@@ -1,25 +1,34 @@
+import * as React from 'react';
 import styles from './index.module.sass';
+import classNames from 'classnames';
 
-export default function Logo({ size, hasText }) {
-	const sizes = {
+import { LogoSizes, LogoType } from '../../../types';
+
+const Logo: React.FC<LogoType> = (props) => {
+	const sizes: Record<LogoSizes, string> = {
 		xs: 'logo-extrasmall',
 		s: 'logo-small',
 		m: 'logo-medium',
 		l: 'logo-large',
 	};
-	const logoSize = sizes[size] || sizes['s'];
+	const logoSize: string = sizes[props.size || 's'];
 
 	return (
 		<div
-			className={`${styles.logo} ${hasText && styles.logo_hastext} ${
-				styles[logoSize]
-			}`}>
-			<LogoSVG width='100px' color='#526245' />
+			className={classNames(styles.logo, styles[logoSize], {
+				[styles.logo_hastext]: props.hasText,
+			})}>
+			<LogoSVG
+				width='100px'
+				color='#526245'
+			/>
 		</div>
 	);
-}
+};
 
-const LogoSVG = ({width = '300px', color = '#fff'}) => {
+export default Logo;
+
+const LogoSVG = ({ width = '300px', color = '#fff' }) => {
 	return (
 		<svg
 			width={width}

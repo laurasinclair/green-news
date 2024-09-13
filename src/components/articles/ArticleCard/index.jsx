@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'react-bootstrap-icons';
 
-import { Button, SaveButton } from '@components';
-import { getSlug, truncate } from '@utils';
-import getPlaceholder from '@utils/Placeholder';
-import { useUserContext } from '@context';
+import { Button, SaveButton } from 'components';
+import { getSlug, truncate } from 'utils';
+import getPlaceholder from 'utils/Placeholder';
+import { useUserContext } from 'context';
 import styles from './index.module.sass';
 
 export default function ArticleCard({ article }) {

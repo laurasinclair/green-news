@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { useState, useEffect } from 'react';
 
 import axios from 'axios';
@@ -5,10 +6,12 @@ import { Heart, HeartFill } from 'react-bootstrap-icons';
 import classNames from 'classnames';
 
 import styles from './index.module.sass';
-import { useUserContext } from '@context';
-import { Button } from '@components';
-import { getSlug } from '@utils';
-import { LoaderIcon } from '@components/states/Loading';
+import { useUserContext } from 'context';
+import { Button } from 'components';
+import { getSlug } from 'utils';
+import { LoaderIcon } from 'components/states/Loading';
+
+const serverURL = import.meta.env.VITE_BACKEND_BASE_URL;
 
 export default function SaveButton({
 	articleId,
@@ -17,7 +20,7 @@ export default function SaveButton({
 	className,
 }) {
 	const { currentUser, setCurrentUser } = useUserContext();
-	const savedArticles = currentUser.userInfo.savedArticles;
+	const savedArticles = currentUser?.userInfo?.savedArticles;
 	const [isSaved, setIsSaved] = useState(undefined);
 
 	// saving article to user page
@@ -28,9 +31,11 @@ export default function SaveButton({
 	});
 
 	useEffect(() => {
-		setIsSaved(
-			savedArticles.some((article) => article.articleId === articleId)
-		);
+		if (savedArticles) {
+			setIsSaved(
+				savedArticles.some((article) => article.articleId === articleId)
+			);
+		}
 	}, [articleId, savedArticles, currentUser]);
 
 	useEffect(() => {
@@ -72,9 +77,7 @@ export default function SaveButton({
 
 		try {
 			const response = await axios.put(
-				`${import.meta.env.VITE_BACKEND_BASE_URL}/users/${
-					currentUser.username
-				}/savedarticles`,
+				`${serverURL}/users/${currentUser.username}/savedarticles`,
 				req
 			);
 

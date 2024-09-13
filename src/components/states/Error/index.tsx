@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import { X } from 'react-bootstrap-icons';
 import classNames from 'classnames';
@@ -9,9 +9,7 @@ function Error({ children, className }) {
 	return (
 		<div className={classNames(styles.error, className)}>
 			<X size={32} />
-			<p>
-				{children}
-			</p>
+			<p>{children}</p>
 		</div>
 	);
 }

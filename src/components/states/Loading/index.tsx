@@ -1,3 +1,4 @@
+import * as React from 'react';
 import classNames from 'classnames';
 
 import styles from './index.module.sass';
@@ -15,7 +16,7 @@ function Loading() {
 
 export default Loading;
 
-export function LoaderIcon({ color = '#526245', size = '100', className }) {
+export function LoaderIcon({ color = '#526245', size = 100, className }) {
 	return (
 		<svg
 			width={`${size}px`}
