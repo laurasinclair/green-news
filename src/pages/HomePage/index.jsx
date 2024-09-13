@@ -23,7 +23,7 @@ export default function HomePage() {
 					<img
 						src={logoImage}
 						alt={window.name + ' | ' + window.slogan}
-						width={400}
+						width={400} loading='lazy'
 					/>
 					<p className={classNames(styles.homepage_top_slogan, 'mb-0')}>
 						{window.slogan}

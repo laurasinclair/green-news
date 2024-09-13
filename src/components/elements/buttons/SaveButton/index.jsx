@@ -71,24 +71,25 @@ export default function SaveButton({
 		};
 
 		try {
-			axios
-				.put(
-					`${import.meta.env.VITE_BACKEND_BASE_URL}/users/${
-						currentUser.username
-					}/savedarticles`,
-					req
-				)
-				.then((res) => {
-					if (res.status === 200) {
-						setCurrentUser((prevState) => ({
-							...prevState,
-							userInfo: {
-								...prevState.userInfo,
-								savedArticles: res.data.savedArticles,
-							},
-						}));
-					}
-				});
+			const response = await axios.put(
+				`${import.meta.env.VITE_BACKEND_BASE_URL}/users/${
+					currentUser.username
+				}/savedarticles`,
+				req
+			);
+
+			if (response.status < 200 || response.status >= 300) {
+				throw new Error('There was a problem fetching articles');
+			}
+
+			const updateSavedArticles = response.data;
+			setCurrentUser((prevState) => ({
+				...prevState,
+				userInfo: {
+					...prevState.userInfo,
+					savedArticles: updateSavedArticles.savedArticles,
+				},
+			}));
 		} catch (error) {
 			console.error("Article couldn't be saved :(", error.message);
 		}

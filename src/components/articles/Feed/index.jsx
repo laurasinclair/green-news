@@ -60,6 +60,7 @@ export default function Feed() {
 
 			setArticles(articlesRes.articles);
 			setTotalArticles(articlesRes.totalArticles);
+			setLoading(false);
 		} catch (error) {
 			console.error(error.message);
 		}
@@ -73,8 +74,7 @@ export default function Feed() {
 
 	useEffect(() => {
 		getArticles(currentPage);
-		setLoading(false);
-	}, [getArticles]);
+	}, [getArticles, currentPage]);
 
 	return (
 		<div className={classNames('feed', styles.feed)}>

@@ -9,7 +9,7 @@ import styles from './index.module.sass';
 
 export default function ArticleCard({ article }) {
 	const { currentUser } = useUserContext();
-	const placeholder = getPlaceholder()
+	const placeholder = getPlaceholder();
 
 	return (
 		<>
@@ -17,17 +17,18 @@ export default function ArticleCard({ article }) {
 				<div className={styles.articleCard}>
 					<div className={styles.articleCard_thumbnail}>
 						<h3>{article.headline && article.headline.main}</h3>
-						<Link to={`/articles/${getSlug(article.headline.main)}`}>
+						<Link to={`articles/${getSlug(article.headline.main)}`}>
 							<img
 								src={
-									'https://static01.nyt.com/' + article.multimedia?.[0]?.url ||
-									placeholder
+									'https://static01.nyt.com/' +
+										article.multimedia?.[0]?.url || placeholder
 								}
-								alt={(article.headline && article.headline.main) | window.name}
+								alt={`${article.headline?.main} | ${window.name}`}
 								onError={(e) => {
 									e.target.onerror = null; // Prevent infinite loop in case placeholder image fails to load
 									e.target.src = placeholder;
 								}}
+								loading='lazy'
 							/>
 						</Link>
 					</div>
@@ -46,11 +47,10 @@ export default function ArticleCard({ article }) {
 						)}
 						<div>
 							<Button
-								to={`/articles/${getSlug(article.headline.main)}`}
+								to={`articles/${getSlug(article.headline.main)}`}
 								label='Read more'
 								fullWidth
 								iconRight={<ArrowRight size='18' />}
-								// stretchedLink
 							/>
 						</div>
 					</div>

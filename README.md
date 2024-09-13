@@ -5,9 +5,9 @@ Have a look!
 
 
 ## Description
-Green News is an innovative application that provides the latest news and updates on environmental issues, sustainability, and green initiatives from around the world. By combining a modern user interface with powerful technology, Green News aims to keep its users informed and engaged on topics related to the environment.
+Green News is an application that provides the latest news and updates on environmental issues, sustainability, and green initiatives from around the world. The application is built using React.js for the frontend, Express.js for the backend, and MongoDB for data management.
 
-![Green News | Your daily dose of nature](https://github.com/laurasinclair/green-news/blob/5726a8a9a64e5ea941685c22010abd0ab1eaf989/public/green-news_screenshot.jpg)
+![Green News | Your daily dose of nature](https://github.com/laurasinclair/green-news/blob/081f51215c8d3cb95bcd1017933f2fdca3cb52e6/public/green-news_screenshot.jpg)
 
 
 ## Features
@@ -21,7 +21,6 @@ Green News is an innovative application that provides the latest news and update
     - [x] Can be logged in/out
     - [x] Can save/unsave articles
 
-
 ## Technologies used
 **Frontend**
 - React.js
@@ -34,7 +33,7 @@ Green News is an innovative application that provides the latest news and update
 - Netlify
 
 **Backend**
-Here is the [backend repository](https://github.com/laurasinclair/green-news_backend).
+- 👉 Here is the [backend repository](https://github.com/laurasinclair/green-news_backend).
 - Express.js
 - Mongoose
 - CRUD operations (GET/POST/PUT/DELETE)

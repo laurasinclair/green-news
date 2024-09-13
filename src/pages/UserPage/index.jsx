@@ -1,17 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import { Container, Row, Col } from 'react-bootstrap';
 
-import { getSlug } from '@utils';
-import {
-	Button,
-	Hero,
-	Section,
-	UploadImage,
-	Loading,
-} from '@components';
-import { useUserContext, useFeedContext } from '@context';
+import { Button, Hero, Section, UploadImage, Loading } from '@components';
+import { useUserContext } from '@context';
+import SavedArticle from '../../components/articles/SavedArticle';
 
 export default function UserPage() {
 	const { currentUser, handleLogOut } = useUserContext();
@@ -23,7 +16,7 @@ export default function UserPage() {
 			setLoading(false);
 			document.title = `${window.name} | ${currentUser.userInfo.firstName} ${currentUser?.userInfo.lastName} ⛭ User settings`;
 		}
-	}, [currentUser]);
+	}, [currentUser, setLoading]);
 
 	return (
 		<>
@@ -65,7 +58,10 @@ export default function UserPage() {
 														<div>
 															<h4>First name</h4>
 															<p className='inputfield'>
-																{currentUser?.userInfo.firstName}
+																{
+																	currentUser?.userInfo
+																		.firstName
+																}
 															</p>
 														</div>
 													</Col>
@@ -95,12 +91,15 @@ export default function UserPage() {
 									<p>
 										{currentUser.isLoggedIn && (
 											<strong>
-												{currentUser.userInfo.savedArticles.length} article
-												{currentUser.userInfo.savedArticles.length > 1
+												{currentUser.userInfo.savedArticles.length}{' '}
+												article
+												{currentUser.userInfo.savedArticles.length >
+												1
 													? 's'
 													: ''}{' '}
 												saved
-												{currentUser.userInfo.savedArticles.length < 1 && ' :('}
+												{currentUser.userInfo.savedArticles.length <
+													1 && ' :('}
 											</strong>
 										)}
 									</p>
@@ -108,22 +107,30 @@ export default function UserPage() {
 									<Row className='gx-3 gx-md-4'>
 										{currentUser.userInfo.savedArticles &&
 										currentUser.userInfo.savedArticles.length > 0 ? (
-											currentUser.userInfo.savedArticles.map((article, i) => {
-												return (
-													<Col
-														sm={12}
-														key={i}
-														className='mb-4'>
-														<Link
-															to={`/articles/${getSlug(article.articleTitle)}`}>
-															{article.articleTitle}
-														</Link>
-													</Col>
-												);
-											})
+											currentUser.userInfo.savedArticles.map(
+												(article, i) => {
+													return (
+														<Col
+															sm={6}
+															md={4}
+															lg={3}
+															key={i}
+															className='mb-4'>
+															<SavedArticle
+																articleTitle={
+																	article.articleTitle
+																}
+															/>
+														</Col>
+													);
+												}
+											)
 										) : (
 											<Col className='mb-4'>
-												<p>We can&apos;t access your saved articles now :(</p>
+												<p>
+													We can&apos;t access your saved articles
+													now :(
+												</p>
 											</Col>
 										)}
 									</Row>

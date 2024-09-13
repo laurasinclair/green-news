@@ -16,6 +16,7 @@ import Section from './layout/Section'
 // Articles
 import Feed from './articles/Feed'
 import ArticleCard from './articles/ArticleCard'
+import SavedArticle from './articles/SavedArticle'
 
 // States
 import Loading from './states/Loading'
@@ -32,6 +33,6 @@ export {
     Logo,
     Button, BackButton, SaveButton,
     Main, Hero, Footer, Navbar, Section,
-    Feed, ArticleCard,
+    Feed, ArticleCard, SavedArticle,
     UploadImage, UserPicture,
 }

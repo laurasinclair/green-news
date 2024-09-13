@@ -1,8 +1,9 @@
-export const getData = (key) => {
-	if (!localStorage || localStorage[key] === 'undefined') return;
+export const getData = async (key) => {
+	const data = await localStorage.getItem(key);
+	if (!data || data === 'undefined') return;
 
 	try {
-		return JSON.parse(localStorage.getItem(key));
+		return JSON.parse(data);
 	} catch (err) {
 		console.error(`Error getting item ${key} from localStorage`, err);
 	}
