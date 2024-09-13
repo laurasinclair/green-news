@@ -10,8 +10,10 @@ import { useNavigate } from 'react-router-dom';
 import { fetchUser } from 'api';
 import { paths } from 'router/paths';
 import { getData, storeData } from 'utils';
+// import { User } from 'types';
 
 const UserContext = createContext({});
+// eslint-disable-next-line react-refresh/only-export-components
 export const useUserContext = () => useContext(UserContext);
 
 export default function UserContextProvider({ children }) {
@@ -20,12 +22,19 @@ export default function UserContextProvider({ children }) {
 	const [currentUser, setCurrentUser] = useState({
 		id: undefined,
 		isLoggedIn: false,
-		userInfo: {},
+		userInfo: {
+			username: undefined,
+			firstName: undefined,
+			lastName: undefined,
+			savedArticles: [],
+			profilePicture: undefined,
+		},
 	});
 
 	const getUser = useCallback(async () => {
 		try {
 			const userRes = await fetchUser('johndoe01');
+			console.log(userRes);
 
 			if (!userRes._id) {
 				throw new Error('Problem fetching user');
@@ -53,7 +62,7 @@ export default function UserContextProvider({ children }) {
 			isLoggedIn: true,
 			userInfo: storedUser.userInfo,
 		});
-	}, [getUser]);
+	}, [getUser, setCurrentUser]);
 
 	const handleLogIn = (e) => {
 		e.preventDefault();

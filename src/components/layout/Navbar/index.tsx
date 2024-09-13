@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 
@@ -8,7 +9,11 @@ import styles from './index.module.sass';
 import { paths } from 'router/paths';
 
 export default function Navbar() {
-	const { currentUser, handleLogIn } = useUserContext();
+	const { currentUser } = useUserContext();
+
+	const handleLogin = () => {
+		console.log('Login btn clicked');
+	};
 
 	return (
 		<nav className={styles.navbar}>
@@ -16,10 +21,7 @@ export default function Navbar() {
 				<Row>
 					<Col>
 						<NavLink to={paths.base}>
-							<Logo
-								size='xs'
-								hasText
-							/>
+							<Logo />
 						</NavLink>
 					</Col>
 					<Col className='d-flex align-items-center justify-content-end'>
@@ -48,8 +50,7 @@ export default function Navbar() {
 								<Button
 									type='primary-outline'
 									label='Log in'
-									onClick={handleLogIn}
-									to='user/johndoe'
+									onClick={handleLogin}
 								/>
 							</div>
 						)}

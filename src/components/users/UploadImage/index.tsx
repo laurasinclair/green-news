@@ -17,7 +17,7 @@ const UploadImage = ({ imageSize }) => {
 		imageUrl: placeholder,
 		label: 'Upload profile picture',
 	});
-	const [error, setError] = useState('');
+	const [error, setError] = useState<ErrorState>('');
 
 	// convert image file to Base64 string
 	const convertToBase64 = (file) => {

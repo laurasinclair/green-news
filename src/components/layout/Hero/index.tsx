@@ -33,7 +33,7 @@ export default function Hero({ size = 's', ...props }: HeroType) {
 						{props.h3 ?? <h3 className={styles['mb-3']}>{props.h3}</h3>}
 						{props.hasLogo && (
 							<Logo
-								size={300}
+								size='s'
 								hasText
 							/>
 						)}

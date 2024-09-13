@@ -6,25 +6,26 @@ import * as path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	base: process.env.NODE_ENV === 'production' ? '/projects/green-news/' : './',
+	base: process.env.NODE_ENV === 'production' ? '/projects/green-news/' : '/',
 	plugins: [react(), tsconfigPaths()],
 	resolve: {
 		alias: {
-			src: path.resolve(__dirname, '/src'),
-			components: `${path.resolve(__dirname, '/src/components/')}`,
-			context: `${path.resolve(__dirname, '/src/context/')}`,
-			assets: `${path.resolve(__dirname, '/src/assets/')}`,
-			images: `${path.resolve(__dirname, '/src/assets/images/')}`,
-			pages: path.resolve(__dirname, '/src/pages'),
-			utils: path.resolve(__dirname, '/src/utils'),
-			router: path.resolve(__dirname, '/src/router'),
-			types: path.resolve(__dirname, '/src/types'),
-			api: path.resolve(__dirname, '/src/api'),
+			api: path.resolve(__dirname, './src/api/'),
+			assets: `${path.resolve(__dirname, './src/assets')}`,
+			components: `${path.resolve(__dirname, './src/components')}`,
+			context: `${path.resolve(__dirname, './src/context')}`,
+			images: `${path.resolve(__dirname, './src/assets/images')}`,
+			pages: path.resolve(__dirname, './src/pages/'),
+			router: path.resolve(__dirname, './src/router/'),
+			src: path.resolve(__dirname, './src'),
+			types: path.resolve(__dirname, './src/types/'),
+			utils: path.resolve(__dirname, './src/utils/'),
 		},
 	},
 	build: {
 		cssCodeSplit: false,
 		cssMinify: 'esbuild',
 		minify: 'esbuild',
+		sourcemap: true,
 	},
 });

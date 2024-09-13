@@ -8,6 +8,14 @@ declare global {
 	type ErrorState = string | undefined;
 }
 
+export type SVGProps = {
+	size?: number;
+	color?: string;
+	className?: string;
+	width?: number;
+	height?: number;
+};
+
 export type HeroType = {
 	size?: 's' | 'm' | 'l';
 	title: string;
@@ -44,4 +52,16 @@ export type Article = {
 	snippet: string | undefined;
 	lead_paragraph: string | undefined;
 	web_url: string | undefined;
+};
+
+export type User = {
+	id: string | undefined;
+	isLoggedIn: boolean;
+	userInfo: {
+		username: string | undefined;
+		firstName: string | undefined;
+		lastName: string | undefined;
+		savedArticles: [string];
+		profilePicture: string | undefined;
+	};
 };
