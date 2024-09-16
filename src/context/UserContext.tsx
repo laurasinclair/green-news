@@ -15,7 +15,7 @@ import { User } from 'src/types';
 const UserContext = createContext({});
 export const useUserContext = () => useContext(UserContext);
 
-export const getUser = async (): Promise<User | undefined> => {
+export const getUser = async (): Promise<User | void> => {
 	try {
 		const userRes = await fetchUser('johndoe01');
 		if (!userRes._id) {
@@ -50,14 +50,23 @@ const UserContextProvider: React.FC<{ children: React.ReactNode }> = ({
 			console.error('problem with setUser()');
 			return;
 		}
-		setCurrentUser({
+		setCurrentUser((prev) => ({
+			...prev,
 			_id: newUser._id,
-			isLoggedIn: true,
 			userInfo: {
 				...newUser.userInfo,
 			},
-		});
+		}));
 	}, []);
+
+	useEffect(() => {
+		if (currentUser._id) {
+			setCurrentUser((prev) => ({
+				...prev,
+				isLoggedIn: true,
+			}));
+		}
+	}, [currentUser, setCurrentUser]);
 
 	useEffect(() => {
 		const fetchData = async (): Promise<void> => {
