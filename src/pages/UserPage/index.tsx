@@ -16,10 +16,10 @@ export default function UserPage() {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		if (!currentUser._id) {
-			navigate(paths.base)
+		if (!currentUser.isLoggedIn) {
+			navigate(paths.base);
 		}
-	})
+	});
 
 	// just updating the page title to the user name
 	useEffect(() => {
