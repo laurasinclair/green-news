@@ -46,7 +46,8 @@ const UserContextProvider: React.FC<{ children: React.ReactNode }> = ({
 	});
 
 	const setUser = useCallback((newUser: User): void => {
-		setCurrentUser((prev) => ({
+		console.log('newUser._id', newUser._id);
+		setCurrentUser((prev: User) => ({
 			...prev,
 			_id: newUser._id,
 			userInfo: {
@@ -57,7 +58,7 @@ const UserContextProvider: React.FC<{ children: React.ReactNode }> = ({
 
 	useEffect(() => {
 		if (currentUser._id && !currentUser.isLoggedIn) {
-			setCurrentUser((prev) => ({
+			setCurrentUser((prev: User) => ({
 				...prev,
 				isLoggedIn: true,
 			}));
@@ -68,6 +69,7 @@ const UserContextProvider: React.FC<{ children: React.ReactNode }> = ({
 		const fetchData = async (): Promise<void> => {
 			try {
 				const storedUser = getData('storedUser');
+				console.log('storedUser', storedUser);
 				if (!storedUser) {
 					const user: User | void = await getUser();
 					if (!user) {
@@ -88,7 +90,7 @@ const UserContextProvider: React.FC<{ children: React.ReactNode }> = ({
 	const handleLogOut = (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
 
-		setCurrentUser((prev) => ({
+		setCurrentUser((prev: User) => ({
 			...prev,
 			isLoggedIn: false,
 		}));
