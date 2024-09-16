@@ -32,7 +32,7 @@ export default function UserPage() {
 	return (
 		<>
 			<Row>
-				{!currentUser ? (
+				{loading ? (
 					<Loading />
 				) : (
 					currentUser &&
@@ -46,7 +46,7 @@ export default function UserPage() {
 								/>
 							</Container>
 
-							<Section size='nope'>
+							<Section>
 								<Container fluid>
 									<Row>
 										<Col sm='3'>
