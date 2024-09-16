@@ -14,9 +14,10 @@ export default function Navbar() {
 
 	const handleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
+		console.log(currentUser);
 		if (!currentUser._id) return;
 
-		setCurrentUser((prev: object) => ({
+		setCurrentUser((prev) => ({
 			...prev,
 			isLoggedIn: true,
 		}));

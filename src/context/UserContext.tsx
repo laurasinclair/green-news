@@ -46,10 +46,6 @@ const UserContextProvider: React.FC<{ children: React.ReactNode }> = ({
 	});
 
 	const setUser = useCallback((newUser: User): void => {
-		if (!newUser) {
-			console.error('problem with setUser()');
-			return;
-		}
 		setCurrentUser((prev) => ({
 			...prev,
 			_id: newUser._id,
@@ -66,16 +62,23 @@ const UserContextProvider: React.FC<{ children: React.ReactNode }> = ({
 				isLoggedIn: true,
 			}));
 		}
-	}, [currentUser, setCurrentUser]);
+	}, [setUser, currentUser, setCurrentUser]);
 
 	useEffect(() => {
 		const fetchData = async (): Promise<void> => {
-			const storedUser = getData('storedUser');
-			if (!storedUser) {
-				const user: User = await getUser();
-				setUser(user);
-			} else {
-				setUser(storedUser);
+			try {
+				const storedUser = getData('storedUser');
+				if (!storedUser) {
+					const user: User | void = await getUser();
+					if (!user) {
+						throw new Error('Problem retrieving user');
+					}
+					setUser(user);
+				} else {
+					setUser(storedUser);
+				}
+			} catch (error) {
+				console.log(error);
 			}
 		};
 
