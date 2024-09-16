@@ -46,7 +46,7 @@ const UserContextProvider: React.FC<{ children: React.ReactNode }> = ({
 	});
 
 	const setUser = useCallback((newUser: User): void => {
-		console.log('newUser._id', newUser._id);
+		// console.log('newUser._id', newUser._id);
 		setCurrentUser((prev: User) => ({
 			...prev,
 			_id: newUser._id,
@@ -69,7 +69,7 @@ const UserContextProvider: React.FC<{ children: React.ReactNode }> = ({
 		const fetchData = async (): Promise<void> => {
 			try {
 				const storedUser = getData('storedUser');
-				console.log('storedUser', storedUser);
+				// console.log('storedUser', storedUser);
 				if (!storedUser) {
 					const user: User | void = await getUser();
 					if (!user) {
@@ -80,7 +80,7 @@ const UserContextProvider: React.FC<{ children: React.ReactNode }> = ({
 					setUser(storedUser);
 				}
 			} catch (error) {
-				console.log(error);
+				console.error(error);
 			}
 		};
 

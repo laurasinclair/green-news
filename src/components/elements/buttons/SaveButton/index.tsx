@@ -76,7 +76,7 @@ export default function SaveButton({
 		}));
 
 		const req = {
-			userId: currentUser.id,
+			userId: currentUser._id,
 			articleId: articleId,
 			articleTitle: articleTitle,
 			articleSlug: getSlug(articleTitle),
