@@ -2,7 +2,15 @@ import * as React from 'react';
 import classNames from 'classnames';
 import styles from './index.module.sass';
 
-export default function Section({ children, size = 's' }) {
+type SectionProps = {
+	children: React.ReactNode;
+	size?: 'xs' | 's' | 'm' | 'l';
+};
+
+const Section: React.FC<SectionProps> = ({
+	children,
+	size = 's',
+}: SectionProps) => {
 	const sizeClasses = {
 		xs: styles['section-extrasmall'],
 		s: styles['section-small'],
@@ -10,9 +18,8 @@ export default function Section({ children, size = 's' }) {
 		l: styles['section-large'],
 	};
 
-	const sectionSizeClass = sizeClasses[size] || sizeClasses.m;
-
-	const sectionContainerClass = classNames(styles.section, sectionSizeClass);
+	const sectionContainerClass = classNames(styles.section, sizeClasses[size]);
 
 	return <section className={sectionContainerClass}>{children}</section>;
-}
+};
+export default Section;

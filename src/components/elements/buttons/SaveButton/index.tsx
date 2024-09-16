@@ -10,15 +10,23 @@ import { useUserContext } from 'context';
 import { Button } from 'components';
 import { getSlug } from 'utils';
 import { LoaderIcon } from 'components/states/Loading';
+import { Article } from 'src/types';
 
 const serverURL = import.meta.env.VITE_BACKEND_BASE_URL;
+
+type Props = {
+	articleId: string;
+	articleTitle: string;
+	fullWidth?: boolean;
+	className?: string;
+};
 
 export default function SaveButton({
 	articleId,
 	articleTitle,
 	fullWidth,
 	className,
-}) {
+}: Props) {
 	const { currentUser, setCurrentUser } = useUserContext();
 	const savedArticles = currentUser?.userInfo?.savedArticles;
 	const [isSaved, setIsSaved] = useState(undefined);
@@ -33,7 +41,7 @@ export default function SaveButton({
 	useEffect(() => {
 		if (savedArticles) {
 			setIsSaved(
-				savedArticles.some((article) => article.articleId === articleId)
+				savedArticles.some((article: Article) => article._id === articleId)
 			);
 		}
 	}, [articleId, savedArticles, currentUser]);
@@ -54,14 +62,14 @@ export default function SaveButton({
 		}
 	}, [isSaved, currentUser]);
 
-	async function handleClick(e) {
+	async function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
 		e.preventDefault();
 
 		setSaveButtonState((prev) => ({
 			...prev,
 			icon: (
 				<LoaderIcon
-					size='30'
+					size={30}
 					color='#fff'
 				/>
 			),
@@ -93,8 +101,12 @@ export default function SaveButton({
 					savedArticles: updateSavedArticles.savedArticles,
 				},
 			}));
-		} catch (error) {
-			console.error("Article couldn't be saved :(", error.message);
+		} catch (error: unknown) {
+			if (error instanceof Error) {
+				console.error(error.message);
+			} else {
+				console.error('An unknown error occurred');
+			}
 		}
 	}
 

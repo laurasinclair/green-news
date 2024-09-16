@@ -32,8 +32,8 @@ const UploadImage = ({ imageSize }) => {
 	};
 
 	// Handle file change event
-	const handleFileChange = async (event) => {
-		const file = event.target.files[0];
+	const handleFileChange = async (e) => {
+		const file = e.target.files[0];
 		if (file) {
 			// convert the image file to Base64 string
 			const base64 = await convertToBase64(file);

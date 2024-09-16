@@ -1,14 +1,6 @@
-declare module '*.sass' {
-	const content: { [key: string]: any };
-	export = content;
-}
-declare module '*.scss' {
-	const content: { [key: string]: any };
-	export = content;
-}
-declare module '*.css' {
-	const content: { [key: string]: any };
-	export = content;
+declare module '*.module.sass' {
+	const content: Record<string, string>;
+	export default content;
 }
 
 declare module 'components';

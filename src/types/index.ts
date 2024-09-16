@@ -28,12 +28,13 @@ export type HeroType = {
 export type LogoSizes = 'xs' | 's' | 'm' | 'l';
 
 export interface LogoType {
-	size: LogoSizes;
+	size?: LogoSizes;
 	hasText?: boolean;
 }
 
 export type Article = {
 	_id: string | undefined;
+	articleTitle: string | undefined;
 	headline: {
 		main: string | undefined;
 	};
@@ -55,13 +56,13 @@ export type Article = {
 };
 
 export type User = {
-	id: string | undefined;
+	_id: string | undefined;
 	isLoggedIn: boolean;
 	userInfo: {
 		username: string | undefined;
 		firstName: string | undefined;
 		lastName: string | undefined;
-		savedArticles: [string];
+		savedArticles: string[];
 		profilePicture: string | undefined;
 	};
 };

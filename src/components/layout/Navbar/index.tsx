@@ -7,12 +7,18 @@ import { useUserContext } from 'context';
 import placeholder from 'images/placeholder_1-1.jpg';
 import styles from './index.module.sass';
 import { paths } from 'router/paths';
+import { getUser } from 'context/UserContext';
 
 export default function Navbar() {
-	const { currentUser } = useUserContext();
+	const { currentUser, setCurrentUser } = useUserContext();
 
-	const handleLogin = () => {
-		console.log('Login btn clicked');
+	const handleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
+		e.preventDefault();
+		if (!currentUser._id) return;
+		setCurrentUser((prev: object) => ({
+			...prev,
+			isLoggedIn: true,
+		}));
 	};
 
 	return (

@@ -6,14 +6,24 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { Button, Hero, Section, UploadImage, Loading } from 'components';
 import { useUserContext } from 'context';
 import SavedArticle from '../../components/articles/SavedArticle';
+import { Article } from 'src/types';
+import { useNavigate } from 'react-router-dom';
+import { paths } from 'router/paths';
 
 export default function UserPage() {
 	const { currentUser, handleLogOut } = useUserContext();
 	const [loading, setLoading] = useState(true);
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		if (!currentUser._id) {
+			navigate(paths.base)
+		}
+	})
 
 	// just updating the page title to the user name
 	useEffect(() => {
-		if (currentUser && currentUser.userInfo) {
+		if (currentUser && currentUser._id) {
 			setLoading(false);
 			document.title = `${window.name} | ${currentUser.userInfo.firstName} ${currentUser?.userInfo.lastName} ⛭ User settings`;
 		}
@@ -26,7 +36,7 @@ export default function UserPage() {
 					<Loading />
 				) : (
 					currentUser &&
-					currentUser.userInfo && (
+					currentUser._id && (
 						<>
 							<Container fluid>
 								<Hero
@@ -36,7 +46,7 @@ export default function UserPage() {
 								/>
 							</Container>
 
-							<Section>
+							<Section size='nope'>
 								<Container fluid>
 									<Row>
 										<Col sm='3'>
@@ -109,7 +119,7 @@ export default function UserPage() {
 										{currentUser.userInfo.savedArticles &&
 										currentUser.userInfo.savedArticles.length > 0 ? (
 											currentUser.userInfo.savedArticles.map(
-												(article, i) => {
+												(article: Article, i: number) => {
 													return (
 														<Col
 															sm={6}

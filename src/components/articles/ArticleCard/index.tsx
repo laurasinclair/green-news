@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'react-bootstrap-icons';
 
@@ -6,6 +7,7 @@ import { getSlug, truncate } from 'utils';
 import getPlaceholder from 'utils/Placeholder';
 import { useUserContext } from 'context';
 import styles from './index.module.sass';
+import { Article } from 'src/types';
 
 export default function ArticleCard({ article }) {
 	const { currentUser } = useUserContext();
@@ -36,7 +38,7 @@ export default function ArticleCard({ article }) {
 						<p>{truncate(article.snippet)}</p>
 					</div>
 					<div className={styles.articleCard_footer}>
-						{currentUser.isLoggedIn && (
+						{currentUser && currentUser.isLoggedIn && (
 							<div>
 								<SaveButton
 									articleId={article._id}

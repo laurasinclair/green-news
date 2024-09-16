@@ -1,5 +1,7 @@
-export const getData = async (key) => {
-	const data = await localStorage.getItem(key);
+import { User } from "src/types";
+
+export const getData = (key: string) => {
+	const data = localStorage.getItem(key);
 	if (!data || data === 'undefined') return;
 
 	try {
@@ -9,7 +11,7 @@ export const getData = async (key) => {
 	}
 };
 
-export const storeData = (key, item) => {
+export const storeData = (key: string, item: User) => {
 	if (!localStorage) return;
 
 	try {

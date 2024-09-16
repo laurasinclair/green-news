@@ -4,7 +4,25 @@ import classNames from 'classnames';
 
 import styles from './index.module.sass';
 
-export default function Button({
+type ButtonProps = {
+	to?: string | Location | undefined;
+	label: string;
+	type?:
+		| 'primary'
+		| 'secondary'
+		| 'primary-outline'
+		| 'secondary-outline'
+		| 'tertiary-outline'
+		| 'tertiary-outline';
+	fullWidth?: boolean;
+	iconRight?: React.ReactNode;
+	iconLeft?: React.ReactNode;
+	onClick?: React.MouseEventHandler<HTMLAnchorElement> | undefined;
+	stretchedLink?: boolean;
+	className?: string;
+};
+
+const Button: React.FC<ButtonProps> = ({
 	to,
 	label,
 	type = 'primary',
@@ -14,7 +32,7 @@ export default function Button({
 	onClick,
 	stretchedLink,
 	className,
-}) {
+}: ButtonProps) => {
 	const typeStyles = {
 		primary: styles['btn-primary'],
 		secondary: styles['btn-secondary'],
@@ -44,4 +62,5 @@ export default function Button({
 			{iconRight}
 		</Link>
 	);
-}
+};
+export default Button;

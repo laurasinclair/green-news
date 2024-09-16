@@ -1,9 +1,12 @@
+import * as React from 'react';
 import { createContext, useContext, useState } from 'react';
 
 const FeedContext = createContext({});
 export const useFeedContext = () => useContext(FeedContext);
 
-export default function FeedContextProvider({ children }) {
+const FeedContextProvider: React.FC<{children: React.ReactNode}> = ({
+	children,
+}) => {
 	const [articles, setArticles] = useState([]);
 	const [totalArticles, setTotalArticles] = useState(0);
 
@@ -18,4 +21,6 @@ export default function FeedContextProvider({ children }) {
 			{children}
 		</FeedContext.Provider>
 	);
-}
+};
+
+export default FeedContextProvider;

@@ -1,27 +1,31 @@
 {
 	"compilerOptions": {
-		"target": "es2021",
+		"target": "es2020",
+		"module": "es2020",
 		"lib": ["es2021", "DOM", "DOM.Iterable"],
 		"baseUrl": "./",
+		"allowJs": true,
 		"paths": {
+			"api": ["src/api"],
 			"api/*": ["src/api/*"],
 			"assets/*": ["src/assets/*"],
-			"components": ["components"],
+			"components": ["src/components"],
 			"components/*": ["src/components/*"],
+			"context": ["src/context"],
 			"context/*": ["src/context/*"],
 			"images/*": ["src/images/*"],
 			"pages/*": ["src/pages/*"],
 			"router/*": ["src/router/*"],
 			"src/*": ["src/*"],
 			"types/*": ["src/types/*"],
+			"utils": ["src/utils"],
 			"utils/*": ["src/utils/*"]
 		},
 		"forceConsistentCasingInFileNames": true,
 		"jsx": "react-jsx",
 		"moduleResolution": "node",
 		"strict": true, // Enable all strict type-checking options
-		"types": ["vite/client"],
-		"typeRoots": ["src/declaration.d.ts"]
+		"typeRoots": ["src/index.d.ts"]
 		// "target": "es5",
 		// "lib": ["dom", "dom.iterable", "esnext"],
 		// "allowJs": true,
@@ -40,6 +44,7 @@
 		// "esModuleInterop": true, // Enable emit interoperability between CommonJS and ES Modules
 		// "skipLibCheck": true, // Skip type checking of declaration files
 	},
-	"include": ["src", "declaration.d.ts"]
+	"include": ["src/**/*", "env.d.ts"],
+	"exclude": ["node_modules"]
 }
 // "include": ["src", "src/**/*.ts", "vite-env.d.ts", "declaration.d.ts"]
