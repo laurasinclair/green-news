@@ -60,7 +60,7 @@ const UserContextProvider: React.FC<{ children: React.ReactNode }> = ({
 	}, []);
 
 	useEffect(() => {
-		if (currentUser._id) {
+		if (currentUser._id && !currentUser.isLoggedIn) {
 			setCurrentUser((prev) => ({
 				...prev,
 				isLoggedIn: true,
