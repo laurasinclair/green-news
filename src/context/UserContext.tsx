@@ -57,18 +57,16 @@ const UserContextProvider: React.FC<{ children: React.ReactNode }> = ({
 	}, []);
 
 	useEffect(() => {
-		if (currentUser._id && !currentUser.isLoggedIn) {
-			setCurrentUser((prev: User) => ({
-				...prev,
-				isLoggedIn: true,
-			}));
-		}
-	}, [setUser, currentUser, setCurrentUser]);
+		setCurrentUser((prev: User) => ({
+			...prev,
+			isLoggedIn: true,
+		}));
+	}, []);
 
 	useEffect(() => {
 		const fetchData = async (): Promise<void> => {
 			try {
-				const storedUser = getData('storedUser');
+				const storedUser = await getData('storedUser');
 				// console.log('storedUser', storedUser);
 				if (!storedUser) {
 					const user: User | void = await getUser();
@@ -87,14 +85,13 @@ const UserContextProvider: React.FC<{ children: React.ReactNode }> = ({
 		fetchData();
 	}, [getUser, setUser]);
 
-	const handleLogOut = (e: React.MouseEvent<HTMLButtonElement>) => {
-		e.preventDefault();
-
-		setCurrentUser((prev: User) => ({
-			...prev,
-			isLoggedIn: false,
-		}));
-		navigate(paths.base);
+	const handleLogOut = () => {
+		if (currentUser._id && currentUser.isLoggedIn) {
+			setCurrentUser((prev: User) => ({
+				...prev,
+				isLoggedIn: false,
+			}));
+		}
 	};
 
 	return (

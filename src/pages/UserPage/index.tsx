@@ -21,6 +21,12 @@ export default function UserPage() {
 		}
 	});
 
+	const handleClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
+		e.preventDefault();
+		handleLogOut();
+		navigate(paths.base);
+	};
+
 	// just updating the page title to the user name
 	useEffect(() => {
 		if (currentUser && currentUser._id) {
@@ -155,7 +161,7 @@ export default function UserPage() {
 												label='Log out'
 												type='primary-outline'
 												fullWidth
-												onClick={handleLogOut}
+												onClick={handleClick}
 											/>
 										</Col>
 									</Row>
