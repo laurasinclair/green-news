@@ -6,21 +6,19 @@ import styles from './index.module.sass';
 import classNames from 'classnames';
 import { HeroType } from '../../../types';
 
-export default function Hero({ size = 's', ...props }: HeroType) {
+export default function Hero({ size = 'm', ...props }: HeroType) {
 	const sizeClasses = {
 		s: styles['hero-small'],
 		m: styles['hero-medium'],
 		l: styles['hero-large'],
 	};
 
-	const heroSizeClass = sizeClasses[size] || sizeClasses.m;
-
 	return (
 		<div
 			className={classNames(
 				'hero',
 				styles.hero,
-				heroSizeClass,
+				sizeClasses[size],
 				props.className
 			)}>
 			<Container fluid>
