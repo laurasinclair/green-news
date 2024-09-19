@@ -5,34 +5,44 @@ import {
 	useEffect,
 	useState,
 } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import { fetchUser } from 'api';
-import { paths } from 'router/paths';
 import { getData, storeData } from 'utils';
 import { User } from 'src/types';
 
-const UserContext = createContext({});
-export const useUserContext = () => useContext(UserContext);
+interface UserContextType {
+	currentUser: User;
+	setCurrentUser: React.Dispatch<React.SetStateAction<User>>;
+	handleLogOut: () => void;
+}
 
-export const getUser = async (): Promise<User | void> => {
+const UserContext = createContext<UserContextType | undefined>(undefined);
+
+export const useUserContext = () => {
+	const context = useContext(UserContext);
+	if (!context) {
+		throw new Error(
+			'useUserContext must be used within a UserContextProvider'
+		);
+	}
+	return context;
+};
+
+const fetchUserData = async (username: string): Promise<User | null> => {
 	try {
-		const userRes = await fetchUser('johndoe01');
-		if (!userRes._id) {
-			throw new Error("User couldn't be found");
-		}
-		storeData('storedUser', userRes);
-		return userRes;
+		const user = await fetchUser(username);
+		if (!user._id) throw new Error("User couldn't be found");
+		storeData('storedUser', user);
+		return user;
 	} catch (error) {
-		console.error(error);
+		console.error('Error fetching user:', error);
+		return null;
 	}
 };
 
 const UserContextProvider: React.FC<{ children: React.ReactNode }> = ({
 	children,
 }) => {
-	const navigate = useNavigate();
-
 	const [currentUser, setCurrentUser] = useState<User>({
 		_id: undefined,
 		isLoggedIn: false,
@@ -45,54 +55,33 @@ const UserContextProvider: React.FC<{ children: React.ReactNode }> = ({
 		},
 	});
 
-	const setUser = useCallback((newUser: User): void => {
-		// console.log('newUser._id', newUser._id);
-		setCurrentUser((prev: User) => ({
-			...prev,
-			_id: newUser._id,
-			userInfo: {
-				...newUser.userInfo,
-			},
-		}));
+	const updateUser = useCallback((user: User) => {
+		setCurrentUser(user);
 	}, []);
 
-	useEffect(() => {
-		setCurrentUser((prev: User) => ({
-			...prev,
-			isLoggedIn: true,
-		}));
-	}, []);
-
-	useEffect(() => {
-		const fetchData = async (): Promise<void> => {
-			try {
-				const storedUser = await getData('storedUser');
-				// console.log('storedUser', storedUser);
-				if (!storedUser) {
-					const user: User | void = await getUser();
-					if (!user) {
-						throw new Error('Problem retrieving user');
-					}
-					setUser(user);
-				} else {
-					setUser(storedUser);
-				}
-			} catch (error) {
-				console.error(error);
+	const initializeUser = useCallback(async () => {
+		try {
+			const storedUser = await getData('storedUser');
+			if (storedUser) {
+				updateUser(storedUser);
+			} else {
+				const user = await fetchUserData('johndoe01');
+				if (user) updateUser(user);
 			}
-		};
-
-		fetchData();
-	}, [getUser, setUser]);
+		} catch (error) {
+			console.error('Error initializing user:', error);
+		}
+	}, [updateUser]);
 
 	const handleLogOut = () => {
-		if (currentUser._id && currentUser.isLoggedIn) {
-			setCurrentUser((prev: User) => ({
-				...prev,
-				isLoggedIn: false,
-			}));
+		if (currentUser?._id) {
+			setCurrentUser({ ...currentUser, isLoggedIn: false });
 		}
 	};
+
+	useEffect(() => {
+		initializeUser();
+	}, [initializeUser]);
 
 	return (
 		<UserContext.Provider
