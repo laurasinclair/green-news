@@ -5,11 +5,7 @@ const API_KEY = import.meta.env.VITE_MONGODB_API_KEY as string;
 
 export const fetchUser = async (username: string) => {
 	try {
-		const response = await axios.get(`${BASE_URL}/users/${username}`, {
-			headers: {
-				'api-key': API_KEY,
-			},
-		});
+		const response = await axios.get(`${BASE_URL}/users/${username}`);
 
 		if (response.status < 200 || response.status >= 300) {
 			throw new Error('There was a problem fetching articles');
