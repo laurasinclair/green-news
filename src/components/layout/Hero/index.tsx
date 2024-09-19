@@ -23,9 +23,7 @@ export default function Hero({ size = 's', ...props }: HeroType) {
 				heroSizeClass,
 				props.className
 			)}>
-			<Container
-				fluid
-				className={styles.test}>
+			<Container fluid>
 				<Row>
 					<Col
 						sm={9}
