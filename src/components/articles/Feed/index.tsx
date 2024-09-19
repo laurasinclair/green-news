@@ -10,6 +10,7 @@ import { getSlug } from 'utils';
 import styles from './index.module.sass';
 import { fetchArticles } from 'api';
 import { useFeedContext } from 'context';
+import { Article } from 'src/types';
 
 export default function Feed() {
 	// prettier-ignore
@@ -21,7 +22,9 @@ export default function Feed() {
 
 	const location = useLocation();
 	const params = new URLSearchParams(location.search);
-	const [currentPage, setCurrentPage] = useState(params.get('page') || 1);
+	const [currentPage, setCurrentPage] = useState<number>(
+		params.get('page').toString() || 1
+	);
 	const navigate = useNavigate();
 
 	const handlePrevPage = () => {
@@ -101,7 +104,7 @@ export default function Feed() {
 								</div>
 								<Row className='gx-3 gx-md-4'>
 									{articles &&
-										articles.map((article, i) => {
+										articles.map((article: Article, i: number) => {
 											return (
 												<Col
 													sm='6'

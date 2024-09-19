@@ -94,7 +94,7 @@ export default function UserPage() {
 
 												<div>
 													<h4>Profile picture</h4>
-													<UploadImage size='100px' />
+													<UploadImage imageSize={100} />
 												</div>
 											</div>
 										</Col>

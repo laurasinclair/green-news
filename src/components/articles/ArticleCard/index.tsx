@@ -9,7 +9,12 @@ import { useUserContext } from 'context';
 import styles from './index.module.sass';
 import { Article } from 'src/types';
 
-export default function ArticleCard({ article }) {
+type Props = {
+	article: Article;
+	link: string;
+};
+
+export default function ArticleCard(props: Props) {
 	const { currentUser } = useUserContext();
 	const placeholder = getPlaceholder();
 

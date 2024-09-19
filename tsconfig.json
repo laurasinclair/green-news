@@ -15,6 +15,7 @@
 			"context/*": ["src/context/*"],
 			"images/*": ["src/images/*"],
 			"pages/*": ["src/pages/*"],
+			"router": ["src/router"],
 			"router/*": ["src/router/*"],
 			"src/*": ["src/*"],
 			"types/*": ["src/types/*"],

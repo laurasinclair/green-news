@@ -10,7 +10,11 @@ import styles from './index.module.sass';
 
 const serverURL = import.meta.env.VITE_BACKEND_BASE_URL;
 
-const UploadImage = ({ imageSize }) => {
+type Props = {
+	imageSize?: number;
+};
+
+const UploadImage = ({ imageSize }: Props) => {
 	const { currentUser } = useUserContext();
 
 	const [userImage, setUserImage] = useState({
@@ -32,7 +36,7 @@ const UploadImage = ({ imageSize }) => {
 	};
 
 	// Handle file change event
-	const handleFileChange = async (e) => {
+	const handleFileChange = async (e: React.MouseEvent<HTMLAnchorElement>) => {
 		const file = e.target.files[0];
 		if (file) {
 			// convert the image file to Base64 string
@@ -58,7 +62,8 @@ const UploadImage = ({ imageSize }) => {
 	};
 
 	// Handle image removal
-	const handleRemoveImage = () => {
+	const handleRemoveImage = (e: React.MouseEvent<HTMLButtonElement>) => {
+		e.preventDefault();
 		try {
 			currentUser.userInfo.profilePicture = '';
 			fetch('http://localhost:7200/users/1', {
@@ -102,7 +107,7 @@ const UploadImage = ({ imageSize }) => {
 						src={userImage.imageUrl}
 						alt={`${currentUser.userInfo.firstName} ${currentUser.userInfo.lastName}`}
 						className='mb-3'
-						size={imageSize || '200px'}
+						size={`${imageSize || 200}px`}
 					/>
 				)}
 			</Col>

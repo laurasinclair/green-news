@@ -10,14 +10,14 @@ type ButtonProps = {
 	type?:
 		| 'primary'
 		| 'secondary'
+		| 'tertiary'
 		| 'primary-outline'
 		| 'secondary-outline'
-		| 'tertiary-outline'
 		| 'tertiary-outline';
 	fullWidth?: boolean;
 	iconRight?: React.ReactNode;
 	iconLeft?: React.ReactNode;
-	onClick?: React.MouseEventHandler<HTMLAnchorElement> | undefined;
+	onClick?: React.MouseEvent<HTMLButtonElement> | undefined;
 	stretchedLink?: boolean;
 	className?: string;
 };

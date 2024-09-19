@@ -7,6 +7,7 @@ import './styles/index.sass';
 
 window.name = 'Green News';
 window.slogan = 'Your daily dose of nature';
+
 createRoot(document.getElementById('root')!).render(
 	<React.StrictMode>
 		<RouterProvider router={Router} />
