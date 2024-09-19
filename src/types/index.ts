@@ -62,7 +62,7 @@ export type User = {
 		username: string | undefined;
 		firstName: string | undefined;
 		lastName: string | undefined;
-		savedArticles: string[];
+		savedArticles: Article[];
 		profilePicture: string | undefined;
 	};
 };

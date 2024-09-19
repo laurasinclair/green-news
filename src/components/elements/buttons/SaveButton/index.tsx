@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 
 import axios from 'axios';
-import { Heart, HeartFill } from 'react-bootstrap-icons';
+import { Heart, HeartFill, Icon } from 'react-bootstrap-icons';
 import classNames from 'classnames';
 
 import styles from './index.module.sass';
@@ -21,6 +21,12 @@ type Props = {
 	className?: string;
 };
 
+type SaveButtonStateType = {
+	saved: boolean;
+	label: string;
+	icon: React.ReactNode;
+};
+
 export default function SaveButton({
 	articleId,
 	articleTitle,
@@ -28,19 +34,18 @@ export default function SaveButton({
 	className,
 }: Props) {
 	const { currentUser, setCurrentUser } = useUserContext();
-	const savedArticles = currentUser?.userInfo?.savedArticles;
-	const [isSaved, setIsSaved] = useState(undefined);
+	const savedArticles: Article[] = currentUser.userInfo.savedArticles;
+	const [isSaved, setIsSaved] = useState<boolean | null>(null);
 
-	// saving article to user page
-	const [saveButtonState, setSaveButtonState] = useState({
+	const [saveButtonState, setSaveButtonState] = useState<SaveButtonStateType>({
 		saved: false,
 		label: 'Save article',
 		icon: <Heart />,
 	});
 
 	useEffect(() => {
-		if (savedArticles) {
-			setIsSaved(
+		if (!!savedArticles.length) {
+			setIsSaved(() =>
 				savedArticles.some((article: Article) => article._id === articleId)
 			);
 		}
@@ -65,7 +70,7 @@ export default function SaveButton({
 	async function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
 		e.preventDefault();
 
-		setSaveButtonState((prev) => ({
+		setSaveButtonState((prev: SaveButtonStateType) => ({
 			...prev,
 			icon: (
 				<LoaderIcon
@@ -85,15 +90,16 @@ export default function SaveButton({
 
 		try {
 			const response = await axios.put(
-				`${serverURL}/users/${currentUser.username}/savedarticles`,
+				`${serverURL}/users/${currentUser.userInfo.username}/savedarticles`,
 				req
 			);
 
-			if (response.status < 200 || response.status >= 300) {
+			if (response.status !== 200) {
 				throw new Error('There was a problem fetching articles');
 			}
 
 			const updateSavedArticles = response.data;
+
 			setCurrentUser((prev: User) => ({
 				...prev,
 				userInfo: {

@@ -22,6 +22,7 @@ export default function Navbar() {
 			isLoggedIn: true,
 		}));
 	};
+	console.log(currentUser.userInfo.savedArticles.length);
 
 	return (
 		<nav className={styles.navbar}>
