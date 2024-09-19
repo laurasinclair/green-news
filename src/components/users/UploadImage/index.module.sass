@@ -1,22 +1,5 @@
 @import '/src/styles/_color-palette.sass'
+@import '../../elements/buttons/Button/index.module.sass'
 
 .imageBtn
-	padding: 10px 20px
-	border-radius: 6px
-	display: inline-flex
-	align-items: center
-	justify-content: center
-	width: fit-content
-	white-space: nowrap
-	font-weight: 400
-	margin: 4px
-	cursor: pointer
-	background-color: $forest-green
-	color: $light
-	border: 2px solid $forest-green
-	&:hover,
-	&:focus,
-	&:active
-		background-color: darken($forest-green, 10%)
-		color: $light
-		border: 2px solid darken($forest-green, 10%)
+	@extend .btn-primary
