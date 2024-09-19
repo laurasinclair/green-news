@@ -23,7 +23,7 @@ export default function Feed() {
 	const location = useLocation();
 	const params = new URLSearchParams(location.search);
 	const [currentPage, setCurrentPage] = useState<number>(
-		params.get('page').toString() || 1
+		Number(params.get('page')) || 1
 	);
 	const navigate = useNavigate();
 
@@ -64,8 +64,10 @@ export default function Feed() {
 			setArticles(articlesRes.articles);
 			setTotalArticles(articlesRes.totalArticles);
 			setLoading(false);
-		} catch (error) {
-			console.error(error.message);
+		} catch (error: Error | unknown) {
+			error instanceof Error
+				? console.error(error.message)
+				: console.error('An unexpected error occurred', error);
 		}
 	}, [setArticles, setTotalArticles, currentPage]);
 
@@ -76,7 +78,7 @@ export default function Feed() {
 	}, [navigate, currentPage, getArticles, articles, paginationNumbers]);
 
 	useEffect(() => {
-		getArticles(currentPage);
+		getArticles();
 	}, [getArticles, currentPage]);
 
 	return (

@@ -4,6 +4,7 @@ import Logo from './elements/Logo';
 // Buttons
 import Button from './elements/buttons/Button';
 import BackButton from './elements/buttons/BackButton';
+import LinkAsButton from './elements/buttons/LinkAsButton';
 import SaveButton from './elements/buttons/SaveButton';
 
 // Layout
@@ -36,6 +37,7 @@ export {
 	Logo,
 	Button,
 	BackButton,
+	LinkAsButton,
 	SaveButton,
 	Main,
 	Hero,

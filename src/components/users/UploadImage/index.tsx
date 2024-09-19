@@ -24,7 +24,7 @@ const UploadImage = ({ imageSize }: Props) => {
 	const [error, setError] = useState<ErrorState>('');
 
 	// convert image file to Base64 string
-	const convertToBase64 = (file) => {
+	const convertToBase64 = (file: File) => {
 		return new Promise((resolve, reject) => {
 			const reader = new FileReader();
 			reader.onloadend = () => {
@@ -36,7 +36,9 @@ const UploadImage = ({ imageSize }: Props) => {
 	};
 
 	// Handle file change event
-	const handleFileChange = async (e: React.MouseEvent<HTMLAnchorElement>) => {
+	const handleFileChange = async (
+		e: React.FormEvent<HTMLLabelElement> | React.FormEvent<HTMLInputElement>
+	) => {
 		const file = e.target.files[0];
 		if (file) {
 			// convert the image file to Base64 string
@@ -62,7 +64,7 @@ const UploadImage = ({ imageSize }: Props) => {
 	};
 
 	// Handle image removal
-	const handleRemoveImage = (e: React.MouseEvent<HTMLButtonElement>) => {
+	const handleRemoveImage = (e: React.MouseEvent<HTMLButtonElement>): void => {
 		e.preventDefault();
 		try {
 			currentUser.userInfo.profilePicture = '';
@@ -107,14 +109,13 @@ const UploadImage = ({ imageSize }: Props) => {
 						src={userImage.imageUrl}
 						alt={`${currentUser.userInfo.firstName} ${currentUser.userInfo.lastName}`}
 						className='mb-3'
-						size={`${imageSize || 200}px`}
+						size={imageSize || 200}
 					/>
 				)}
 			</Col>
 			<Col className='d-flex flex-column'>
 				<label
 					htmlFor='files'
-					// name='userImage'
 					className={styles.imageBtn}
 					onChange={handleFileChange}>
 					{userImage.label}

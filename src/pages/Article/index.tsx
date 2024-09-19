@@ -22,31 +22,16 @@ const Article: React.FC = () => {
 	const placeholder = getPlaceholder();
 
 	const [article, setArticle] = useState<ArticleType>({
-		_id: undefined,
-		headline: { main: undefined },
-		multimedia: [],
-		byline: {
-			original: undefined,
-			person: [
-				{
-					firstname: undefined,
-					middlename: undefined,
-					lastname: undefined,
-				},
-			],
-		},
-		pub_date: undefined,
-		source: undefined,
-		publishedAt: undefined,
-		snippet: undefined,
-		lead_paragraph: undefined,
-		web_url: undefined,
+		_id: '',
+		articleTitle: '',
+		headline: { main: '' },
+		snippet: '',
 	});
 	const articleSlug = useParams().articleSlug;
 
 	useEffect(() => {
 		if (articles) {
-			const findArticle = articles.find((article) => {
+			const findArticle = articles.find((article: ArticleType) => {
 				return getSlug(article.headline.main) === articleSlug;
 			});
 

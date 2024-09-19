@@ -12,12 +12,10 @@ export const fetchUser = async (username: string) => {
 		}
 
 		return response.data;
-	} catch (error: unknown) {
-		if (error instanceof Error) {
-			console.error(error.message);
-		} else {
-			console.error('An unknown error occurred');
-		}
+	} catch (error: Error | unknown) {
+		error instanceof Error
+			? console.error(error.message)
+			: console.error('An unexpected error occurred', error);
 	}
 };
 
@@ -33,24 +31,21 @@ export const fetchArticles = async (page: number) => {
 
 		const { articles, totalArticles } = await response.data;
 		return { articles, totalArticles };
-	} catch (error: unknown) {
-		if (error instanceof Error) {
-			console.error(error.message);
-		} else {
-			console.error('An unknown error occurred');
-		}
+	} catch (error: Error | unknown) {
+		error instanceof Error
+			? console.error(error.message)
+			: console.error('An unexpected error occurred', error);
 	}
 };
 
 export const fetchArticle = async (articleId: string) => {
 	const req = {
-		headers: {
-			articleId: articleId, // nyt://article/1c2d620b-c2f2-50e9-a3ed-c2a362ddbca4
-		},
+		articleId, // nyt://article/1c2d620b-c2f2-50e9-a3ed-c2a362ddbca4
 	};
+
 	try {
-		const response = await axios.get(
-			`${BASE_URL}/api/articles?articleId=${req}`,
+		const response = await axios.post(
+			`${BASE_URL}/api/articles/article`,
 			req
 		);
 		if (response.status < 200 || response.status >= 300) {
@@ -58,11 +53,9 @@ export const fetchArticle = async (articleId: string) => {
 		}
 		const { articles, totalArticles } = response.data;
 		return { articles, totalArticles };
-	} catch (error: unknown) {
-		if (error instanceof Error) {
-			console.error(error.message);
-		} else {
-			console.error('An unknown error occurred');
-		}
+	} catch (error: Error | unknown) {
+		error instanceof Error
+			? console.error(error.message)
+			: console.error('An unexpected error occurred', error);
 	}
 };

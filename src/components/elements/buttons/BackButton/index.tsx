@@ -5,7 +5,11 @@ import { ArrowLeftShort } from 'react-bootstrap-icons';
 
 import { paths } from 'router/paths';
 
-export default function BackButton({ label = 'Back to previous page' }) {
+type Props = {
+	label: string;
+};
+
+export default function BackButton({ label = 'Back to previous page' }: Props) {
 	return (
 		<Link
 			to={paths.base}

@@ -13,7 +13,8 @@
 			"components/*": ["src/components/*"],
 			"context": ["src/context"],
 			"context/*": ["src/context/*"],
-			"images/*": ["src/images/*"],
+			"images": ["src/assets/images"],
+			"images/*": ["src/assets/images/*"],
 			"pages/*": ["src/pages/*"],
 			"router": ["src/router"],
 			"router/*": ["src/router/*"],
@@ -45,7 +46,7 @@
 		// "esModuleInterop": true, // Enable emit interoperability between CommonJS and ES Modules
 		// "skipLibCheck": true, // Skip type checking of declaration files
 	},
-	"include": ["src/**/*", "env.d.ts"],
+	"include": ["src/**/*", "src/types/env.d.ts", "src/types/global.d.ts"],
 	"exclude": ["node_modules"]
 }
 // "include": ["src", "src/**/*.ts", "vite-env.d.ts", "declaration.d.ts"]

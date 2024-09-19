@@ -1,6 +1,6 @@
 declare global {
 	namespace NodeJS {
-		interface Global {
+		interface Window {
 			name: string;
 			slogan: string;
 		}
@@ -33,26 +33,26 @@ export interface LogoType {
 }
 
 export type Article = {
-	_id: string | undefined;
-	articleTitle: string | undefined;
+	_id: string;
+	articleTitle: string;
 	headline: {
-		main: string | undefined;
+		main: string;
 	};
+	snippet: string;
 	multimedia?: { url: string | undefined }[];
 	byline?: {
 		original?: string;
 		person?: {
-			firstname: string | undefined;
-			middlename: string | undefined;
-			lastname?: string | undefined;
+			firstname?: string;
+			middlename?: string;
+			lastname?: string;
 		}[];
 	};
-	pub_date: string | undefined;
-	source: string | undefined;
-	publishedAt: string | undefined;
-	snippet: string | undefined;
-	lead_paragraph: string | undefined;
-	web_url: string | undefined;
+	pub_date?: string;
+	source?: string;
+	publishedAt?: string;
+	lead_paragraph?: string;
+	web_url?: string;
 };
 
 export type User = {

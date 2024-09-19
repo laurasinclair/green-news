@@ -10,7 +10,7 @@ import { useUserContext } from 'context';
 import { Button } from 'components';
 import { getSlug } from 'utils';
 import { LoaderIcon } from 'components/states/Loading';
-import { Article } from 'src/types';
+import { Article, User } from 'src/types';
 
 const serverURL = import.meta.env.VITE_BACKEND_BASE_URL;
 
@@ -94,19 +94,17 @@ export default function SaveButton({
 			}
 
 			const updateSavedArticles = response.data;
-			setCurrentUser((prevState) => ({
-				...prevState,
+			setCurrentUser((prev: User) => ({
+				...prev,
 				userInfo: {
-					...prevState.userInfo,
+					...prev.userInfo,
 					savedArticles: updateSavedArticles.savedArticles,
 				},
 			}));
-		} catch (error: unknown) {
-			if (error instanceof Error) {
-				console.error(error.message);
-			} else {
-				console.error('An unknown error occurred');
-			}
+		} catch (error: Error | unknown) {
+			error instanceof Error
+				? console.error(error.message)
+				: console.error('An unexpected error occurred', error);
 		}
 	}
 

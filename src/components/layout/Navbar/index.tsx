@@ -50,7 +50,7 @@ export default function Navbar() {
 									}
 									alt={`${currentUser.userInfo.firstName} ${currentUser.userInfo.lastName}`}
 									className='ms-4'
-									size='50px'
+									size={50}
 								/>
 							</NavLink>
 						) : (
