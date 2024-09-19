@@ -2,10 +2,10 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
-import styles from './index.module.sass';
+import styles from '../Button/index.module.sass';
 
-type ButtonProps = {
-	to?: string | Location;
+type Props = {
+	to: string;
 	label: string;
 	type?:
 		| 'primary'
@@ -17,22 +17,21 @@ type ButtonProps = {
 	fullWidth?: boolean;
 	iconRight?: React.ReactNode;
 	iconLeft?: React.ReactNode;
-	onClick: React.MouseEvent<HTMLButtonElement, MouseEvent>;
+	onClick?: React.MouseEvent<HTMLButtonElement>;
 	stretchedLink?: boolean;
 	className?: string;
 };
 
-const Button: React.FC<ButtonProps> = ({
+const LinkAsButton: React.FC<Props> = ({
 	to,
 	label,
 	type = 'primary',
 	fullWidth = false,
 	iconRight,
 	iconLeft,
-	onClick,
 	stretchedLink,
 	className,
-}: ButtonProps) => {
+}: Props) => {
 	const typeStyles = {
 		primary: styles['btn-primary'],
 		secondary: styles['btn-secondary'],
@@ -53,13 +52,13 @@ const Button: React.FC<ButtonProps> = ({
 	);
 
 	return (
-		<button
-			className={classNames(className, buttonClasses)}
-			onClick={onClick}>
+		<Link
+			to={to}
+			className={classNames(className, buttonClasses)}>
 			{iconLeft}
 			{label}
 			{iconRight}
-		</button>
+		</Link>
 	);
 };
-export default Button;
+export default LinkAsButton;
