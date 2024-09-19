@@ -17,7 +17,7 @@ type ButtonProps = {
 	fullWidth?: boolean;
 	iconRight?: React.ReactNode;
 	iconLeft?: React.ReactNode;
-	onClick: React.MouseEvent<HTMLButtonElement, MouseEvent>;
+	onClick: React.MouseEvent<HTMLButtonElement>;
 	stretchedLink?: boolean;
 	className?: string;
 };

@@ -7,6 +7,7 @@ import { Button, UserPicture } from 'components';
 import { useUserContext } from 'context';
 import placeholder from 'images/placeholder_1-1.jpg';
 import styles from './index.module.sass';
+import { User } from 'src/types';
 
 const serverURL = import.meta.env.VITE_BACKEND_BASE_URL;
 
@@ -15,7 +16,7 @@ type Props = {
 };
 
 const UploadImage = ({ imageSize }: Props) => {
-	const { currentUser } = useUserContext();
+	const { currentUser, setCurrentUser } = useUserContext();
 
 	const [userImage, setUserImage] = useState({
 		imageUrl: placeholder,
@@ -24,7 +25,9 @@ const UploadImage = ({ imageSize }: Props) => {
 	const [error, setError] = useState<ErrorState>('');
 
 	// convert image file to Base64 string
-	const convertToBase64 = (file: File) => {
+	const convertToBase64 = (
+		file: File
+	): Promise<string | ArrayBuffer | null> => {
 		return new Promise((resolve, reject) => {
 			const reader = new FileReader();
 			reader.onloadend = () => {
@@ -39,27 +42,42 @@ const UploadImage = ({ imageSize }: Props) => {
 	const handleFileChange = async (
 		e: React.FormEvent<HTMLLabelElement> | React.FormEvent<HTMLInputElement>
 	) => {
-		const file = e.target.files[0];
-		if (file) {
-			// convert the image file to Base64 string
-			const base64 = await convertToBase64(file);
+		const target = e.target as HTMLInputElement;
+		let file: File | undefined;
 
-			try {
-				currentUser.userInfo.profilePicture = base64;
-				await fetch(`${serverURL}/users/johndoe01`, {
-					method: 'PUT',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify(currentUser),
-				});
-				setUserImage({
-					label: 'Replace profile picture',
-					imageUrl: base64,
-				});
-			} catch (error) {
-				setError("Image couldn't be saved :(");
-			}
+		if (target.files && target.files.length > 0) {
+			file = target.files[0];
+		}
+
+		if (!file) {
+			return console.error('Problem with file');
+		}
+
+		const base64 = await convertToBase64(file);
+
+		try {
+			setCurrentUser((prev: User) => ({
+				...prev,
+				userInfo: {
+					...prev.userInfo,
+					profilePicture: base64?.toString(),
+				},
+			}));
+
+			await fetch(`${serverURL}/users/johndoe01`, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(currentUser),
+			});
+
+			setUserImage({
+				label: 'Replace profile picture',
+				imageUrl: base64,
+			});
+		} catch (error) {
+			setError("Image couldn't be saved :(");
 		}
 	};
 
@@ -67,8 +85,14 @@ const UploadImage = ({ imageSize }: Props) => {
 	const handleRemoveImage = (e: React.MouseEvent<HTMLButtonElement>): void => {
 		e.preventDefault();
 		try {
-			currentUser.userInfo.profilePicture = '';
-			fetch('http://localhost:7200/users/1', {
+			setCurrentUser((prev: User) => ({
+				...prev,
+				userInfo: {
+					...prev.userInfo,
+					profilePicture: '',
+				},
+			}));
+			fetch(`${serverURL}/users/johndoe01`, {
 				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json',
