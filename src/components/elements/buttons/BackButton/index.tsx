@@ -14,7 +14,7 @@ export default function BackButton({ label = 'Back to previous page' }: Props) {
 		<Link
 			to={paths.base}
 			className={styles.btn_back}>
-			<ArrowLeftShort size='26' /> {label}
+			<ArrowLeftShort size={26} /> {label}
 		</Link>
 	);
 }

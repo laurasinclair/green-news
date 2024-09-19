@@ -57,7 +57,7 @@ export default function ArticleCard({ article, link }: Props) {
 							to={`articles/${getSlug(article.headline.main)}`}
 							label='Read more'
 							fullWidth
-							iconRight={<ArrowRight size='18' />}
+							iconRight={<ArrowRight size={18} />}
 						/>
 					</div>
 				</div>

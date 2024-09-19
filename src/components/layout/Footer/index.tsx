@@ -25,7 +25,7 @@ export default function Footer() {
 								rel='noreferrer'
 								className='m-2'>
 								<Github
-									size='30'
+									size={30}
 									color='#2B3B20'
 								/>
 							</a>
@@ -36,7 +36,7 @@ export default function Footer() {
 								rel='noreferrer'
 								className='m-2'>
 								<Linkedin
-									size='30'
+									size={30}
 									color='#2B3B20'
 								/>
 							</a>
