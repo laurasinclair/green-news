@@ -10,12 +10,12 @@ import { getSlug } from 'utils';
 import styles from './index.module.sass';
 import { fetchArticles } from 'api';
 import { useFeedContext } from 'context';
-import { Article } from 'src/types';
+import { Article, StatusType } from 'src/types';
 
 export default function Feed() {
-	// prettier-ignore
-	const	[loading, setLoading] = useState(true),
-			[error] = useState(undefined)
+	const [status, setStatus] = useState<StatusType>({
+		type: 'loading',
+	});
 
 	const { articles, setArticles, totalArticles, setTotalArticles } =
 		useFeedContext();
@@ -63,7 +63,7 @@ export default function Feed() {
 
 			setArticles(articlesRes.articles);
 			setTotalArticles(articlesRes.totalArticles);
-			setLoading(false);
+			setStatus({ type: null });
 		} catch (error: Error | unknown) {
 			error instanceof Error
 				? console.error(error.message)
@@ -88,9 +88,9 @@ export default function Feed() {
 				className='mt-5'>
 				<h2>Today&apos;s top stories</h2>
 
-				{loading ? (
+				{status.type === 'loading' ? (
 					<Loading />
-				) : error ? (
+				) : status.type === 'error' ? (
 					'Oops, there seems to be a problem here'
 				) : (
 					articles && (

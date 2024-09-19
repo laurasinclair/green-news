@@ -66,3 +66,14 @@ export type User = {
 		profilePicture: string | undefined;
 	};
 };
+
+export type StatusType = {
+	type: 'loading' | 'error' | null;
+	message?: string | undefined;
+};
+
+export type Paths = {
+	base: string;
+	articles: string;
+	user: string;
+};

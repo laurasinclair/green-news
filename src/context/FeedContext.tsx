@@ -8,10 +8,8 @@ interface FeedContextType {
 	setTotalArticles: React.Dispatch<React.SetStateAction<number>>;
 }
 
-// Create context with a default value of undefined
 const FeedContext = createContext<FeedContextType | undefined>(undefined);
 
-// Custom hook to use the FeedContext
 export const useFeedContext = () => {
 	const context = useContext(FeedContext);
 	if (!context) {
@@ -22,7 +20,6 @@ export const useFeedContext = () => {
 	return context;
 };
 
-// Provider component
 const FeedContextProvider: React.FC<{ children: React.ReactNode }> = ({
 	children,
 }) => {
