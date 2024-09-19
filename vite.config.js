@@ -6,7 +6,7 @@ import * as path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	base: process.env.NODE_ENV === 'production' ? '/projects/green-news/' : '/',
+	base: process.env.NODE_ENV === 'production' ? '/projects/green-news' : '/',
 	plugins: [react(), tsconfigPaths()],
 	resolve: {
 		alias: {
@@ -15,11 +15,11 @@ export default defineConfig({
 			components: `${path.resolve(__dirname, './src/components')}`,
 			context: `${path.resolve(__dirname, './src/context')}`,
 			images: `${path.resolve(__dirname, './src/assets/images')}`,
-			pages: path.resolve(__dirname, './src/pages/'),
-			router: path.resolve(__dirname, './src/router/'),
+			pages: path.resolve(__dirname, './src/pages'),
+			router: path.resolve(__dirname, './src/router'),
 			src: path.resolve(__dirname, './src'),
-			types: path.resolve(__dirname, './src/types/'),
-			utils: path.resolve(__dirname, './src/utils/'),
+			types: path.resolve(__dirname, './src/types'),
+			utils: path.resolve(__dirname, './src/utils'),
 		},
 	},
 	build: {
