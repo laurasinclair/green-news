@@ -29,6 +29,7 @@ export type LogoSizes = 'xs' | 's' | 'm' | 'l';
 
 export interface LogoType {
 	size?: LogoSizes;
+	color?: string;
 	hasText?: boolean;
 }
 

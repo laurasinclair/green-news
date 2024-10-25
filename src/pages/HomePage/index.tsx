@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import { Feed } from 'components';
 import styles from './index.module.sass';
 import bgImage from 'images/bart-zimny-W5XTTLpk1-I-unsplash.jpg';
-import logoImage from 'images/greennews_logo.svg';
+import { LogoSVG } from 'components/elements/Logo';
 
 export default function HomePage() {
 	useEffect(() => {
@@ -20,12 +20,10 @@ export default function HomePage() {
 				fluid
 				className={styles.homepage_top}
 				style={{ backgroundImage: 'url(' + bgImage + ')' }}>
-				<div className='px-5'>
-					<img
-						src={logoImage}
-						alt={window.name + ' | ' + window.slogan}
-						width={400}
-						loading='lazy'
+				<div className='px-5 d-flex flex-column align-items-center'>
+					<LogoSVG
+						width={440}
+						color='white'
 					/>
 					<p className={classNames(styles.homepage_top_slogan, 'mb-0')}>
 						{window.slogan}
