@@ -18,14 +18,14 @@ let canFetch = true;
 
 export const fetchArticles = async (page: number) => {
 	if (!canFetch) {
-		console.log("Too many requests for now.");
+		console.warn("Too many requests for now.");
 		return;
 	}
 
 	canFetch = false;
 	setTimeout(() => {
 		canFetch = true;
-	}, 300000);
+	}, 20000);
 
 	try {
 		const response = await axios.get(
@@ -35,10 +35,10 @@ export const fetchArticles = async (page: number) => {
 		if (response.status < 200 || response.status >= 300)
 			throw new Error(`${response.status} - ${response.statusText}`);
 
-		const { articles, totalArticles } = await response.data;
+		const { articles, totalArticles } = response.data;
 		return { articles, totalArticles };
-	} catch (error) {
-		console.error("❌ fetchArticles()", error);
+	} catch (error: any) {
+		// console.error("❌ fetchArticles()", error.message);
 	}
 };
 
