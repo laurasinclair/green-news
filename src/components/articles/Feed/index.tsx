@@ -56,18 +56,13 @@ export default function Feed() {
 		return buttons;
 	}, [currentPage]);
 
-	const getArticles = useCallback(async () => {
+	const displayArticles = useCallback(async () => {
 		try {
-			const articlesRes = await fetchArticles(currentPage);
-			if (!articlesRes) throw new Error('Error fetching articles');
-
-			setArticles(articlesRes.articles);
-			setTotalArticles(articlesRes.totalArticles);
-			setStatus({ type: null });
+			//
 		} catch (error: Error | unknown) {
 			error instanceof Error
 				? console.error(error.message)
-				: console.error('An unexpected error occurred', error);
+				: console.error("❌ getArticles()", error);
 		}
 	}, [setArticles, setTotalArticles, currentPage]);
 
@@ -75,11 +70,11 @@ export default function Feed() {
 		navigate(`?page=${currentPage}`);
 
 		paginationNumbers();
-	}, [navigate, currentPage, getArticles, articles, paginationNumbers]);
+	}, [navigate, currentPage, displayArticles, articles, paginationNumbers]);
 
 	useEffect(() => {
-		getArticles();
-	}, [getArticles, currentPage]);
+		displayArticles();
+	}, [displayArticles, currentPage]);
 
 	return (
 		<div className={classNames('feed', styles.feed)}>

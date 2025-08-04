@@ -27,22 +27,23 @@ const Article: React.FC = () => {
 		headline: { main: '' },
 		snippet: '',
 	});
-	const articleSlug = useParams().articleSlug;
+	const articleSlug = useParams();
 
 	useEffect(() => {
-		if (articles) {
+		console.log(articleSlug, articles.length)
+		
+		try {
 			const findArticle = articles.find((article: ArticleType) => {
 				return getSlug(article.headline.main) === articleSlug;
 			});
 
-			if (findArticle) {
-				setArticle(findArticle);
-			}
-
+			if (!findArticle) throw new Error("Article not found")
+			
+			setArticle(findArticle);
 			setError(undefined);
 			setLoading(false);
-		} else {
-			setError('No data to display');
+		} catch {
+			setError('findArticle');
 		}
 	}, [articleSlug, articles]);
 

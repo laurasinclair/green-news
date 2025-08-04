@@ -14,7 +14,7 @@ export default function Navbar() {
 
 	const handleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
-		console.log('currentUser', currentUser);
+		// console.log('currentUser', currentUser);
 		if (!currentUser._id) return;
 
 		setCurrentUser((prev: User) => ({
@@ -22,7 +22,7 @@ export default function Navbar() {
 			isLoggedIn: true,
 		}));
 	};
-	console.log(currentUser.userInfo.savedArticles.length);
+	// console.log(currentUser.userInfo.savedArticles.length);
 
 	return (
 		<nav className={styles.navbar}>

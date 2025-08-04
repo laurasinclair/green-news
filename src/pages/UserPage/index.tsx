@@ -33,6 +33,11 @@ export default function UserPage() {
 			setLoading(false);
 			document.title = `${window.name} | ${currentUser.userInfo.firstName} ${currentUser?.userInfo.lastName} ⛭ User settings`;
 		}
+
+		return () => {
+			document.title = window.name;
+		};
+
 	}, [currentUser, setLoading]);
 
 	return (
@@ -46,7 +51,7 @@ export default function UserPage() {
 						<>
 							<Container fluid>
 								<Hero
-									title={`Hello, ${currentUser?.userInfo.firstName} ${currentUser?.userInfo.lastName}!`}
+									title={`Hello, ${currentUser.userInfo.firstName} ${currentUser.userInfo.lastName}!`}
 									leadText='Happy to see you here! 🌿'
 									size='m'
 								/>
@@ -65,7 +70,7 @@ export default function UserPage() {
 														<div>
 															<h4>Username</h4>
 															<p className='inputfield'>
-																{currentUser?.userInfo.username}
+																{currentUser.userInfo.username}
 															</p>
 														</div>
 													</Col>
@@ -76,7 +81,7 @@ export default function UserPage() {
 															<h4>First name</h4>
 															<p className='inputfield'>
 																{
-																	currentUser?.userInfo
+																	currentUser.userInfo
 																		.firstName
 																}
 															</p>
@@ -86,7 +91,7 @@ export default function UserPage() {
 														<div>
 															<h4>Last name</h4>
 															<p className='inputfield'>
-																{currentUser?.userInfo.lastName}
+																{currentUser.userInfo.lastName}
 															</p>
 														</div>
 													</Col>
@@ -126,6 +131,8 @@ export default function UserPage() {
 										currentUser.userInfo.savedArticles.length > 0 ? (
 											currentUser.userInfo.savedArticles.map(
 												(article: Article, i: number) => {
+													if (!Object.entries(article).length)
+														return;
 													return (
 														<Col
 															sm={6}

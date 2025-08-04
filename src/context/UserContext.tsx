@@ -20,22 +20,21 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const useUserContext = () => {
 	const context = useContext(UserContext);
-	if (!context) {
-		throw new Error(
-			'useUserContext must be used within a UserContextProvider'
-		);
-	}
 	return context;
 };
 
-const fetchUserData = async (username: string): Promise<User | null> => {
+const getUserData = async (username: string): Promise<User | null> => {
 	try {
-		const user = await fetchUser(username);
-		if (!user._id) throw new Error("User couldn't be found");
-		storeData('storedUser', user);
-		return user;
+		const localStorageUser = await getData(username);
+		if (localStorageUser) {
+			return localStorageUser;
+		}
+
+		const fetchedUser = await fetchUser(username);
+		storeData(username, fetchedUser);
+		return fetchedUser;
 	} catch (error) {
-		console.error('Error fetching user:', error);
+		console.log("❌ getUserData()", error);
 		return null;
 	}
 };
@@ -61,27 +60,25 @@ const UserContextProvider: React.FC<{ children: React.ReactNode }> = ({
 
 	const initializeUser = useCallback(async () => {
 		try {
-			const storedUser = await getData('storedUser');
-			if (storedUser) {
-				updateUser(storedUser);
-			} else {
-				const user = await fetchUserData('johndoe01');
-				if (user) updateUser(user);
-			}
+			const user = await getUserData("johndoe01");
+			if (!user) throw new Error("user not found");
+			updateUser(user);
 		} catch (error) {
-			console.error('Error initializing user:', error);
+			console.error("❌ initializeUser()", error);
 		}
-	}, [updateUser]);
+	}, []);
 
 	const handleLogOut = () => {
-		if (currentUser?._id) {
+		try {
 			setCurrentUser({ ...currentUser, isLoggedIn: false });
+		} catch (error) {
+			console.error("Error logging out:", error);
 		}
 	};
 
 	useEffect(() => {
 		initializeUser();
-	}, [initializeUser]);
+	}, []);
 
 	return (
 		<UserContext.Provider
