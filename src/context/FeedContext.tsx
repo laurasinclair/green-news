@@ -1,7 +1,7 @@
 import { fetchArticles } from 'api';
 import { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { Article } from 'src/types';
-import { getData } from 'src/utils';
+import { getData, storeData } from 'src/utils';
 
 interface FeedContextType {
 	articles: Article[];
@@ -14,10 +14,15 @@ const FeedContext = createContext<FeedContextType | undefined>(undefined);
 
 export const useFeedContext = () => {
 	const context = useContext(FeedContext);
+	if (!context) {
+		throw new Error(
+			"You're using useFeedContext() outside of the provider — wrap your component!"
+		);
+	}
 	return context;
 };
 
-const getArticles = async (): Promise<{articles: Article[], totalArticles: number} | void> => {
+const loadInitialArticles = async (): Promise<{articles: Article[], totalArticles: number} | undefined> => {
 	try {
 		const localStoredArticles = await getData("articles");
 		if (localStoredArticles) {
@@ -25,7 +30,9 @@ const getArticles = async (): Promise<{articles: Article[], totalArticles: numbe
 		}
 
 		const fetchedArticles = await fetchArticles(1);
-		if (!fetchedArticles) throw new Error(fetchedArticles);
+		if (!fetchedArticles) throw new Error("fetchArticles() returned nothing");
+
+		storeData("articles", fetchedArticles);
 		return fetchedArticles;
 	} catch (error) {
 		// console.warn("❌ getAllArticles()", error);
@@ -45,7 +52,7 @@ const FeedContextProvider: React.FC<{ children: React.ReactNode }> = ({
 	
 	const initializeArticles = useCallback(async () => {
 		try {
-			const response = await getArticles();
+			const response = await loadInitialArticles();
 			if (!response) throw new Error("Couldn't find articles");
 			updateArticles(response.articles, response.totalArticles);
 		} catch (error) {

@@ -6,11 +6,12 @@ import classNames from 'classnames';
 import { ChevronLeft, ChevronRight } from 'react-bootstrap-icons';
 
 import { ArticleCard, Loading } from 'components';
-import { getSlug } from 'utils';
+import { getSlug, storeData } from 'utils';
 import styles from './index.module.sass';
-import { fetchArticles } from 'api';
 import { useFeedContext } from 'context';
 import { Article, StatusType } from 'src/types';
+import { fetchArticles } from 'api';
+import { getCachedArticles, storeArticles } from 'src/utils/LocalStorage';
 
 export default function Feed() {
 	const [status, setStatus] = useState<StatusType>({
@@ -28,15 +29,11 @@ export default function Feed() {
 	const navigate = useNavigate();
 
 	const handlePrevPage = () => {
-		if (currentPage > 1) {
-			setCurrentPage(currentPage - 1);
-		}
+		if (currentPage > 1) setCurrentPage(currentPage - 1);
 	};
 
 	const handleNextPage = () => {
-		if (currentPage < totalArticles / 12) {
-			setCurrentPage(currentPage + 1);
-		}
+		if (currentPage < totalArticles / 12) setCurrentPage(currentPage + 1);
 	};
 
 	const paginationNumbers = useCallback(() => {
@@ -56,25 +53,47 @@ export default function Feed() {
 		return buttons;
 	}, [currentPage]);
 
-	const displayArticles = useCallback(async () => {
-		try {
-			//
-		} catch (error: Error | unknown) {
-			error instanceof Error
-				? console.error(error.message)
-				: console.error("❌ getArticles()", error);
+	useEffect(() => {
+		const fetchAndSet = async () => {
+			const cached = getCachedArticles(currentPage);
+			if (cached) {
+				setArticles(cached.articles);
+				setTotalArticles(cached.totalArticles);
+				setStatus({ type: null });
+				return;
+			}
+
+			try {
+				const fetched = await fetchArticles(currentPage);
+				if (!fetched) throw new Error("No data");
+
+				setArticles(fetched.articles);
+				setTotalArticles(fetched.totalArticles);
+				storeArticles(currentPage, fetched);
+				setStatus({ type: null });
+			} catch (err) {
+				console.error(err);
+				setStatus({ type: "loading" });
+			}
+		};
+
+		fetchAndSet();
+	}, [currentPage]);
+
+	useEffect(() => {
+		if (articles.length) {
+			setStatus({ type: null });
 		}
-	}, [setArticles, setTotalArticles, currentPage]);
+	}, [articles]);
 
 	useEffect(() => {
 		navigate(`?page=${currentPage}`);
-
 		paginationNumbers();
-	}, [navigate, currentPage, displayArticles, articles, paginationNumbers]);
+	}, [navigate, currentPage, articles, paginationNumbers]);
 
-	useEffect(() => {
-		displayArticles();
-	}, [displayArticles, currentPage]);
+	// useEffect(() => {
+	// 	displayArticles();
+	// }, [displayArticles, currentPage]);
 
 	return (
 		<div className={classNames('feed', styles.feed)}>
@@ -110,9 +129,6 @@ export default function Feed() {
 													className='mb-4 mb-md-5'>
 													<ArticleCard
 														article={article}
-														link={`articles/${getSlug(
-															article.headline.main
-														)}`}
 													/>
 												</Col>
 											);

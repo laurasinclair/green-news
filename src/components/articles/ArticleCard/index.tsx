@@ -23,22 +23,25 @@ export default function ArticleCard({ article, link }: Props) {
 			<div className={styles.articleCard}>
 				<div className={styles.articleCard_thumbnail}>
 					<h3>{article.headline && article.headline.main}</h3>
-					<Link to={`articles/${getSlug(article.headline.main)}`}>
-						<img
-							src={
-								'https://static01.nyt.com/' +
-									article.multimedia?.[0]?.url || placeholder
-							}
-							alt={`${article.headline?.main} | ${window.name}`}
-							onError={(
-								e: React.SyntheticEvent<HTMLImageElement, Event>
-							) => {
-								const target = e.target as HTMLImageElement;
-								target.onerror = null; // Prevent infinite loop in case placeholder image fails to load
-								target.src = placeholder;
-							}}
-							loading='lazy'
-						/>
+					<Link
+						to={`articles/${getSlug(article.headline.main)}?id=${
+							article._id
+						}`}
+					>
+						{article.multimedia && (
+							<img
+								src={article.multimedia.default.url || placeholder}
+								alt={`${article.headline?.main} | ${window.name}`}
+								onError={(
+									e: React.SyntheticEvent<HTMLImageElement, Event>
+								) => {
+									const target = e.target as HTMLImageElement;
+									target.onerror = null; // Prevent infinite loop in case placeholder image fails to load
+									target.src = placeholder;
+								}}
+								loading="lazy"
+							/>
+						)}
 					</Link>
 				</div>
 				<div className={styles.articleCard_body}>
@@ -54,8 +57,10 @@ export default function ArticleCard({ article, link }: Props) {
 					)}
 					<div>
 						<LinkAsButton
-							to={`articles/${getSlug(article.headline.main)}`}
-							label='Read more'
+							to={`articles/${getSlug(article.headline.main)}?id=${
+								article._id
+							}`}
+							label="Read more"
 							fullWidth
 							iconRight={<ArrowRight size={18} />}
 						/>

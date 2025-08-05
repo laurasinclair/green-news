@@ -14,23 +14,19 @@ export const fetchUser = async (username: string) => {
 		return null
 	}
 };
+
 let canFetch = true;
 
 export const fetchArticles = async (page: number) => {
-	if (!canFetch) {
-		console.warn("Too many requests for now.");
-		return;
-	}
-
-	canFetch = false;
-	setTimeout(() => {
-		canFetch = true;
-	}, 20000);
-
 	try {
 		const response = await axios.get(
 			`${BASE_URL}/api/articles?page=${page || 1}`
 		);
+
+		canFetch = false;
+		setTimeout(() => {
+			canFetch = true;
+		}, 20000);
 
 		if (response.status < 200 || response.status >= 300)
 			throw new Error(`${response.status} - ${response.statusText}`);
@@ -55,11 +51,11 @@ export const fetchArticle = async (articleId: string) => {
 		if (response.status < 200 || response.status >= 300) throw new Error('There was a problem fetching one article');
 
 		console.log(response.data)
-		const { articles, totalArticles } = response.data;
-		return { articles, totalArticles };
+		const article = response.data;
+		return article;
 	} catch (error: Error | unknown) {
 		error instanceof Error
-			? console.error(error.message)
+			? console.error("❌", error.message)
 			: console.error('An unexpected error occurred', error);
 	}
 };

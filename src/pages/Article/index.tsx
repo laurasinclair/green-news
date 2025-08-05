@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
+import { useSearchParams } from "react-router-dom";
 
 import { Container, Row, Col } from 'react-bootstrap';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -11,6 +12,7 @@ import { getSlug, publishedDate } from 'utils';
 import getPlaceholder from 'utils/Placeholder';
 import styles from './index.module.sass';
 import { Article as ArticleType } from '../../types';
+import { fetchArticle } from 'api';
 
 const Article: React.FC = () => {
 	const { articles } = useFeedContext();
@@ -18,6 +20,9 @@ const Article: React.FC = () => {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<ErrorState>(undefined);
 	const navigate = useNavigate();
+  	
+	const [searchParams] = useSearchParams();
+  	const articleId = searchParams.get("id");
 
 	const placeholder = getPlaceholder();
 
@@ -27,25 +32,24 @@ const Article: React.FC = () => {
 		headline: { main: '' },
 		snippet: '',
 	});
-	const articleSlug = useParams();
 
 	useEffect(() => {
-		console.log(articleSlug, articles.length)
-		
-		try {
-			const findArticle = articles.find((article: ArticleType) => {
-				return getSlug(article.headline.main) === articleSlug;
-			});
+		const getArticle = async (id) => {
+			if (!id) return;
+			const article = await fetchArticle(id);
+			return article;
+		};
 
-			if (!findArticle) throw new Error("Article not found")
-			
-			setArticle(findArticle);
+		try {
+			const fetchedArticle = getArticle(articleId.split("/")[3]);
+			console.log(fetchedArticle);
+			setArticle(fetchedArticle.article);
 			setError(undefined);
 			setLoading(false);
 		} catch {
-			setError('findArticle');
+			setError("findArticle");
 		}
-	}, [articleSlug, articles]);
+	}, [searchParams]);
 
 	useEffect(() => {
 		if (article && article.headline?.main) {
@@ -59,17 +63,18 @@ const Article: React.FC = () => {
 				className={styles.article_top}
 				style={{
 					backgroundImage:
-						'url(' +
-						(article.multimedia && article.multimedia[0]?.url
-							? 'https://static01.nyt.com/' + article.multimedia[0].url
+						"url(" +
+						(article.multimedia && article.multimedia.default.url
+							? article.multimedia.default.url
 							: placeholder) +
-						')',
-				}}>
+						")",
+				}}
+			>
 				<Container fluid>
 					<div className={styles.article_top_content}>
 						<h3>
 							{(article && article.headline && article.headline.main) ||
-								'Are We Rediscovering the Healing Power of Forests?'}
+								"Are We Rediscovering the Healing Power of Forests?"}
 						</h3>
 					</div>
 				</Container>
@@ -78,7 +83,7 @@ const Article: React.FC = () => {
 			<Container fluid>
 				<Row>
 					{loading ? (
-						<Col className='py-5'>
+						<Col className="py-5">
 							<Loading />
 						</Col>
 					) : error ? (
@@ -89,49 +94,47 @@ const Article: React.FC = () => {
 						</Col>
 					) : (
 						article && (
-							<Col
-								sm='10'
-								md='8'
-								lg='6'
-								className='mx-auto pt-5 pb-3'>
+							<Col sm="10" md="8" lg="6" className="mx-auto pt-5 pb-3">
 								<div>
 									<p className={styles.article_details}>
 										<strong>
 											{article.byline
 												? article.byline.original
-												: 'Guest Author'}
-										</strong>{' '}
-										{article.source && '  -  ' + article.source}
+												: "Guest Author"}
+										</strong>{" "}
+										{article.source && "  -  " + article.source}
 										<br />
 										{article.publishedAt
-											? 'Published on ' +
+											? "Published on " +
 											  publishedDate(article.pub_date)
-											: 'Publication date unknown'}
+											: "Publication date unknown"}
 									</p>
 								</div>
 
 								{article ? (
 									<>
-										<div className='pb-3 pb-md-5'>
+										<div className="pb-3 pb-md-5">
 											<div className={styles.article_snippet}>
 												{article.snippet}
 											</div>
 											<div className={styles.article_leadParagraph}>
 												{article.lead_paragraph
 													? article.lead_paragraph
-													: 'Nature and wildlife encompass the diverse ecosystems and the myriad of species that inhabit them. From lush forests and expansive grasslands to vibrant coral reefs and arid deserts, nature provides a home for countless creatures. Wildlife includes animals ranging from the tiniest insects to the largest mammals, each playing a crucial role in maintaining ecological balance. Observing wildlife in their natural habitats not only offers breathtaking sights but also reminds us of the importance of preserving these environments for future generations.'}
+													: "Nature and wildlife encompass the diverse ecosystems and the myriad of species that inhabit them. From lush forests and expansive grasslands to vibrant coral reefs and arid deserts, nature provides a home for countless creatures. Wildlife includes animals ranging from the tiniest insects to the largest mammals, each playing a crucial role in maintaining ecological balance. Observing wildlife in their natural habitats not only offers breathtaking sights but also reminds us of the importance of preserving these environments for future generations."}
 											</div>
 										</div>
 										{article.web_url && (
 											<p
 												className={classNames(
 													styles.article_link,
-													'pb-3 pb-md-5'
-												)}>
+													"pb-3 pb-md-5"
+												)}
+											>
 												<a
 													href={article.web_url}
-													target='_blank'
-													rel='noreferrer'>
+													target="_blank"
+													rel="noreferrer"
+												>
 													Link to the full article
 												</a>
 											</p>
@@ -148,8 +151,8 @@ const Article: React.FC = () => {
 									/>
 								)}
 
-								<div className='py-5'>
-									<BackButton label='Back to all articles' />
+								<div className="py-5">
+									<BackButton label="Back to all articles" />
 								</div>
 							</Col>
 						)
